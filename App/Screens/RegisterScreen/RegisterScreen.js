@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import { Container, Content, Form, Item, Input, Button, Text, View } from 'native-base';
+import { Container, Content, Form, Item, Input, Button, Text, View, Grid, Row, Col } from 'native-base';
 import { reduxForm, Field } from 'redux-form';
 import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 
-class LoginScreen extends Component {
+class RegisterScreen extends Component {
     renderInput({ input, placeholder, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
         if(error !== undefined){
@@ -20,13 +20,12 @@ class LoginScreen extends Component {
         )
     }
 
-    login(values) {
+    register(values) {
         NavigationService.navigate('App');
     }
 
-    goToRegisterPage() {
-        console.log('navigate to register')
-        NavigationService.navigate('Register');
+    goToLoginPage() {
+        NavigationService.navigate('Login');
     }
     render() {
         const { handleSubmit } = this.props;
@@ -41,34 +40,48 @@ class LoginScreen extends Component {
                                 placeholder="Email"
                                 component={this.renderInput}/>
 
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <Field
+                                    style={{ marginLeft: 0, flex: 1}}
+                                    name="code"
+                                    placeholder="SMS code"
+                                    component={this.renderInput}/>
+
+                                <Button
+                                    transparent
+                                    light
+                                    style={{ marginLeft: 10}}>
+                                    <Text>Send SMS</Text>
+                                </Button>
+                            </View>
+
                             <Field
                                 name="password"
                                 placeholder="Password"
-                                style={FormStyles.regularInputLast}
                                 component={this.renderInput}/>
 
-                            <Button transparent light>
-                                <Text style={FormStyles.linkButtonText}>Forgot password?</Text>
-                            </Button>
+                            <Field
+                                name="confirmPassword"
+                                placeholder="Confirm Password"
+                                component={this.renderInput}/>
                         </Form>
-                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.login)}>
-                            <Text>Login</Text>
+
+                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.register)}>
+                            <Text>Next</Text>
                         </Button>
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
                             <Button transparent style={{ marginRight: 6}} disabled>
                                 <Text style={FormStyles.linkButtonText}>
-                                    Haven't got an account?
+                                    Have an account?
                                 </Text>
                             </Button>
-                            <Button light transparent onPress={this.goToRegisterPage}>
-                                <Text>
-                                    Sign up
+                            <Button transparent light onPress={this.goToLoginPage}>
+                                <Text style={ApplicationStyles.typography.textUnderlined}>
+                                    Login
                                 </Text>
                             </Button>
                         </View>
-
                     </View>
-
                 </Content>
             </Container>
         )
@@ -76,5 +89,5 @@ class LoginScreen extends Component {
 }
 
 export default reduxForm({
-    form: 'loginForm'
-})(LoginScreen);
+    form: 'registerForm'
+})(RegisterScreen);

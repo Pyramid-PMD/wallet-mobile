@@ -5,8 +5,9 @@ import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
+import Metrics from "../../Theme/Metrics";
 
-class LoginScreen extends Component {
+class PinCodeScreen extends Component {
     renderInput({ input, placeholder, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
         if(error !== undefined){
@@ -20,14 +21,10 @@ class LoginScreen extends Component {
         )
     }
 
-    login(values) {
+    submitPin(values) {
         NavigationService.navigate('App');
     }
 
-    goToRegisterPage() {
-        console.log('navigate to register')
-        NavigationService.navigate('Register');
-    }
     render() {
         const { handleSubmit } = this.props;
         return(
@@ -35,38 +32,23 @@ class LoginScreen extends Component {
                 <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
                     <View style={ApplicationStyles.layout.contentWidth}>
                         <AppLogo/>
+                        <Text style={{ marginBottom: Metrics.section}}>
+                            Some description here Some description here Some description here Some description here
+                        </Text>
                         <Form>
                             <Field
-                                name="email"
-                                placeholder="Email"
+                                name="pin"
+                                placeholder="Pin Code"
                                 component={this.renderInput}/>
 
                             <Field
-                                name="password"
-                                placeholder="Password"
-                                style={FormStyles.regularInputLast}
+                                name="confirmPin"
+                                placeholder="Confirm Pin Code"
                                 component={this.renderInput}/>
-
-                            <Button transparent light>
-                                <Text style={FormStyles.linkButtonText}>Forgot password?</Text>
-                            </Button>
                         </Form>
-                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.login)}>
-                            <Text>Login</Text>
+                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.submitPin)}>
+                            <Text>Next</Text>
                         </Button>
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                            <Button transparent style={{ marginRight: 6}} disabled>
-                                <Text style={FormStyles.linkButtonText}>
-                                    Haven't got an account?
-                                </Text>
-                            </Button>
-                            <Button light transparent onPress={this.goToRegisterPage}>
-                                <Text>
-                                    Sign up
-                                </Text>
-                            </Button>
-                        </View>
-
                     </View>
 
                 </Content>
@@ -76,5 +58,5 @@ class LoginScreen extends Component {
 }
 
 export default reduxForm({
-    form: 'loginForm'
-})(LoginScreen);
+    form: 'pinForm'
+})(PinCodeScreen);

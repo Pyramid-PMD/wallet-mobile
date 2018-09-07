@@ -1,0 +1,56 @@
+import React from 'react';
+import { Card, CardItem, Text, Icon, Right, View, H2 } from 'native-base';
+import HomeScreenStyles from '../HomeScreenStyles';
+
+const Miners = (props) => {
+    const miners = [
+        {
+            name: 'P-001',
+            statusName: 'Working'
+        },
+        {
+            name: 'P-002',
+            statusName: 'Stopped'
+        },
+        {
+            name: 'P-003',
+            statusName: 'Working'
+        }
+
+    ];
+    const renderMinerItems = () => {
+        return miners.map((miner, index) => {
+            const style = index === miners.length - 1 ?
+                [HomeScreenStyles.cardItem, HomeScreenStyles.cardItemLastChild] :
+                HomeScreenStyles.cardItem;
+
+            return (
+                <CardItem key={ miner.name } style={style}>
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                        <Icon
+                            name="screen-desktop"
+                            type="SimpleLineIcons"
+                            style={HomeScreenStyles.cardItemIcon}/>
+                        <Text style={HomeScreenStyles.cardItemText}>{ miner.name }</Text>
+                    </View>
+
+                    <Right>
+                        <Text>{miner.statusName}</Text>
+                    </Right>
+                </CardItem>
+            );
+        })
+    };
+
+    return (
+        <View>
+            <H2>Miners</H2>
+            <Card transparent style={HomeScreenStyles.card}>
+                { renderMinerItems() }
+            </Card>
+        </View>
+
+    );
+};
+
+export default Miners;

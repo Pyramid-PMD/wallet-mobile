@@ -5,17 +5,22 @@ import HomeScreen from '../Screens/HomeScreen/HomeScreen';
 import NewsScreen from '../Screens/NewsScreen/NewsScreen';
 import ProfileScreen from '../Screens/ProfileScreen/ProfileScreen';
 import LoginScreen from '../Screens/LoginScreen/LoginScreen';
+import RegisterScreen from '../Screens/RegisterScreen/RegisterScreen';
+
 import NotificationScreen from '../Screens/NotificationScreen/NotificationScreen';
 
 import NavigationTabs from './NavigationTabs';
 import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
+import NavigationStyles from './NavigationStyles';
+import PinCodeScreen from "../Screens/PinCodeScreen/PinCodeScreen";
 
 
 const HomeStack = createStackNavigator({
     Home: {
         screen: HomeScreen,
         navigationOptions: {
-            headerRight: (<HeaderNotificationButton />)
+            headerRight: (<HeaderNotificationButton />),
+            ...NavigationStyles
         }
     },
     Notification: NotificationScreen,
@@ -25,7 +30,8 @@ const NewsStack = createStackNavigator({
     News: {
         screen: NewsScreen,
         navigationOptions: {
-            headerRight: (<HeaderNotificationButton />)
+            headerRight: (<HeaderNotificationButton />),
+            ...NavigationStyles
         }
     },
     Notification: NotificationScreen
@@ -37,7 +43,8 @@ const ProfileStack = createStackNavigator({
     Profile: {
         screen: ProfileScreen,
         navigationOptions: {
-            headerRight: (<HeaderNotificationButton />)
+            headerRight: (<HeaderNotificationButton />),
+            ...NavigationStyles
         }
     },
     Notification: NotificationScreen
@@ -45,7 +52,12 @@ const ProfileStack = createStackNavigator({
 });
 
 const AuthNavigation = createStackNavigator({
-    Login: LoginScreen
+    Login: LoginScreen,
+    Register: RegisterScreen,
+    Pin: PinCodeScreen
+}, {
+    headerMode: 'none',
+    initialRouteName: 'Login',
 });
 
 const TabNavigation = createBottomTabNavigator({

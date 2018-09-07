@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import { Text, Container, Content } from 'native-base';
+import Miners from "./Miners/Miners";
+import ExchangeIndex from "./ExhangeIndex/ExchangeIndex";
 
 class HomeScreen extends Component {
-    // static navigationOptions = {
-    //     headerTitle: 'NAda',
-    // };
     render() {
-        console.log('home screen');
         return(
             <Container>
-                <Content>
-                    <Text>Home screen</Text>
+                <Content padder>
+                    <ExchangeIndex />
+                    <Miners />
                 </Content>
             </Container>
         )
