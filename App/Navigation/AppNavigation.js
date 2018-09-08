@@ -13,6 +13,14 @@ import NavigationTabs from './NavigationTabs';
 import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
 import NavigationStyles from './NavigationStyles';
 import PinCodeScreen from "../Screens/PinCodeScreen/PinCodeScreen";
+import NewsDetailScreen from "../Screens/NewsDetailScreen/NewsDetailScreen";
+import ChangePasswordScreen from "../Screens/ChangePasswordScreen/ChangePasswordScreen";
+import ChangeCurrencyScreen from "../Screens/ChangeCurrencyScreen/ChangeCurrencyScreen";
+import ChangeLanguageScreen from "../Screens/ChangeLanguageScreen/ChangeLanguageScreen";
+import HelpScreen from "../Screens/HelpScreen/HelpScreen";
+import ChangePinScreen from "../Screens/ChangePinScreen/ChangePinScreen";
+import HelpDetailScreen from "../Screens/HelpDetailScreen/HelpDetailScreen";
+import MinerDetailScreen from "../Screens/MinerDetailScreen/MinerDetailScreen";
 
 
 const HomeStack = createStackNavigator({
@@ -23,7 +31,13 @@ const HomeStack = createStackNavigator({
             ...NavigationStyles
         }
     },
+    MinerDetail: MinerDetailScreen,
     Notification: NotificationScreen,
+}, {
+    initialRouteName: 'Home',
+    navigationOptions: {
+     ...NavigationStyles
+    }
 });
 
 const NewsStack = createStackNavigator({
@@ -34,8 +48,14 @@ const NewsStack = createStackNavigator({
             ...NavigationStyles
         }
     },
+    NewsDetail: NewsDetailScreen,
     Notification: NotificationScreen
 
+}, {
+    initialRouteName: 'News',
+    navigationOptions: {
+        ...NavigationStyles
+    }
 });
 
 
@@ -47,8 +67,19 @@ const ProfileStack = createStackNavigator({
             ...NavigationStyles
         }
     },
+    ChangePassword: ChangePasswordScreen,
+    ChangeCurrency: ChangeCurrencyScreen,
+    ChangeLanguage: ChangeLanguageScreen,
+    ChangePin: ChangePinScreen,
+    Help: HelpScreen,
+    HelpDetail: HelpDetailScreen,
     Notification: NotificationScreen
 
+}, {
+    initialRouteName: 'Profile',
+    navigationOptions: {
+        ...NavigationStyles
+    }
 });
 
 const AuthNavigation = createStackNavigator({

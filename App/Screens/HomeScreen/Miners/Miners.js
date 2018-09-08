@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardItem, Text, Icon, Right, View, H2 } from 'native-base';
 import HomeScreenStyles from '../HomeScreenStyles';
+import NavigationService from '../../../Navigation/NavigationService';
 
 const Miners = (props) => {
     const miners = [
@@ -18,6 +19,11 @@ const Miners = (props) => {
         }
 
     ];
+
+    const goToMiner = (miner) => {
+        NavigationService.navigate('MinerDetail', { miner });
+    };
+
     const renderMinerItems = () => {
         return miners.map((miner, index) => {
             const style = index === miners.length - 1 ?
@@ -25,7 +31,7 @@ const Miners = (props) => {
                 HomeScreenStyles.cardItem;
 
             return (
-                <CardItem key={ miner.name } style={style}>
+                <CardItem key={ miner.name } style={style} button={true} onPress={goToMiner.bind(this, miner)}>
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                         <Icon
                             name="screen-desktop"

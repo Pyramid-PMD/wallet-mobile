@@ -8,6 +8,10 @@ export default (variables = variable) => {
   const tabContainerTheme = {
     elevation: 3,
     height: 50,
+    margin: 20,
+    marginBottom: 0,
+    borderRadius: 6,
+    overflow: 'hidden',
     flexDirection: "row",
     shadowColor: platformStyle === "material" ? "#000" : undefined,
     shadowOffset: platformStyle === "material"

@@ -16,7 +16,8 @@ const formStyles = StyleSheet.create({
         backgroundColor: Colors.primary,
         borderColor: Colors.primaryLight,
         borderWidth: 2,
-        borderRadius: 8
+        borderRadius: 8,
+        shadowColor: 'transparent'
     },
     linkButtonText: {
         color: Colors.secondaryText,

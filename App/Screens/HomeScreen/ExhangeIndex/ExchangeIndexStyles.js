@@ -36,6 +36,4 @@ export default StyleSheet.create({
         marginRight: 20,
         marginLeft: 8
     },
-
-
 });

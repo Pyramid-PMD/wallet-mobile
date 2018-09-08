@@ -186,7 +186,7 @@ export default (variables = variable) => {
     alignItems: "center",
     borderRadius: 2,
     // padding: variables.cardItemPadding + 5,
-    paddingVertical: variables.cardItemPadding,
+    // paddingVertical: variables.cardItemPadding,
     backgroundColor: variables.cardDefaultBg
   };
 

@@ -11,7 +11,9 @@ const colors = {
     text: '#E0D7E5',
     inputBorderColor: '#ffffff',
     inputBackgroundColor: '#031523',
-    cardBorderColor: '#4a5157'
+    cardBorderColor: '#4a5157',
+    listBorderColor: '#4a5157',
+    danger: '#e66262'
 }
 
 export default colors

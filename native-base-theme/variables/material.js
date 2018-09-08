@@ -91,16 +91,16 @@ export default {
   cardItemPadding: platform === "ios" ? 10 : 12,
 
   // CheckBox
-  CheckboxRadius: 0,
+  CheckboxRadius: 13,
   CheckboxBorderWidth: 2,
-  CheckboxPaddingLeft: 2,
-  CheckboxPaddingBottom: 5,
+  CheckboxPaddingLeft: 3,
+  CheckboxPaddingBottom: 0,
   CheckboxIconSize: 16,
   CheckboxIconMarginTop: 1,
   CheckboxFontSize: 17,
-  checkboxBgColor: "#039BE5",
+  checkboxBgColor: Colors.primaryLight,
   checkboxSize: 20,
-  checkboxTickColor: "#fff",
+  checkboxTickColor: Colors.primaryBackground,
 
   // Color
   brandPrimary: "#3F51B5",
@@ -134,7 +134,7 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: Colors.primaryBackground,
+  footerDefaultBg: Colors.lightPrimaryBackground,
   footerPaddingBottom: 0,
 
   // FooterTab
@@ -143,7 +143,7 @@ export default {
   activeTab: Colors.primaryText,
   sTabBarActiveTextColor: Colors.primaryText,
   tabBarActiveTextColor: Colors.primaryText,
-  tabActiveBgColor: Colors.primaryBackground,
+  tabActiveBgColor: Colors.lightPrimaryBackground,
 
   // Header
   toolbarBtnColor: "#fff",
@@ -196,7 +196,7 @@ export default {
   listBg: "transparent",
   listBorderColor: "#c9c9c9",
   listDividerBg: "#f4f4f4",
-  listBtnUnderlayColor: "#DDD",
+  listBtnUnderlayColor: "transparent",
   listItemPadding: 12,
   listNoteColor: "#808080",
   listNoteSize: 13,
@@ -227,11 +227,11 @@ export default {
   inverseSpinnerColor: "#1A191B",
 
   // Tab
-  tabDefaultBg: Colors.primaryBackground,
-  topTabBarTextColor: "#b3c7f9",
-  topTabBarActiveTextColor: "#fff",
-  topTabBarBorderColor: "#fff",
-  topTabBarActiveBorderColor: "#fff",
+  tabDefaultBg: Colors.secondaryBackground,
+  topTabBarTextColor: Colors.secondaryText,
+  topTabBarActiveTextColor: Colors.primaryText,
+  topTabBarBorderColor: "transparent",
+  topTabBarActiveBorderColor: "transparent",
 
   // Tabs
   tabBgColor: "#F8F8F8",
@@ -255,7 +255,7 @@ export default {
   // Other
   borderRadiusBase: 2,
   borderWidth: 3 / PixelRatio.getPixelSizeForLayoutSize(1),
-  contentPadding: 10,
+  contentPadding: 18,
   dropdownLinkColor: "#414142",
   inputLineHeight: 24,
   deviceWidth,

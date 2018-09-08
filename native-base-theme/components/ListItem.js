@@ -431,7 +431,7 @@ export default (variables = variable) => {
     alignItems: "center",
     flexDirection: "row",
     paddingRight: variables.listItemPadding + 6,
-    paddingVertical: 8,
+    paddingVertical: 5,
     marginLeft: variables.listItemPadding + 6,
     borderBottomWidth: 1 / PixelRatio.getPixelSizeForLayoutSize(1),
     backgroundColor: variables.listBg,
