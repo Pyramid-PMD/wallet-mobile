@@ -43,7 +43,8 @@ const ApplicationStyles = {
         },
         secondaryText: {
             color: Colors.secondaryText
-        }
+        },
+
     },
     checkboxList: {
         listItem: {
@@ -82,6 +83,13 @@ const ApplicationStyles = {
             width: '100%',
             backgroundColor: 'red'
         }
+    },
+    card: {
+        borderRadius: 6,
+        borderColor: 'transparent',
+        overflow: 'hidden',
+        backgroundColor: Colors.secondaryBackground,
+        padding: 14
     }
 };
 

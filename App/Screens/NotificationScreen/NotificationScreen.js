@@ -1,32 +1,80 @@
 import React, {Component} from 'react';
-import { Text, Container, Tabs, Tab, TabHeading, Content, View, List, ListItem } from 'native-base';
+import {
+    Text,
+    Container,
+    Tabs,
+    Tab,
+    TabHeading,
+    Content,
+    View,
+    List,
+    ListItem,
+    Card,
+    H3 } from 'native-base';
 import Colors from "../../Theme/Colors";
+import NotificationScreenStyles from "./NotificationScreenStyles";
+import ApplicationStyles from "../../Theme/ApplicationStyles";
 
 class NotificationScreen extends Component {
     notifications = [
         {
-            title: 'Notification 1 title',
-            content: 'Notification 1 content Notification 1 content Notification 1 content Notification 1 content Notification 1 content',
-            day: '',
-            month: '',
-            type: 'system'
+            date: {
+                day: '10',
+                month: 'Jun'
+            },
+            notifications: [
+                {
+                    id: 1,
+                    title: 'Notification 1 title',
+                    content: 'Notification 1 content Notification 1 content Notification 1 content Notification 1',
+                    day: '',
+                    month: '',
+                    type: 'system'
+                },
+                {
+                    id: 2,
+                    title: 'Notification 2 title',
+                    content: 'Notification 2 content Notification 2 content Notification 2 content Notification 2 content',
+                    day: '',
+                    month: '',
+                    type: 'transaction'
+                },
+                {
+                    id: 4,
+                    title: 'Notification 1 title',
+                    content: 'Notification 1 content Notification 1 content Notification 1 content Notification 1',
+                    day: '',
+                    month: '',
+                    type: 'system'
+                },
+            ]
         },
         {
-            title: 'Notification 2 title',
-            content: 'Notification 2 content Notification 2 content Notification 2 content Notification 2 content Notification 2 content',
-            day: '',
-            month: '',
-            type: 'transaction'
+            date: {
+                day: '03',
+                month: 'Jun'
+            },
+            notifications: [
+                {
+                    id: 3,
+                    title: 'Notification 1 title',
+                    content: 'Notification 1 content Notification 1 content Notification 1 content Notification 1',
+                    day: '',
+                    month: '',
+                    type: 'system'
+                }
+            ]
         }
+
     ];
 
     renderTab(notificationType = 'system') {
         return (
             <Container>
                 <Content padder>
-                    <View style={{ borderTopWidth: 1, borderColor: Colors.listBorderColor, paddingTop: 12 }}>
+                    <View style={NotificationScreenStyles.viewContainer}>
                         <List>
-
+                            { this.renderNotificationListHeaders(notificationType)}
                         </List>
                     </View>
                 </Content>
@@ -34,12 +82,45 @@ class NotificationScreen extends Component {
         )
     }
 
-    renderNotifications(notificationType) {
+    renderNotificationListHeaders(notificationType) {
+        return this.notifications.map(notification => {
+            const filtered = this.filterNotificationsByType(notificationType, notification.notifications);
+            if (filtered.length === 0) {
+                return null
+            }
+            return (
+                <View>
+                    <ListItem itemHeader style={NotificationScreenStyles.listItemHeader}>
+                        <Text>
+                            <Text style={ApplicationStyles.typography.numberBig}>{notification.date.day} </Text>
+                            {notification.date.month}</Text>
+                    </ListItem>
+                    { this.renderNotificationItems(filtered)}
+                </View>
 
+            );
+        })
     }
 
-    filterNotificationsByType(notificationType) {
+    renderNotificationItems(notifications) {
+        return notifications.map(notification => {
+            return (
+                <Card style={ApplicationStyles.card} key={notification.id}>
+                    <Text
+                        style={[
+                            ApplicationStyles.typography.secondaryText,
+                            ApplicationStyles.typography.body,
+                            { marginBottom: 12}]}>
+                        {notification.title}
+                    </Text>
+                    <Text style={[ApplicationStyles.typography.body]}>{notification.content}</Text>
+                </Card>
+            )
+        });
+    }
 
+    filterNotificationsByType(notificationType, notifications) {
+        return notifications.filter(notification => notification.type === notificationType);
     }
 
     render() {
