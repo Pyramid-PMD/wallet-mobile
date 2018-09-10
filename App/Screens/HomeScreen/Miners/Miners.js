@@ -31,6 +31,7 @@ const Miners = (props) => {
                 HomeScreenStyles.cardItem;
 
             return (
+
                 <CardItem key={ miner.name } style={style} button={true} onPress={goToMiner.bind(this, miner)}>
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                         <Icon

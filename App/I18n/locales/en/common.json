@@ -1,0 +1,35 @@
+{
+  "brand": {
+    "name": "Pyramid",
+    "slogan": "Next generation centralized protocol of storage"
+  },
+  "interface": {
+    "next": "Continue",
+    "skip": "Skip step",
+    "update": "Update",
+    "comingSoon": "Coming soon",
+    "copy": "Copy",
+    "max": "Max",
+    "send": "Send",
+    "address": "Address",
+    "amount": "Amount",
+    "state": "State",
+    "withdraw": "Withdraw",
+    "currency": "Currency",
+    "language": "Language",
+    "ui": "UI",
+    "save": "Save",
+    "cancel": "Cancel",
+    "disk": "Disk",
+    "done": "Done",
+    "logout": "Logout",
+    "diskSerial": "Disk serial",
+    "copiedToCB": "Copied to clipboard",
+    "netTest": "Test net"
+  },
+  "networkErrors": {
+    "somethingWentWrong": "Something went wrong. Please try again",
+    "tokenExpired": "Token expired",
+    "installNewUpdate": "Your current version is outdated. Please restart the app to update"
+  }
+}

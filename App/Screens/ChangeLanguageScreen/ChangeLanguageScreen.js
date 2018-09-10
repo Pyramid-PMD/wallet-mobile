@@ -1,26 +1,19 @@
 import React, {Component} from 'react';
 import { Text, Container, Content, ListItem, CheckBox, Body, Thumbnail, View } from 'native-base';
-import Images from "../../Theme/Images";
+import { translate } from 'react-i18next';
+import { languages } from '../../Config/AppConfig';
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 
+@translate(['common'], { wait: true })
 class ChangeLanguageScreen extends Component {
     state = {
-        languages: [
-            {
-                name: 'Chinese',
-                checked: true,
-            },
-            {
-                name: 'English',
-                checked: false
-            }
-        ]
+        languages
     };
 
 
     onLanguageSelect(selectedLanguage) {
         this.handleCheckedState(selectedLanguage);
-        this.changeLanguage();
+        this.changeLanguage(selectedLanguage);
     }
 
     handleCheckedState(selectedLanguage) {
@@ -31,8 +24,10 @@ class ChangeLanguageScreen extends Component {
         this.setState({ languages });
     }
 
-    changeLanguage() {
-        console.log('dispatch change language action');
+    changeLanguage(selectedLanguage) {
+        const { i18n } = this.props;
+        // TODO: dispatch action instead
+        i18n.changeLanguage(selectedLanguage.code);
     }
 
     renderLanguages() {
@@ -50,6 +45,8 @@ class ChangeLanguageScreen extends Component {
         });
     }
     render() {
+        const { t } = this.props;
+
         return(
             <Container>
                 <Content>

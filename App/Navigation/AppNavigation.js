@@ -1,17 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import NavigationService from './NavigationService';
+import { translate } from 'react-i18next';
+import i18n from '../I18n/i18n.config';
+
+
 import AuthLoadingScreen from '../Screens/AuthLoadingScreen/AuthLoadingScreen';
 import HomeScreen from '../Screens/HomeScreen/HomeScreen';
 import NewsScreen from '../Screens/NewsScreen/NewsScreen';
 import ProfileScreen from '../Screens/ProfileScreen/ProfileScreen';
 import LoginScreen from '../Screens/LoginScreen/LoginScreen';
 import RegisterScreen from '../Screens/RegisterScreen/RegisterScreen';
-
 import NotificationScreen from '../Screens/NotificationScreen/NotificationScreen';
-
-import NavigationTabs from './NavigationTabs';
-import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
-import NavigationStyles from './NavigationStyles';
 import PinCodeScreen from "../Screens/PinCodeScreen/PinCodeScreen";
 import NewsDetailScreen from "../Screens/NewsDetailScreen/NewsDetailScreen";
 import ChangePasswordScreen from "../Screens/ChangePasswordScreen/ChangePasswordScreen";
@@ -21,6 +21,11 @@ import HelpScreen from "../Screens/HelpScreen/HelpScreen";
 import ChangePinScreen from "../Screens/ChangePinScreen/ChangePinScreen";
 import HelpDetailScreen from "../Screens/HelpDetailScreen/HelpDetailScreen";
 import MinerDetailScreen from "../Screens/MinerDetailScreen/MinerDetailScreen";
+
+import NavigationTabs from './NavigationTabs';
+import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
+import NavigationStyles from './NavigationStyles';
+
 
 
 const HomeStack = createStackNavigator({
@@ -112,6 +117,8 @@ const TabNavigation = createBottomTabNavigator({
 });
 
 
+
+
 const RootNavigation = createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: TabNavigation,
@@ -121,7 +128,17 @@ const RootNavigation = createSwitchNavigator({
     initialRouteName: 'AuthLoading',
 });
 
+// Wrapping a stack with translation hoc asserts we trigger new render on language change
+// the hoc is set to only trigger rerender on languageChanged
+const WrappedStack = () => {
+    return <RootNavigation ref={navigatorRef => {
+        NavigationService.setTopLevelNavigator(navigatorRef);
+    }} screenProps={{ t: i18n.getFixedT() }} />;
+};
+const WrappedRootNavigation = translate('translation', {
+    bindI18n: 'languageChanged',
+    bindStore: false
+})(WrappedStack);
 
 
-
-export default RootNavigation;
+export default WrappedRootNavigation;

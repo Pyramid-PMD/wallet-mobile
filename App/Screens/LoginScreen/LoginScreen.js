@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { translate } from 'react-i18next';
 import { Container, Content, Form, Item, Input, Button, Text, View } from 'native-base';
 import { reduxForm, Field } from 'redux-form';
 import AppLogo from '../../Components/AppLogo/AppLogo';
@@ -6,6 +7,7 @@ import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 
+@translate(['auth', 'common'], { wait: true })
 class LoginScreen extends Component {
     renderInput({ input, placeholder, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
@@ -29,7 +31,7 @@ class LoginScreen extends Component {
         NavigationService.navigate('Register');
     }
     render() {
-        const { handleSubmit } = this.props;
+        const { t, handleSubmit } = this.props;
         return(
             <Container>
                 <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
@@ -38,31 +40,31 @@ class LoginScreen extends Component {
                         <Form>
                             <Field
                                 name="email"
-                                placeholder="Email"
+                                placeholder={t('auth:email')}
                                 component={this.renderInput}/>
 
                             <Field
                                 name="password"
-                                placeholder="Password"
+                                placeholder={t('auth:password')}
                                 style={FormStyles.regularInputLast}
                                 component={this.renderInput}/>
 
                             <Button transparent light>
-                                <Text style={FormStyles.linkButtonText}>Forgot password?</Text>
+                                <Text style={FormStyles.linkButtonText}>{t('auth:login.forgotPassword')}</Text>
                             </Button>
                         </Form>
                         <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.login)}>
-                            <Text>Login</Text>
+                            <Text>{t('auth:login.title')}</Text>
                         </Button>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                             <Button transparent style={{ marginRight: 6}} disabled>
                                 <Text style={FormStyles.linkButtonText}>
-                                    Haven't got an account?
+                                    {t('auth:noAccount')}
                                 </Text>
                             </Button>
                             <Button light transparent onPress={this.goToRegisterPage}>
                                 <Text>
-                                    Sign up
+                                    {t('auth:register.title')}
                                 </Text>
                             </Button>
                         </View>

@@ -1,0 +1,46 @@
+{
+  "overview": {
+    "exchangeIndex": "Exchange index",
+    "miningProfit": "Mining Profit",
+    "otherIncoming": "Other incoming",
+    "orange": "Orange",
+    "blue": "Blue"
+  },
+  "transaction": {
+    "walletAddress": "Wallet address",
+    "balance": "Balance",
+    "enterWalletAddress": "Enter Wallet address",
+    "noSavedAddresses": "No wallet addresses saved",
+    "addressNotfound": "Wallet address not found",
+    "errors": {
+      "wrongAmount": "Wrong transaction amount",
+      "wrongAddress": "Wrong address",
+      "wrongPassword": "Wrong trade password",
+      "notEnoughBalance": "Not enough balance",
+      "errorSavingTransaction": "Error saving transaction",
+      "invalidAddress": "Please enter a valid address",
+      "addressRequired": "Address is required",
+      "amountRequired": "Please enter amount"
+    }
+  },
+  "notifications": {
+    "system": "System",
+    "transactions": "Transactions",
+    "withdraw": "Withdraw",
+    "noNotifications": "No notifications"
+  },
+  "settings": {
+    "mining": "Mining",
+    "defaultSettings": "Default settings",
+    "saveSettingsSuccess": "New settings successfully saved",
+    "loading": "Loading settings"
+  },
+  "miner": {
+    "estimateIncoming": "Estimate incoming in 24 hrs",
+    "globalHashRate": "Global hash rate",
+    "localHashRate": "Local hash rate"
+  },
+  "tradePasswordModal": {
+    "enterTradePassword": "Enter trade password"
+  }
+}

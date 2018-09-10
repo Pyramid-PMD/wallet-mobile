@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Container, StyleProvider } from 'native-base';
 import { Provider } from 'react-redux';
+import { I18nextProvider } from 'react-i18next';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import AppNavigation from '../Navigation/AppNavigation';
-import NavigationService from '../Navigation/NavigationService';
 import createStore from '../Redux';
+import i18n from '../I18n/i18n.config';
 
 
 const { store } = createStore();
@@ -15,11 +16,11 @@ class RootContainer extends Component {
         return (
             <Provider store={store}>
                 <StyleProvider style={getTheme(material)}>
-                    <Container>
-                        <AppNavigation ref={navigatorRef => {
-                            NavigationService.setTopLevelNavigator(navigatorRef);
-                        }}/>
-                    </Container>
+                    <I18nextProvider i18n={i18n}>
+                        <Container>
+                            <AppNavigation />
+                        </Container>
+                    </I18nextProvider>
                 </StyleProvider>
             </Provider>
         )

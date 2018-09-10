@@ -1,0 +1,35 @@
+{
+  "brand": {
+    "name": "Pyramid",
+    "slogan": "下一代去中心化文件存储协议"
+  },
+  "interface": {
+    "next": "下一步",
+    "skip": "忽略",
+    "update": "更新",
+    "comingSoon": "即将推出",
+    "copy": "复制",
+    "max": "全部",
+    "send": "发送",
+    "address": "地址",
+    "amount": "金额",
+    "state": "状态",
+    "withdraw": "提币",
+    "currency": "货币单位",
+    "language": "语言",
+    "ui": "界面",
+    "save": "保存",
+    "cancel": "取消",
+    "disk": "磁盘",
+    "done": "完成",
+    "logout": "注销",
+    "diskSerial": "硬盘 ID",
+    "copiedToCB": "复制",
+    "netTest": "测试网"
+  },
+  "networkErrors": {
+    "somethingWentWrong": "出了些问题。请再试一次",
+    "tokenExpired": "令牌已过期",
+    "installNewUpdate": "您当前的版本已过时。请重新启动应用以进行更新"
+  }
+}
