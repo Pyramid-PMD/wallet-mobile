@@ -1,46 +1,42 @@
 {
-  "overview": {
-    "exchangeIndex": "Exchange index",
-    "miningProfit": "Mining Profit",
-    "otherIncoming": "Other incoming",
-    "orange": "Orange",
-    "blue": "Blue"
+  "navigationTabs": {
+    "home": "Home",
+    "news": "News",
+    "profile": "Profile"
   },
-  "transaction": {
-    "walletAddress": "Wallet address",
-    "balance": "Balance",
-    "enterWalletAddress": "Enter Wallet address",
-    "noSavedAddresses": "No wallet addresses saved",
-    "addressNotfound": "Wallet address not found",
-    "errors": {
-      "wrongAmount": "Wrong transaction amount",
-      "wrongAddress": "Wrong address",
-      "wrongPassword": "Wrong trade password",
-      "notEnoughBalance": "Not enough balance",
-      "errorSavingTransaction": "Error saving transaction",
-      "invalidAddress": "Please enter a valid address",
-      "addressRequired": "Address is required",
-      "amountRequired": "Please enter amount"
+  "homeScreen": {
+    "miners": "Miners",
+    "priceIndex": "Price Index"
+  },
+  "changePasswordScreen": {
+    "oldPassword": "Old account password",
+    "newPassword": "New account password",
+    "confirmPassword": "Confirm new password",
+    "changePinCode": "Change PIN code"
+  },
+  "changePinScreen": {
+    "oldPin": "Old PIN",
+    "newPin": "New PIN",
+    "confirmPin": "Confirm new PIN",
+    "changePassword": "Change Account Password"
+  },
+  "minerDetailScreen": {
+    "elapsed": "Elapsed",
+    "margin": "Margin"
+  },
+  "profileScreen": {
+    "signOut": "Sign out",
+    "settings": {
+      "help": "Help",
+      "baseCurrency": "Base currency",
+      "languages": "Languages",
+      "password": "Password"
+    },
+    "balance": {
+      "balance": "Balance",
+      "minerIncoming": "Incoming from mining",
+      "otherIncoming": "Other incoming",
+      "withdraw": "Withdraw"
     }
-  },
-  "notifications": {
-    "system": "System",
-    "transactions": "Transactions",
-    "withdraw": "Withdraw",
-    "noNotifications": "No notifications"
-  },
-  "settings": {
-    "mining": "Mining",
-    "defaultSettings": "Default settings",
-    "saveSettingsSuccess": "New settings successfully saved",
-    "loading": "Loading settings"
-  },
-  "miner": {
-    "estimateIncoming": "Estimate incoming in 24 hrs",
-    "globalHashRate": "Global hash rate",
-    "localHashRate": "Local hash rate"
-  },
-  "tradePasswordModal": {
-    "enterTradePassword": "Enter trade password"
   }
 }

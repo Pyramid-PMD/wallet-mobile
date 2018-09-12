@@ -4,7 +4,8 @@ import { List, ListItem, Text, View, H2 } from 'native-base';
 import Images from "../../../Theme/Images";
 import ExchangeIndexStyles from "./ExchangeIndexStyles";
 
-const ExchangeIndex = () => {
+const ExchangeIndex = (props) => {
+    const {t} = props;
     const exchangeIndices = [
         {
             name: 'Fcoin',
@@ -38,7 +39,7 @@ const ExchangeIndex = () => {
 
     return (
         <View style={ExchangeIndexStyles.container}>
-            <H2 style={ExchangeIndexStyles.title}>Price Index</H2>
+            <H2 style={ExchangeIndexStyles.title}>{t('dashboard:homeScreen.priceIndex')}</H2>
             <List  style={ExchangeIndexStyles.list} dataArray={exchangeIndices} horizontal={true}
                    renderRow={renderExchangeIndexItem}>
             </List>

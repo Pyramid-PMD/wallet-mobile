@@ -25,6 +25,7 @@ import MinerDetailScreen from "../Screens/MinerDetailScreen/MinerDetailScreen";
 import NavigationTabs from './NavigationTabs';
 import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
 import NavigationStyles from './NavigationStyles';
+import WithdrawScreen from "../Screens/WithdrawScreen/WithdrawScreen";
 
 
 
@@ -78,7 +79,8 @@ const ProfileStack = createStackNavigator({
     ChangePin: ChangePinScreen,
     Help: HelpScreen,
     HelpDetail: HelpDetailScreen,
-    Notification: NotificationScreen
+    Notification: NotificationScreen,
+    Withdraw: WithdrawScreen
 
 }, {
     initialRouteName: 'Profile',
@@ -126,6 +128,7 @@ const RootNavigation = createSwitchNavigator({
 },
 {
     initialRouteName: 'AuthLoading',
+    mode: 'modal'
 });
 
 // Wrapping a stack with translation hoc asserts we trigger new render on language change

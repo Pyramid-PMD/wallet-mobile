@@ -14,13 +14,11 @@ const i18nextOptions = {
             common: require('./locales/en/common.json'),
             auth: require('./locales/en/auth.json'),
             dashboard: require('./locales/en/dashboard.json'),
-            menu: require('./locales/en/menu.json'),
         },
         cn: {
             common: require('./locales/cn/common.json'),
             auth: require('./locales/cn/auth.json'),
             dashboard: require('./locales/cn/dashboard.json'),
-            menu: require('./locales/cn/menu.json'),
         }
     },
     saveMissing: true,

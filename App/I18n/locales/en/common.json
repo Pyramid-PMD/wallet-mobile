@@ -5,6 +5,7 @@
   },
   "interface": {
     "next": "Continue",
+    "balance": "Balance",
     "skip": "Skip step",
     "update": "Update",
     "comingSoon": "Coming soon",

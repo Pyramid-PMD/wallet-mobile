@@ -4,6 +4,7 @@ import HomeScreenStyles from '../HomeScreenStyles';
 import NavigationService from '../../../Navigation/NavigationService';
 
 const Miners = (props) => {
+    const { t } = props;
     const miners = [
         {
             name: 'P-001',
@@ -51,7 +52,7 @@ const Miners = (props) => {
 
     return (
         <View>
-            <H2>Miners</H2>
+            <H2>{t('dashboard:homeScreen.miners')}</H2>
             <Card transparent style={HomeScreenStyles.card}>
                 { renderMinerItems() }
             </Card>

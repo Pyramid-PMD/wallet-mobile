@@ -4,7 +4,8 @@ import NavigationService from '../../../Navigation/NavigationService';
 import ProfileScreenStyles from "../ProfileScreenStyles";
 import ApplicationStyles from "../../../Theme/ApplicationStyles";
 
-const Settings = () => {
+const Settings = (props) => {
+    const {t} = props;
     const navigate = (routeName) => {
         NavigationService.navigate(routeName);
     };
@@ -20,7 +21,7 @@ const Settings = () => {
                         type="MaterialCommunityIcons"
                         style={ProfileScreenStyles.cardItemIcon} />
                     <View style={[ProfileScreenStyles.cardItemTextContainer, ProfileScreenStyles.cardItemNoBorder]}>
-                        <Text>Help</Text>
+                        <Text>{t('dashboard:profileScreen.settings.help')}</Text>
                         <Right>
                             <Icon
                                 name="chevron-right"
@@ -28,7 +29,6 @@ const Settings = () => {
                                 style={[ProfileScreenStyles.cardItemIcon, ApplicationStyles.listChevronIcon]}/>
                         </Right>
                     </View>
-
                 </CardItem>
             </Card>
 
@@ -39,7 +39,7 @@ const Settings = () => {
                         type="MaterialCommunityIcons"
                         style={ProfileScreenStyles.cardItemIcon} />
                     <View style={ProfileScreenStyles.cardItemTextContainer}>
-                        <Text>Base currency</Text>
+                        <Text>{t('dashboard:profileScreen.settings.baseCurrency')}</Text>
                         <Right>
                             <Icon
                                 name="chevron-right"
@@ -55,7 +55,7 @@ const Settings = () => {
                         type="SimpleLineIcons"
                         style={ProfileScreenStyles.cardItemIcon} />
                     <View style={ProfileScreenStyles.cardItemTextContainer}>
-                        <Text>Languages</Text>
+                        <Text>{t('dashboard:profileScreen.settings.languages')}</Text>
                         <Right>
                             <Icon
                                 name="chevron-right"
@@ -71,7 +71,7 @@ const Settings = () => {
                         type="SimpleLineIcons"
                         style={ProfileScreenStyles.cardItemIcon} />
                     <View style={[ProfileScreenStyles.cardItemTextContainer, ProfileScreenStyles.cardItemNoBorder]}>
-                        <Text>Password</Text>
+                        <Text>{t('dashboard:profileScreen.settings.password')}</Text>
                         <Icon
                             name="chevron-right"
                             type="EvilIcons"

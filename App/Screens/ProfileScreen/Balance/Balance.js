@@ -1,49 +1,39 @@
 import React from 'react';
-import { ImageBackground } from 'react-native';
-import { Card, CardItem, Body, Text, Grid, Row, Col, Button } from 'native-base'
-import Images from "../../../Theme/Images";
+import { Text, Row, Col, Button } from 'native-base'
 import ProfileScreenStyles from "../ProfileScreenStyles";
 import ApplicationStyles from "../../../Theme/ApplicationStyles";
 import FormStyles from "../../../Theme/FormStyles";
-const Balance = () => {
-    return (
-        <Card transparent style={[ProfileScreenStyles.card, { height: 240}]}>
-            <CardItem>
-                <Body>
-                    <ImageBackground source={Images.withdrawCardBackground} style={ProfileScreenStyles.backgroundImage}>
-                        <Grid>
-                            <Row style={ProfileScreenStyles.cardSection}>
-                                <Col size={1}>
-                                    <Text>Balance</Text>
-                                </Col>
-                                <Col size={3}>
-                                    <Text style={ApplicationStyles.typography.numberBig}>20,180.10<Text>PMD</Text></Text>
-                                    <Text>≈100,287.88 USD</Text>
-                                </Col>
-                            </Row>
-                            <Row style={ProfileScreenStyles.cardSection}>
-                                <Col>
-                                    <Text style={ApplicationStyles.typography.smallText}>Incoming from mining</Text>
-                                    <Text style={ApplicationStyles.typography.number}>20,180</Text>
-                                </Col>
-                                <Col style={ProfileScreenStyles.otherIncoming}>
-                                    <Text style={ApplicationStyles.typography.smallText}>Other incoming</Text>
-                                    <Text style={ApplicationStyles.typography.number}>20,180</Text>
-                                </Col>
+import NavigationService from '../../../Navigation/NavigationService';
+import BalanceCard from "../../../Components/BalanceCard/BalanceCard";
 
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Button block style={[FormStyles.submitButton, ProfileScreenStyles.withdrawButton]}>
-                                        <Text>Withdraw</Text>
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Grid>
-                    </ImageBackground>
-                </Body>
-            </CardItem>
-        </Card>
+const Balance = (props) => {
+    const {t} = props;
+    const goToWithdrawScreen = () => {
+        NavigationService.navigate('Withdraw');
+    };
+    return (
+        <BalanceCard>
+            <Row style={ProfileScreenStyles.cardSection}>
+                <Col>
+                    <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.minerIncoming')}</Text>
+                    <Text style={ApplicationStyles.typography.number}>20,180</Text>
+                </Col>
+                <Col style={ProfileScreenStyles.otherIncoming}>
+                    <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.otherIncoming')}</Text>
+                    <Text style={ApplicationStyles.typography.number}>20,180</Text>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button
+                        onPress={goToWithdrawScreen}
+                        block
+                        style={[FormStyles.submitButton, ProfileScreenStyles.withdrawButton]}>
+                        <Text>{t('dashboard:profileScreen.balance.withdraw')}</Text>
+                    </Button>
+                </Col>
+            </Row>
+        </BalanceCard>
     );
 };
 export default Balance;

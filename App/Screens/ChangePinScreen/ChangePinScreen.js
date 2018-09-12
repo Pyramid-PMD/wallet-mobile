@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { Container, Content, Form, Item, Input, Button, Text, View } from 'native-base';
 import { reduxForm, Field } from 'redux-form';
-import AppLogo from '../../Components/AppLogo/AppLogo';
+import { translate } from 'react-i18next';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 
+@translate(['common', 'dashboard'], { wait: true })
 class ChangePinScreen extends Component {
     renderInput({ input, placeholder, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
@@ -29,7 +30,7 @@ class ChangePinScreen extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, t } = this.props;
         return(
             <Container>
                 <Content padder contentContainerStyle={{ flex: 1, alignItems: 'center', marginTop: 50}}>
@@ -37,26 +38,26 @@ class ChangePinScreen extends Component {
                         <Form>
                             <Field
                                 name="oldPin"
-                                placeholder="Old PIN"
+                                placeholder={t('dashboard:changePinScreen.oldPin')}
                                 component={this.renderInput}/>
 
                             <Field
                                 name="newPin"
-                                placeholder="New PIN"
+                                placeholder={t('dashboard:changePinScreen.newPin')}
                                 component={this.renderInput}/>
 
                             <Field
                                 name="newPinConfirm"
-                                placeholder="Confirm new PIN"
+                                placeholder={t('dashboard:changePinScreen.confirmPin')}
                                 component={this.renderInput}/>
                         </Form>
                         <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.changePin)}>
-                            <Text>Done</Text>
+                            <Text>{t('common:interface.done')}</Text>
                         </Button>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                             <Button light transparent onPress={this.goToChangePassword}>
                                 <Text>
-                                    Change Account Password
+                                    {t('dashboard:changePinScreen.changePassword')}
                                 </Text>
                             </Button>
                         </View>

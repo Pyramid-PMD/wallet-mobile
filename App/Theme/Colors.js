@@ -1,5 +1,6 @@
 const colors = {
     primary: '#437B65',
+    secondary: '#a0c85f',
     primaryLight: '#73EAB7',
     primaryBackground: '#282f33',
     lightPrimaryBackground: '#3F4448',
@@ -13,7 +14,8 @@ const colors = {
     inputBackgroundColor: '#031523',
     cardBorderColor: '#4a5157',
     listBorderColor: '#4a5157',
-    danger: '#e66262'
+    danger: '#e66262',
+    autoCompleteBackground: '#141218'
 }
 
 export default colors
