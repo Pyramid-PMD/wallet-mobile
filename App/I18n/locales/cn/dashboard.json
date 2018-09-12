@@ -1,46 +1,56 @@
 {
-  "overview": {
-    "exchangeIndex": "交易所行情",
-    "miningProfit": "挖矿收入",
-    "otherIncoming": "其它收入",
-    "orange": "橙色",
-    "blue": "蓝色"
+  "navigationTabs": {
+    "home": "Home",
+    "news": "News",
+    "profile": "Profile"
   },
-  "transaction": {
-    "walletAddress": "钱包地址",
-    "balance": "余额",
-    "enterWalletAddress": "输入钱包地址",
-    "noSavedAddresses": "没有保存钱包地址",
-    "addressNotfound": "找不到钱包地址",
-    "errors": {
-      "wrongAmount": "交易数额不正确",
-      "wrongAddress": "钱包地址格式不正确",
-      "wrongPassword": "交易密码错误，请确认后再尝试",
-      "notEnoughBalance": "可供转账的余额不足",
-      "errorSavingTransaction": "交易失败",
-      "invalidAddress": "请输入有效的地址",
-      "addressRequired": "地址是必需的",
-      "amountRequired": "请输入金额"
+  "homeScreen": {
+    "miners": "Miners",
+    "priceIndex": "Price Index"
+  },
+  "changePasswordScreen": {
+    "oldPassword": "Old account password",
+    "newPassword": "New account password",
+    "confirmPassword": "Confirm new password",
+    "changePinCode": "Change PIN code"
+  },
+  "changePinScreen": {
+    "oldPin": "Old PIN",
+    "newPin": "New PIN",
+    "confirmPin": "Confirm new PIN",
+    "changePassword": "Change Account Password"
+  },
+  "minerDetailScreen": {
+    "elapsed": "Elapsed",
+    "margin": "Margin"
+  },
+  "profileScreen": {
+    "signOut": "Sign out",
+    "settings": {
+      "help": "Help",
+      "baseCurrency": "Base currency",
+      "languages": "Languages",
+      "password": "Password"
+    },
+    "balance": {
+      "balance": "Balance",
+      "minerIncoming": "Incoming from mining",
+      "otherIncoming": "Other incoming",
+      "withdraw": "Withdraw"
     }
   },
-  "notifications": {
-    "system": "系统通知",
-    "transactions": "转账通知",
-    "withdraw": "提币通知",
-    "noNotifications": "没有通知"
+  "notificationScreen": {
+    "system": "System",
+    "transaction": "Transaction",
+    "withdraw": "Withdraw"
   },
-  "settings": {
-    "mining": "挖矿",
-    "defaultSettings": "默认设置",
-    "saveSettingsSuccess": "新设置已成功保存",
-    "loading": "加载设置"
+  "pinCodeScreen": {
+    "description": "Some description here Some description here Some description here Some description here",
+    "pinCode": "Pin Code",
+    "confirmPinCode": "Confirm Pin Code"
   },
-  "miner": {
-    "estimateIncoming": "预计24小时内的收益为: ",
-    "globalHashRate": "全网算力",
-    "localHashRate": "本地算力"
-  },
-  "tradePasswordModal": {
-    "enterTradePassword": "请输入交易密码"
+  "withdrawScreen": {
+    "wallet": "Wallet",
+    "withdraw": "Withdraw"
   }
 }

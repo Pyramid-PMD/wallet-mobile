@@ -26,6 +26,7 @@ import NavigationTabs from './NavigationTabs';
 import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
 import NavigationStyles from './NavigationStyles';
 import WithdrawScreen from "../Screens/WithdrawScreen/WithdrawScreen";
+import QrCodeScannerScreen from "../Screens/QrCodeScannerScreen/QrCodeScannerScreen";
 
 
 
@@ -80,7 +81,8 @@ const ProfileStack = createStackNavigator({
     Help: HelpScreen,
     HelpDetail: HelpDetailScreen,
     Notification: NotificationScreen,
-    Withdraw: WithdrawScreen
+    Withdraw: WithdrawScreen,
+    QrCodeScan: QrCodeScannerScreen
 
 }, {
     initialRouteName: 'Profile',

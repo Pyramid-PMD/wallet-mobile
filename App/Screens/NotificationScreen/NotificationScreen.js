@@ -9,12 +9,13 @@ import {
     View,
     List,
     ListItem,
-    Card,
-    H3 } from 'native-base';
-import Colors from "../../Theme/Colors";
+    Card
+} from 'native-base';
 import NotificationScreenStyles from "./NotificationScreenStyles";
 import ApplicationStyles from "../../Theme/ApplicationStyles";
+import { translate } from 'react-i18next';
 
+@translate(['common', 'dashboard'], { wait: true })
 class NotificationScreen extends Component {
     notifications = [
         {
@@ -124,17 +125,17 @@ class NotificationScreen extends Component {
     }
 
     render() {
-        console.log('props', this.props.navigation)
+        const {t} = this.props;
         return(
             <Container>
                 <Tabs>
-                    <Tab heading={ <TabHeading><Text>System</Text></TabHeading>}>
+                    <Tab heading={ <TabHeading><Text>{t('dashboard:notificationScreen.system')}</Text></TabHeading>}>
                         {this.renderTab()}
                     </Tab>
-                    <Tab heading={ <TabHeading><Text>Transaction</Text></TabHeading>}>
+                    <Tab heading={ <TabHeading><Text>{t('dashboard:notificationScreen.transaction')}</Text></TabHeading>}>
                         {this.renderTab('transaction')}
                     </Tab>
-                    <Tab heading={ <TabHeading><Text>Withdraw</Text></TabHeading>}>
+                    <Tab heading={ <TabHeading><Text>{t('dashboard:notificationScreen.withdraw')}</Text></TabHeading>}>
                         {this.renderTab('withdraw')}
                     </Tab>
                 </Tabs>

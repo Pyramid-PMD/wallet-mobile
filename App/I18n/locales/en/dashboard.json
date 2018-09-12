@@ -38,5 +38,19 @@
       "otherIncoming": "Other incoming",
       "withdraw": "Withdraw"
     }
+  },
+  "notificationScreen": {
+    "system": "System",
+    "transaction": "Transaction",
+    "withdraw": "Withdraw"
+  },
+  "pinCodeScreen": {
+    "description": "Some description here Some description here Some description here Some description here",
+    "pinCode": "Pin Code",
+    "confirmPinCode": "Confirm Pin Code"
+  },
+  "withdrawScreen": {
+    "wallet": "Wallet",
+    "withdraw": "Withdraw"
   }
 }

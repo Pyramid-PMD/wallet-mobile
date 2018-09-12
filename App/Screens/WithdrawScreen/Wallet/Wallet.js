@@ -13,7 +13,7 @@ import {
     Button } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 import Autocomplete from 'native-base-autocomplete';
-
+import { translate } from 'react-i18next';
 import ApplicationStyles from "../../../Theme/ApplicationStyles";
 import FormStyles from "../../../Theme/FormStyles";
 import ProfileScreenStyles from "../../ProfileScreen/ProfileScreenStyles";
@@ -23,6 +23,8 @@ import UnderLinedInputWithButtonStyles from "../../../Theme/UnderlinedInputWithB
 import NavigationService from '../../../Navigation/NavigationService';
 import PinCodeModal from "../../../Modals/PinCodeModal/PinCodeModal";
 
+
+@translate(['common', 'dashboard'], { wait: true })
 class Wallet extends Component {
      state = {
         addresses: [
@@ -44,7 +46,7 @@ class Wallet extends Component {
     }
 
     scanQrCode() {
-
+        NavigationService.navigate('QrCodeScan');
     }
 
     openPinCodeModal() {
@@ -87,12 +89,13 @@ class Wallet extends Component {
         );
     }
     render() {
+        const {t} = this.props;
         return(
             <View>
                 <Card style={[ApplicationStyles.card, { paddingTop: 0, marginBottom: 10 }]}>
                     <CardItem style={WalletStyles.cardHeader}>
                         <Left>
-                            <Text style={{ marginLeft: 0}}>Wallet</Text>
+                            <Text style={{ marginLeft: 0}}>{t('dashboard:withdrawScreen.wallet')}</Text>
                         </Left>
                         <Right>
                             <Button transparent textStyle={{color: '#87838B'}} onPress={this.scanQrCode}>
@@ -100,7 +103,6 @@ class Wallet extends Component {
                             </Button>
                         </Right>
                     </CardItem>
-                    {/*<CardItem>*/}
                     <PinCodeModal modalVisible={this.state.modalVisible} closeModal={this.closePinCodeModal.bind(this)}/>
                     <Form>
                         { this.renderAutoCompleteInput() }
@@ -117,7 +119,7 @@ class Wallet extends Component {
                     onPress={this.openPinCodeModal.bind(this)}
                     block
                     style={[FormStyles.submitButton, ProfileScreenStyles.withdrawButton, { margin: 2}]}>
-                    <Text>Withdraw</Text>
+                    <Text>{t('dashboard:withdrawScreen.withdraw')}</Text>
                 </Button>
             </View>
 
