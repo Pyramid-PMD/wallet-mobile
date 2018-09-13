@@ -6,7 +6,6 @@ import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
-// import LoginActions from './LoginRedux';
 
 @translate(['auth', 'common'], { wait: true })
 class LoginScreen extends Component {
@@ -23,12 +22,12 @@ class LoginScreen extends Component {
         )
     }
 
-    login(credentials) {
-        // this.props.login(credentials);
-        // NavigationService.navigate('App');
+    login(values) {
+        NavigationService.navigate('App');
     }
 
     goToRegisterPage() {
+        console.log('navigate to register')
         NavigationService.navigate('Register');
     }
     render() {
@@ -45,9 +44,8 @@ class LoginScreen extends Component {
                                 component={this.renderInput}/>
 
                             <Field
-                                name="pwd"
+                                name="password"
                                 placeholder={t('auth:password')}
-                                secureTextEntry
                                 style={FormStyles.regularInputLast}
                                 component={this.renderInput}/>
 
@@ -72,23 +70,12 @@ class LoginScreen extends Component {
                         </View>
 
                     </View>
+
                 </Content>
             </Container>
         )
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        loading: true
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: (credentials) => LoginActions.loginRequest(credentials)
-    }
-};
 
 export default reduxForm({
     form: 'loginForm'

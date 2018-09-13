@@ -1,18 +1,8 @@
 {
   "expo": {
-    "name": "Pyramid",
-    "version": "1.0.0",
-    "icon": "./App/Icons/icon.png",
     "sdkVersion": "27.0.0",
     "splash": {
-      "image": "./App/Splash/splash.png",
-      "resizeMode": "cover"
-    },
-    "ios": {
-      "bundleIdentifier": "com.pyramid.pyramid"
-    },
-    "android": {
-      "package": "com.pyramid.pyramid"
+      "image": "./App/Splash/splash.png"
     }
   }
 }

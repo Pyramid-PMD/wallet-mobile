@@ -80,7 +80,8 @@ const ApplicationStyles = {
     image: {
         responsive: {
             height: 200,
-            width: '100%'
+            width: '100%',
+            backgroundColor: 'red'
         }
     },
     card: {

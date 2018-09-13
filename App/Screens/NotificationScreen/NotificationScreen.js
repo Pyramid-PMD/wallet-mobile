@@ -90,7 +90,7 @@ class NotificationScreen extends Component {
                 return null
             }
             return (
-                <View key={notification.id}>
+                <View>
                     <ListItem itemHeader style={NotificationScreenStyles.listItemHeader}>
                         <Text>
                             <Text style={ApplicationStyles.typography.numberBig}>{notification.date.day} </Text>
