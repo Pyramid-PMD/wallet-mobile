@@ -25,11 +25,16 @@ class PinCodeModal extends Component {
     withdraw() {
         this.closeModal();
     }
+
+    onRequestClose() {
+
+    }
     render() {
       return (
           <Modal
               animationType="slide"
               visible={this.props.modalVisible}
+              onRequestClose={this.onRequestClose}
               transparent>
               <TouchableOpacity
                   style={PinCodeModalStyles.modalContainer} onPress={this.closeModal.bind(this)}>
