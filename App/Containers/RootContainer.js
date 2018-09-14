@@ -7,6 +7,7 @@ import material from '../../native-base-theme/variables/material';
 import AppNavigation from '../Navigation/AppNavigation';
 import createStore from '../Redux';
 import i18n from '../I18n/i18n.config';
+import DebugConfig from '../Config/DebugConfig';
 
 
 const { store } = createStore();
@@ -27,4 +28,6 @@ class RootContainer extends Component {
     }
 }
 
-export default RootContainer;
+export default DebugConfig.useReactotron
+    ? console.tron.overlay(RootContainer)
+    : RootContainer

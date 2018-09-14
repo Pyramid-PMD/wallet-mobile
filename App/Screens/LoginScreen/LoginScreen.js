@@ -1,32 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Container, Content, Form, Item, Input, Button, Text, View } from 'native-base';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
 import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
-// import LoginActions from './LoginRedux';
+import LoginActions from './LoginRedux';
 
 @translate(['auth', 'common'], { wait: true })
 class LoginScreen extends Component {
-    renderInput({ input, placeholder, label, type, style, meta: { touched, error, warning } }){
+    renderInput({ input, placeholder, secureTextEntry, style, meta: { touched, error, warning } }){
         let hasError= false;
         if(error !== undefined){
             hasError= true;
         }
         return(
             <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input placeholder={placeholder} {...input}/>
+                <Input
+                    secureTextEntry={secureTextEntry}
+                    placeholder={placeholder}
+                    {...input}/>
                 {hasError ? <Text>{error}</Text> : <Text />}
             </Item>
         )
     }
 
-    login(credentials) {
-        // this.props.login(credentials);
+    onLogin = (credentials) => {
+        console.log('credentials', credentials);
+        this.props.login(credentials);
         // NavigationService.navigate('App');
-    }
+    };
 
     goToRegisterPage() {
         NavigationService.navigate('Register');
@@ -47,7 +52,7 @@ class LoginScreen extends Component {
                             <Field
                                 name="pwd"
                                 placeholder={t('auth:password')}
-                                secureTextEntry
+                                secureTextEntry={true}
                                 style={FormStyles.regularInputLast}
                                 component={this.renderInput}/>
 
@@ -55,7 +60,7 @@ class LoginScreen extends Component {
                                 <Text style={FormStyles.linkButtonText}>{t('auth:login.forgotPassword')}</Text>
                             </Button>
                         </Form>
-                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.login)}>
+                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.onLogin)}>
                             <Text>{t('auth:login.title')}</Text>
                         </Button>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
@@ -86,10 +91,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (credentials) => LoginActions.loginRequest(credentials)
+        login: (credentials) => dispatch(LoginActions.loginRequest(credentials))
     }
 };
 
 export default reduxForm({
+    initialValues: {
+        email: 'nada-hakim@hotmail.com',
+        pwd: 'final30788'
+    },
     form: 'loginForm'
-})(LoginScreen);
+})(connect(mapStateToProps, mapDispatchToProps)(LoginScreen));

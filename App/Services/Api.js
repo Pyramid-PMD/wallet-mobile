@@ -31,6 +31,13 @@ const create  =  (baseURL = url) => {
     };
 };
 
+export const addTokenToRequestHeaders = (api, token, uid) => {
+    api.instance.addRequestTransform(request => {
+        request.headers['token'] = token;
+        request.headers['uid'] = uid;
+    });
+};
+
 export default {
     create
 };

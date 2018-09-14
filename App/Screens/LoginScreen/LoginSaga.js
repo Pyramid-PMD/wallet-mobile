@@ -1,41 +1,50 @@
 import { put, call } from 'redux-saga/effects';
+import { AsyncStorage } from 'react-native';
 import LoginActions from './LoginRedux';
 import i18n from '../../I18n/i18n.config';
-
-
+import NavigationService from '../../Navigation/NavigationService';
+import { addTokenToRequestHeaders } from '../../Services/Api';
 export function * loginSaga(api, action) {
     const { credentials } = action;
     const res = yield call(api.login, credentials);
-    console.log('res', res);
-    yield handleLoginResponse(api, res);
+    yield call(handleLoginResponse, api, res);
 }
 
 export function *handleLoginResponse(api, res) {
+    console.log('handle login response', api, res);
     if (res.data.code === '0') {
-        yield handleLoginSuccess(res, api)
+        yield call(handleLoginSuccess, api, res);
     } else {
-        yield handleLoginErrors(res)
+        yield call(handleLoginErrors, res);
     }
 }
 
 export function *handleLoginSuccess(api, res) {
-    yield saveTokenToStorage(res);
-    yield addTokenToRequestHeaders(api, res);
+    const token = res.data.data.token.toString(),
+        uid = res.data.data.uid.toString();
+    yield call(saveTokenToStorage, token);
+    yield call(saveUserIdToStorage, uid);
+    yield call(addTokenToRequestHeaders, api, token, uid);
+    yield call(NavigationService.navigate, 'App');
     yield put(LoginActions.loginSuccess(res.data.data));
 }
 
-
-export function saveTokenToStorage(res) {
-    localStorage.setItem('token', res.data.data.token);
-    localStorage.setItem('user', JSON.stringify(res.data.data));
+export function *saveTokenToStorage(token) {
+    try {
+        yield call(AsyncStorage.setItem, 'token', token);
+    } catch (error) {
+        console.log('failed saving token');
+    }
 }
 
-export function addTokenToRequestHeaders(api, res) {
-    api.instance.addRequestTransform(request => {
-        request.headers['token'] = res.data.data.token;
-        request.headers['uid'] = res.data.data.uid;
-    });
+export function *saveUserIdToStorage(uid) {
+    try {
+        yield call(AsyncStorage.setItem, 'uid', uid);
+    } catch (error) {
+        console.log('failed saving user id');
+    }
 }
+
 
 export function *handleLoginErrors(res) {
     let errorMsg;
@@ -55,7 +64,25 @@ export function *handleLoginErrors(res) {
 
 
 export function * logoutSaga() {
-    yield localStorage.removeItem('token');
-    yield localStorage.removeItem('user');
-    yield put(LoginActions.logoutSuccess());
+    yield call(removeTokenFormStorage);
+    yield call(removeUserIdFormStorage);
+    NavigationService.navigate('Auth');
 }
+
+
+export async function removeTokenFormStorage() {
+    try {
+        await AsyncStorage.removeItem('token');
+    } catch (error) {
+        console.log('failed removing token');
+    }
+}
+
+export async function removeUserIdFormStorage() {
+    try {
+        await AsyncStorage.removeItem('uid');
+    } catch (error) {
+        console.log('failed saving user id');
+    }
+}
+
