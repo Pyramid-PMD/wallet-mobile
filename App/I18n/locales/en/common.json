@@ -26,7 +26,9 @@
     "logout": "Logout",
     "diskSerial": "Disk serial",
     "copiedToCB": "Copied to clipboard",
-    "netTest": "Test net"
+    "netTest": "Test net",
+    "online": "Working",
+    "offline": "Stopped"
   },
   "networkErrors": {
     "somethingWentWrong": "Something went wrong. Please try again",

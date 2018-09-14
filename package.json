@@ -23,10 +23,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apisauce": "^0.16.0",
     "expo": "^27.0.1",
     "i18next": "^11.7.0",
     "native-base": "^2.8.0",
     "native-base-autocomplete": "^1.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.3.1",
     "react-i18next": "^7.11.1",
     "react-native": "^0.55.3",
@@ -37,6 +39,7 @@
     "redux-form": "^7.4.2",
     "redux-persist": "^5.10.0",
     "redux-saga": "^0.16.0",
-    "reduxsauce": "^1.0.0"
+    "reduxsauce": "^1.0.0",
+    "reselect": "^3.0.1"
   }
 }

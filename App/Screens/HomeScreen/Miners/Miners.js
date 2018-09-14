@@ -2,25 +2,10 @@ import React from 'react';
 import { Card, CardItem, Text, Icon, Right, View, H2 } from 'native-base';
 import HomeScreenStyles from '../HomeScreenStyles';
 import NavigationService from '../../../Navigation/NavigationService';
+import PropTypes from 'prop-types';
 
 const Miners = (props) => {
-    const { t } = props;
-    const miners = [
-        {
-            name: 'P-001',
-            statusName: 'Working'
-        },
-        {
-            name: 'P-002',
-            statusName: 'Stopped'
-        },
-        {
-            name: 'P-003',
-            statusName: 'Working'
-        }
-
-    ];
-
+    const { t, miners } = props;
     const goToMiner = (miner) => {
         NavigationService.navigate('MinerDetail', { miner });
     };
@@ -62,3 +47,12 @@ const Miners = (props) => {
 };
 
 export default Miners;
+
+Miners.propTypes = {
+    miners: PropTypes.arrayOf(PropTypes.shape({
+        mid: PropTypes.number,
+        name: PropTypes.string,
+        status: PropTypes.number,
+        statusName: PropTypes.string
+    }))
+};

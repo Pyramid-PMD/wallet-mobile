@@ -19,14 +19,14 @@ const create  =  (baseURL = url) => {
 
     // Auth
     const login = (credentials) => api.post('login', credentials);
-    const getMinerList = () => api.get('machine/list');
+    const getMiners = () => api.get('machine/list');
     const postWithdrawal = (withdrawal) => api.post('withdraw/all', withdrawal);
 
 
     return {
         instance: api,
         login,
-        getMinerList,
+        getMiners,
         postWithdrawal
     };
 };
