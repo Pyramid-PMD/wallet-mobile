@@ -10,7 +10,7 @@ class HelpDetailScreen extends Component {
             <Container>
                 <Content padder>
                     <View style={[ApplicationStyles.borders.borderBottom, { marginBottom: 14 }]}>
-                        <H3 style={{ fontSize: 18}}>{ help.title }</H3>
+                        <H3 style={{ fontSize: 18}}>{ help.head }</H3>
                     </View>
                     <Text style={[ApplicationStyles.typography.body, ApplicationStyles.typography.secondaryText]}>{ help.body }</Text>
                 </Content>
