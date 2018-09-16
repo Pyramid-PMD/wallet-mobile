@@ -15,15 +15,18 @@ import LoginActions from "../LoginScreen/LoginRedux";
 
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
+    componentDidMount() {
+        // Get balance and incoming
+    }
     logout() {
         this.props.logout();
     }
     render() {
-        const { t } = this.props;
+        const { t, balance, selectedCurrency } = this.props;
         return(
             <Container>
                 <Content padder>
-                    <Balance t={t}/>
+                    <Balance t={t} balance={balance} selectedCurrency={selectedCurrency}/>
                     <Settings t={t}/>
                     <Button
                         onPress={this.logout.bind(this)}
@@ -37,10 +40,18 @@ class ProfileScreen extends Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    balance: {
+        balance: 2000,
+        balanceInSelectedCurrency: 123040
+    },
+    selectedCurrency: 'USD'
+});
+
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => dispatch(LoginActions.logoutRequest()),
     }
 };
 
-export default connect(null, mapDispatchToProps)(ProfileScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

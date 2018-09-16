@@ -51,6 +51,10 @@
   },
   "withdrawScreen": {
     "wallet": "Wallet",
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "enterAmount": "Enter amount"
+  },
+  "pinCodeModal": {
+    "enterPin": "Please enter your pin code"
   }
 }

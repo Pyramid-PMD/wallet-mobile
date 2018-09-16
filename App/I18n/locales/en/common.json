@@ -28,7 +28,8 @@
     "copiedToCB": "Copied to clipboard",
     "netTest": "Test net",
     "online": "Working",
-    "offline": "Stopped"
+    "offline": "Stopped",
+    "ensure": "Ensure"
   },
   "networkErrors": {
     "somethingWentWrong": "Something went wrong. Please try again",

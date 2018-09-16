@@ -6,12 +6,14 @@ import {StartupTypes} from './StartupRedux';
 import {LoginTypes} from '../Screens/LoginScreen/LoginRedux';
 import {HomeTypes} from '../Screens/HomeScreen/HomeRedux';
 import {MinerTypes} from '../Screens/MinerScreen/MinerRedux';
+import {WithdrawTypes} from '../Screens/WithdrawScreen/WithdrawRedux';
 
 /* ------------- Sagas ------------- */
 import {checkAuthStatus} from "./StartupSagas";
 import {loginSaga, logoutSaga} from '../Screens/LoginScreen/LoginSaga';
 import { getMinersAndExchangeIndex } from '../Screens/HomeScreen/HomeSaga';
 import { getMiner } from '../Screens/MinerScreen/MinerSaga';
+import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/WithdrawSaga';
 
 
 /* ------------- API ------------- */
@@ -27,6 +29,8 @@ export default function * root () {
         takeLatest(LoginTypes.LOGOUT_REQUEST, logoutSaga),
         takeLatest(HomeTypes.MINERS_EXCHANGE_REQUEST, getMinersAndExchangeIndex, api),
         takeLatest(MinerTypes.MINER_REQUEST, getMiner, api),
+        takeLatest(WithdrawTypes.SEND_WITHDRAW_REQUEST, sendWithdraw, api),
+        takeLatest(WithdrawTypes.GET_SAVED_ADDRESS_LIST, getAddressList),
     ]);
 };
 

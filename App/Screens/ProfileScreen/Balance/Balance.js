@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Row, Col, Button } from 'native-base'
+import { Text, Row, Col, Button } from 'native-base';
+import PropTypes from 'prop-types';
 import ProfileScreenStyles from "../ProfileScreenStyles";
 import ApplicationStyles from "../../../Theme/ApplicationStyles";
 import FormStyles from "../../../Theme/FormStyles";
@@ -7,12 +8,12 @@ import NavigationService from '../../../Navigation/NavigationService';
 import BalanceCard from "../../../Components/BalanceCard/BalanceCard";
 
 const Balance = (props) => {
-    const {t} = props;
+    const {t, balance, selectedCurrency} = props;
     const goToWithdrawScreen = () => {
-        NavigationService.navigate('Withdraw');
+        NavigationService.navigate('Withdraw', { balance, selectedCurrency});
     };
     return (
-        <BalanceCard>
+        <BalanceCard balance={balance} selectedCurrency={selectedCurrency}>
             <Row style={ProfileScreenStyles.cardSection}>
                 <Col>
                     <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.minerIncoming')}</Text>
@@ -37,3 +38,12 @@ const Balance = (props) => {
     );
 };
 export default Balance;
+
+BalanceCard.propType = {
+    balance: PropTypes.shape({
+        balance: PropTypes.number.isRequired,
+        balanceInSelectedCurrency: PropTypes.number.isRequired
+    }),
+    selectedCurrency: PropTypes.string.isRequired
+};
+
