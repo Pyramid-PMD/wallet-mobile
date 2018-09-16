@@ -18,4 +18,8 @@ export default {
         initialLang: languages[0],
         namespace: ['common', 'menu', 'auth', 'dashboard']
     },
+    api: {
+        baseUrl: 'http://101.132.161.0/api/',
+    }
 };
+

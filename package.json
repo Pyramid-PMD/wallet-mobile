@@ -27,6 +27,7 @@
     "expo": "^27.0.1",
     "i18next": "^11.7.0",
     "lodash": "^4.17.11",
+    "moment": "^2.22.2",
     "native-base": "^2.8.0",
     "native-base-autocomplete": "^1.1.0",
     "prop-types": "^15.6.2",

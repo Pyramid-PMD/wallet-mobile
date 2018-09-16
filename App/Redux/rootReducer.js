@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
     home: require('../Screens/HomeScreen/HomeRedux').reducer,
     miner: require('../Screens/MinerScreen/MinerRedux').reducer,
     withdraw: require('../Screens/WithdrawScreen/WithdrawRedux').reducer,
+    notification: require('../Screens/NotificationScreen/NotificationRedux').reducer,
 });
 
 export default rootReducer;

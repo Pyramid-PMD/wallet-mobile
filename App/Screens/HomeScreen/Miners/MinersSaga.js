@@ -12,7 +12,7 @@ export function* getMiners(api, action) {
 }
 
 export function* handleMinerListResponse(res) {
-    if (res) {
+    if (res && res.data) {
         if (res.data.code === "0") {
             yield call(handleMinerListSuccess, res);
         } else {
@@ -22,7 +22,6 @@ export function* handleMinerListResponse(res) {
 }
 
 export function* handleMinerListSuccess(res) {
-    console.log(res.data.data.list);
     yield put(MinersActions.minersSuccess(res.data.data.list));
 }
 

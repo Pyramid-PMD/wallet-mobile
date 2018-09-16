@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
     Text,
     Container,
@@ -11,6 +12,7 @@ import {
     ListItem,
     Card
 } from 'native-base';
+import NotificationActions, {NotificationSelectors} from './NotificationRedux';
 import NotificationScreenStyles from "./NotificationScreenStyles";
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 import { translate } from 'react-i18next';
@@ -68,6 +70,11 @@ class NotificationScreen extends Component {
         }
 
     ];
+
+    componentDidMount() {
+        this.props.getNotifications();
+        console.log('notifications', this.props.notifications);
+    }
 
     renderTab(notificationType = 'system') {
         return (
@@ -144,4 +151,11 @@ class NotificationScreen extends Component {
     }
 }
 
-export default NotificationScreen;
+const mapStateToProps = (state) => ({
+    notifications: NotificationSelectors.selectNotifications(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    getNotifications: () => dispatch(NotificationActions.notificationRequest())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationScreen);
