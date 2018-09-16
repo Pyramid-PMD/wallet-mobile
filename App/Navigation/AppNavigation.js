@@ -20,7 +20,7 @@ import ChangeLanguageScreen from "../Screens/ChangeLanguageScreen/ChangeLanguage
 import HelpScreen from "../Screens/HelpScreen/HelpScreen";
 import ChangePinScreen from "../Screens/ChangePinScreen/ChangePinScreen";
 import HelpDetailScreen from "../Screens/HelpDetailScreen/HelpDetailScreen";
-import MinerDetailScreen from "../Screens/MinerDetailScreen/MinerDetailScreen";
+import MinerDetailScreen from "../Screens/MinerScreen/MinerScreen";
 
 import NavigationTabs from './NavigationTabs';
 import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';

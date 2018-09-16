@@ -6,6 +6,7 @@ const rootReducer = combineReducers({
     auth: require('../Screens/LoginScreen/LoginRedux').reducer,
     miners: require('../Screens/HomeScreen/Miners/MinersRedux').reducer,
     home: require('../Screens/HomeScreen/HomeRedux').reducer,
+    miner: require('../Screens/MinerScreen/MinerRedux').reducer,
 });
 
 export default rootReducer;

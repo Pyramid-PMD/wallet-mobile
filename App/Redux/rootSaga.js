@@ -2,14 +2,16 @@ import { takeLatest, all, call } from 'redux-saga/effects'
 import API from '../Services/Api';
 
 /* ------------- Types ------------- */
-import {StartupTypes} from "./StartupRedux";
+import {StartupTypes} from './StartupRedux';
 import {LoginTypes} from '../Screens/LoginScreen/LoginRedux';
 import {HomeTypes} from '../Screens/HomeScreen/HomeRedux';
+import {MinerTypes} from '../Screens/MinerScreen/MinerRedux';
 
 /* ------------- Sagas ------------- */
 import {checkAuthStatus} from "./StartupSagas";
 import {loginSaga, logoutSaga} from '../Screens/LoginScreen/LoginSaga';
 import { getMinersAndExchangeIndex } from '../Screens/HomeScreen/HomeSaga';
+import { getMiner } from '../Screens/MinerScreen/MinerSaga';
 
 
 /* ------------- API ------------- */
@@ -24,6 +26,7 @@ export default function * root () {
         takeLatest(LoginTypes.LOGIN_REQUEST, loginSaga, api),
         takeLatest(LoginTypes.LOGOUT_REQUEST, logoutSaga),
         takeLatest(HomeTypes.MINERS_EXCHANGE_REQUEST, getMinersAndExchangeIndex, api),
+        takeLatest(MinerTypes.MINER_REQUEST, getMiner, api),
     ]);
 };
 

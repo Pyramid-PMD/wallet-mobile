@@ -20,6 +20,7 @@ const create  =  (baseURL = url) => {
     // Auth
     const login = (credentials) => api.post('login', credentials);
     const getMiners = () => api.get('machine/list');
+    const getMiner = (machine_id) => api.get(`machine/${machine_id}`);
     const postWithdrawal = (withdrawal) => api.post('withdraw/all', withdrawal);
 
 
@@ -27,6 +28,7 @@ const create  =  (baseURL = url) => {
         instance: api,
         login,
         getMiners,
+        getMiner,
         postWithdrawal
     };
 };
