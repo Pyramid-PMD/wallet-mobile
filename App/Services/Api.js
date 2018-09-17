@@ -34,6 +34,19 @@ const create  =  (baseURL = url) => {
     };
 };
 
+const createWpApi  =  (baseURL = config.api.wpApi) => {
+    const api = apisauce.create({
+        baseURL,
+    });
+
+    const getNews = () => api.get('posts');
+
+    return {
+        instance: api,
+        getNews
+    };
+};
+
 export const addTokenToRequestHeaders = (api, token, uid) => {
     api.instance.addRequestTransform(request => {
         request.headers['token'] = token;
@@ -42,7 +55,8 @@ export const addTokenToRequestHeaders = (api, token, uid) => {
 };
 
 export default {
-    create
+    create,
+    createWpApi
 };
 
 

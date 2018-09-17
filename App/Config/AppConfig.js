@@ -20,6 +20,7 @@ export default {
     },
     api: {
         baseUrl: 'http://101.132.161.0/api/',
+        wpApi: 'https://jhfund.vip/wp-json/wp/v2/'
     }
 };
 

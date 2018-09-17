@@ -81,7 +81,7 @@ const ApplicationStyles = {
         responsive: {
             height: 200,
             width: '100%',
-            backgroundColor: 'red'
+            backgroundColor: Colors.lightPrimaryBackground
         }
     },
     card: {

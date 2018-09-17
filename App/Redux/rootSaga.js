@@ -8,6 +8,7 @@ import {HomeTypes} from '../Screens/HomeScreen/HomeRedux';
 import {MinerTypes} from '../Screens/MinerScreen/MinerRedux';
 import {WithdrawTypes} from '../Screens/WithdrawScreen/WithdrawRedux';
 import {NotificationTypes} from '../Screens/NotificationScreen/NotificationRedux';
+import {NewsTypes} from '../Screens/NewsScreen/NewsRedux';
 
 /* ------------- Sagas ------------- */
 import {checkAuthStatus} from "./StartupSagas";
@@ -16,12 +17,15 @@ import { getMinersAndExchangeIndex } from '../Screens/HomeScreen/HomeSaga';
 import { getMiner } from '../Screens/MinerScreen/MinerSaga';
 import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/WithdrawSaga';
 import { getNotifications } from '../Screens/NotificationScreen/NotificationSaga';
+import { getNews } from '../Screens/NewsScreen/NewsSaga';
 
 
 /* ------------- API ------------- */
 
 // Two different api endpoints are used
 const api = API.create();
+// use for news and news details
+const wpApi = API.createWpApi();
 
 /* ------------- Connect Types To Sagas ------------- */
 export default function * root () {
@@ -34,7 +38,7 @@ export default function * root () {
         takeLatest(WithdrawTypes.SEND_WITHDRAW_REQUEST, sendWithdraw, api),
         takeLatest(WithdrawTypes.GET_SAVED_ADDRESS_LIST, getAddressList),
         takeLatest(NotificationTypes.NOTIFICATION_REQUEST, getNotifications, api),
-
+        takeLatest(NewsTypes.NEWS_REQUEST, getNews, wpApi),
     ]);
 };
 

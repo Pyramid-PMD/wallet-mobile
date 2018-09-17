@@ -1,25 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { Text, Container, Content, List, ListItem, Thumbnail, Body, Left, View } from 'native-base';
-import NewsStyles from "./NewsStyles";
+import NewsStyles from './NewsStyles';
+import NewsActions, {NewsSelectors} from './NewsRedux';
 import NavigationService from '../../Navigation/NavigationService';
 
 class NewsScreen extends Component {
-    news = [
-        {
-            title: 'Article 1',
-            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            thumb: require('../../Images/news/thumb.png'),
-            image: require('../../Images/news/newsdetail.png'),
-            date: '13 min ago'
-        },
-        {
-            title: 'Article 2',
-            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            thumb: require('../../Images/news/thumb.png'),
-            image: require('../../Images/news/newsdetail.png'),
-            date: '29 min ago'
-        }
-    ];
+    componentDidMount() {
+        this.props.getNews();
+    }
 
     goToNewsDetail(news) {
         NavigationService.navigate('NewsDetail', {news});
@@ -39,18 +28,35 @@ class NewsScreen extends Component {
         )
     }
 
+    renderNews() {
+        const {news} = this.props;
+        if (news) {
+            return (
+                <List dataArray={news}
+                      style={NewsStyles.list}
+                      renderRow={this.renderNewsItem.bind(this)}>
+                </List>
+            );
+        }
+    }
+
     render() {
         return(
             <Container>
                 <Content padder>
-                    <List dataArray={this.news}
-                          style={NewsStyles.list}
-                          renderRow={this.renderNewsItem.bind(this)}>
-                    </List>
+                    {this.renderNews()}
                 </Content>
             </Container>
         )
     }
 }
 
-export default NewsScreen;
+const mapStateToProps = (state) => ({
+    news: NewsSelectors.selectNews(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    getNews: () => dispatch(NewsActions.newsRequest())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsScreen);
