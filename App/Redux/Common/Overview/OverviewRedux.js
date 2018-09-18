@@ -6,7 +6,7 @@ const { Types, Creators } = createActions({
     overviewFailure: ['error']
 });
 
-export const ProfileTypes = Types;
+export const OverviewTypes = Types;
 export default Creators;
 
 const INITIAL_STATE = {
@@ -17,24 +17,31 @@ const INITIAL_STATE = {
 
 /* ------------- Selectors ------------- */
 
-export const ProfileSelectors = {
-    selectBalance: (state) => {
-        if (state.profile.overview) {
-            const balance = state.profile.overview.pmd_all;
+export const OverviewSelectors = {
+    selectBalance: state => {
+        if (state.overview.overview) {
+            const balance = state.overview.overview.pmd_all;
 
             // TODO: Get selected currency
-            const balanceInSelectedCurrency = state.profile.overview.pmd_all * 0.5;
+            const balanceInSelectedCurrency = state.overview.overview.pmd_all * 0.5;
             return {
                 balance,
                 balanceInSelectedCurrency,
-                otherIncoming: state.profile.overview.other_incoming,
-                minerIncoming: state.profile.overview.mining_profit
+                otherIncoming: state.overview.overview.other_incoming,
+                minerIncoming: state.overview.overview.mining_profit
             }
         }
     },
-    selectMiningProfit: state => state.profile.overview ? state.profile.overview.mining_profit: null,
-    selectOtherIncoming: state => state.profile.overview ? state.profile.overview.other_incoming: null,
-    selectPmdAll: state => state.profile.overview ? state.profile.overview.pmd_all: null
+    selectExchangeIndex: state => {
+        if (state.overview.overview) {
+            return state.overview.overview.exchangeIndex;
+        }
+    },
+    selectMiners: state => {
+        if (state.overview.overview) {
+            const balance = state.overview.overview.pmd_all;
+        }
+    }
 };
 
 export const request = (state) => {

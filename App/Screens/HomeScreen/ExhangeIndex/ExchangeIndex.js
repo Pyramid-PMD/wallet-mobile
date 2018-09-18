@@ -1,34 +1,20 @@
 import React from 'react';
-import { ImageBackground, Image } from 'react-native';
+import { Image } from 'react-native';
+import Images from '../../../Theme/Images';
+import PropTypes from 'prop-types';
 import { List, ListItem, Text, View, H2 } from 'native-base';
-import Images from "../../../Theme/Images";
 import ExchangeIndexStyles from "./ExchangeIndexStyles";
 
 const ExchangeIndex = (props) => {
-    const {t} = props;
-    const exchangeIndices = [
-        {
-            name: 'Fcoin',
-            price: 99.05,
-            icon: require('../../../Images/exchange/icon-Fcoin.png'),
-            background: require('../../../Images/exchange/bg-Fcoin.png')
-        },
-        {
-            name: 'Bian',
-            price: 103.5,
-            icon: require('../../../Images/exchange/icon-Bian.png'),
-            background: require('../../../Images/exchange/bg-Bian.png')
-        },
-    ];
-
+    const {t, exchangeIndex} = props;
     const renderExchangeIndexItem = (exchangeIndex, sectionId, rowId) => {
         const listItemStyle = rowId === "0" ?
             [ExchangeIndexStyles.listItem, ExchangeIndexStyles.listItemFirstChild]:
                   ExchangeIndexStyles.listItem;
         return (
             <ListItem style={listItemStyle}>
-                <Image source={exchangeIndex.background} style={ExchangeIndexStyles.backgroundImage} />
-                <Image source={exchangeIndex.icon} style={ExchangeIndexStyles.icon} />
+                <Image source={Images['bg' + exchangeIndex.name]} style={ExchangeIndexStyles.backgroundImage} />
+                <Image source={Images['icon' + exchangeIndex.name]} style={ExchangeIndexStyles.icon} />
                 <View>
                     <Text>{exchangeIndex.name}</Text>
                     <Text>{exchangeIndex.price}</Text>
@@ -38,13 +24,23 @@ const ExchangeIndex = (props) => {
     };
 
     return (
+        exchangeIndex.length > 0 ?
         <View style={ExchangeIndexStyles.container}>
             <H2 style={ExchangeIndexStyles.title}>{t('dashboard:homeScreen.priceIndex')}</H2>
-            <List  style={ExchangeIndexStyles.list} dataArray={exchangeIndices} horizontal={true}
+            <List  style={ExchangeIndexStyles.list} dataArray={exchangeIndex} horizontal={true}
                    renderRow={renderExchangeIndexItem}>
             </List>
-        </View>
+        </View> : null
     );
 };
 
 export default ExchangeIndex;
+
+ExchangeIndex.propTypes = {
+    exchangeIndex: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            price: PropTypes.string.isRequired
+        })
+    )
+};

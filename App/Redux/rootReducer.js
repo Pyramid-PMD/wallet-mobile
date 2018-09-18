@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
     withdraw: require('../Screens/WithdrawScreen/WithdrawRedux').reducer,
     notification: require('../Screens/NotificationScreen/NotificationRedux').reducer,
     news: require('../Screens/NewsScreen/NewsRedux').reducer,
-    profile: require('../Screens/ProfileScreen/ProfileRedux').reducer,
+    overview: require('./Common/Overview/OverviewRedux').reducer,
 });
 
 export default rootReducer;

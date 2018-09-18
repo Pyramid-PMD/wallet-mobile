@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import Miners from './Miners/Miners';
 import HomeActions, { HomeSelectors } from './HomeRedux';
+import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/OverviewRedux';
 import { MinerListSelectors } from './Miners/MinersRedux';
 import ExchangeIndex from './ExhangeIndex/ExchangeIndex';
 
@@ -11,17 +12,18 @@ import ExchangeIndex from './ExhangeIndex/ExchangeIndex';
 class HomeScreen extends Component {
     componentDidMount() {
         this.props.getMiners();
+        this.props.getOverview();
     }
 
     renderContent() {
-        const { t, miners, loading } = this.props;
+        const { t, miners, loading, exchangeIndex } = this.props;
         console.log('miners', miners);
         if (loading) {
             return <Text>loading</Text>
         }
         return (
             <Content padder>
-                <ExchangeIndex t={t} />
+                {exchangeIndex ? <ExchangeIndex t={t} exchangeIndex={exchangeIndex}/> : null}
                 <Miners miners={miners} t={t} />
             </Content>
         );
@@ -38,13 +40,15 @@ class HomeScreen extends Component {
 const mapStateToProps = (state) => {
     return {
         loading: HomeSelectors.selectLoading(state),
-        miners: MinerListSelectors.selectMiners(state)
+        miners: MinerListSelectors.selectMiners(state),
+        exchangeIndex: OverviewSelectors.selectExchangeIndex(state)
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getMiners: () => dispatch(HomeActions.minersExchangeRequest())
+        getMiners: () => dispatch(HomeActions.minersExchangeRequest()),
+        getOverview: () => dispatch(OverviewActions.overviewRequest())
     }
 };
 

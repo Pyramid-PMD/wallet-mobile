@@ -12,16 +12,13 @@ import Settings from './Settings/Settings';
 import ProfileScreenStyles from './ProfileScreenStyles';
 import FormStyles from '../../Theme/FormStyles';
 import LoginActions from '../LoginScreen/LoginRedux';
-import ProfileActions, {ProfileSelectors} from './ProfileRedux';
+import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/OverviewRedux';
 
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
     componentDidMount() {
-        // Get balance and incoming
         this.props.getOverview();
     }
-
-
 
     render() {
         return(
@@ -59,13 +56,13 @@ class ProfileScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    balance: ProfileSelectors.selectBalance(state),
+    balance: OverviewSelectors.selectBalance(state),
     selectedCurrency: 'USD'
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getOverview: () => dispatch(ProfileActions.overviewRequest()),
+        getOverview: () => dispatch(OverviewActions.overviewRequest()),
         logout: () => dispatch(LoginActions.logoutRequest()),
     }
 };

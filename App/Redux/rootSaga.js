@@ -10,7 +10,7 @@ import {WithdrawTypes} from '../Screens/WithdrawScreen/WithdrawRedux';
 import {NotificationTypes} from '../Screens/NotificationScreen/NotificationRedux';
 import {NewsTypes} from '../Screens/NewsScreen/NewsRedux';
 import {ChangeLanguageTypes} from '../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
-import {ProfileTypes} from '../Screens/ProfileScreen/ProfileRedux';
+import {OverviewTypes} from './Common/Overview/OverviewRedux';
 
 
 /* ------------- Sagas ------------- */
@@ -22,7 +22,7 @@ import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/Withdraw
 import { getNotifications } from '../Screens/NotificationScreen/NotificationSaga';
 import { getNews } from '../Screens/NewsScreen/NewsSaga';
 import { changeLanguage } from '../Screens/ChangeLanguageScreen/ChangeLanguageSaga';
-import {getOverview} from '../Screens/ProfileScreen/ProfileSaga';
+import {getOverview} from './Common/Overview/OverviewSaga';
 
 
 /* ------------- API ------------- */
@@ -45,8 +45,6 @@ export default function * root () {
         takeLatest(NotificationTypes.NOTIFICATION_REQUEST, getNotifications, api),
         takeLatest(NewsTypes.NEWS_REQUEST, getNews, wpApi),
         takeLatest(ChangeLanguageTypes.CHANGE_LANGUAGE, changeLanguage),
-        takeLatest(ProfileTypes.OVERVIEW_REQUEST, getOverview, api),
+        takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api),
     ]);
 };
-
-

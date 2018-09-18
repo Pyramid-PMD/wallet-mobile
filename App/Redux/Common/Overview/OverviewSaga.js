@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects';
-import OverviewActions from './ProfileRedux';
+import OverviewActions from './OverviewRedux';
 
 export function * getOverview(api) {
     const res = yield call(api.getOverview);
