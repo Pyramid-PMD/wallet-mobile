@@ -1,5 +1,6 @@
 import { createActions, createReducer } from 'reduxsauce';
 import moment from 'moment';
+import * as _ from 'lodash';
 
 const { Types, Creators } = createActions({
     notificationRequest: null,
@@ -21,15 +22,28 @@ const INITIAL_STATE = {
 
 export const NotificationSelectors = {
     selectNotifications: (state) => {
+        // TODO: find a better lodash way to handle this
+        let groupedNotifications = [];
         if (state.notification.notifications) {
-            const notifications = [...state.notification.notifications];
-            if (notifications.length > 0) {
+            if (state.notification.notifications.length > 0) {
+                let notifications = [...state.notification.notifications];
                 notifications.map(notification => {
-                    notification.day = moment.unix(notification.create_at).format("DD");
-                    notification.month = moment.unix(notification.create_at).format("MMM");
+                    notification.create_at = moment.unix(notification.create_at).format("d-MMM-YYYY");
                     return notification;
                 });
-                return notifications;
+                notifications = _.groupBy(notifications, 'create_at');
+                _.forIn(notifications, (value, key) => {
+                    console.log(key, value);
+                    const notificationGroup = {
+                       date: {
+                           day: moment(key).format("DD"),
+                           month: moment(key).format("MMM"),
+                       },
+                       notifications: value
+                    };
+                    groupedNotifications.push(notificationGroup);
+                });
+                return groupedNotifications;
             }
         }
 
