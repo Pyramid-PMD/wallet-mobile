@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { Text, Container, Content, ListItem, CheckBox, Body, Thumbnail, View } from 'native-base';
 import { translate } from 'react-i18next';
 import { languages } from '../../Config/AppConfig';
 import ApplicationStyles from "../../Theme/ApplicationStyles";
+import ChangeLanguageActions, {ChangeLanguageSelectors} from './ChangeLanguageRedux';
 
 @translate(['common'], { wait: true })
 class ChangeLanguageScreen extends Component {
@@ -10,6 +12,10 @@ class ChangeLanguageScreen extends Component {
         languages
     };
 
+    componentDidMount() {
+        const {currentLanguage} = this.props;
+        this.handleCheckedState(currentLanguage);
+    }
 
     onLanguageSelect(selectedLanguage) {
         this.handleCheckedState(selectedLanguage);
@@ -17,17 +23,20 @@ class ChangeLanguageScreen extends Component {
     }
 
     handleCheckedState(selectedLanguage) {
-        const languages = this.state.languages;
+        let languages = this.state.languages;
         const index = languages.indexOf(selectedLanguage);
-        languages.map(language => language.checked = false);
-        languages[index].checked = !languages[index].checked;
-        this.setState({ languages });
+        // TODO: indexof sometimes returns -1
+        if (index > -1) {
+            languages.map(language => language.checked = false);
+            languages[index].checked = !languages[index].checked;
+            this.setState({ languages });
+        }
+
     }
 
     changeLanguage(selectedLanguage) {
-        const { i18n } = this.props;
-        // TODO: dispatch action instead
-        i18n.changeLanguage(selectedLanguage.code);
+        const { changeLanguage } = this.props;
+        changeLanguage(selectedLanguage);
     }
 
     renderLanguages() {
@@ -45,8 +54,6 @@ class ChangeLanguageScreen extends Component {
         });
     }
     render() {
-        const { t } = this.props;
-
         return(
             <Container>
                 <Content>
@@ -57,4 +64,12 @@ class ChangeLanguageScreen extends Component {
     }
 }
 
-export default ChangeLanguageScreen;
+const mapStateToProps = (state) => ({
+    currentLanguage: ChangeLanguageSelectors.selectLanguage(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    changeLanguage: (language) => dispatch(ChangeLanguageActions.changeLanguage(language))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeLanguageScreen);

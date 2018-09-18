@@ -17,11 +17,11 @@ const Balance = (props) => {
             <Row style={ProfileScreenStyles.cardSection}>
                 <Col>
                     <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.minerIncoming')}</Text>
-                    <Text style={ApplicationStyles.typography.number}>20,180</Text>
+                    <Text style={ApplicationStyles.typography.number}>{balance.minerIncoming}</Text>
                 </Col>
                 <Col style={ProfileScreenStyles.otherIncoming}>
                     <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.otherIncoming')}</Text>
-                    <Text style={ApplicationStyles.typography.number}>20,180</Text>
+                    <Text style={ApplicationStyles.typography.number}>{balance.otherIncoming}</Text>
                 </Col>
             </Row>
             <Row>
@@ -42,7 +42,9 @@ export default Balance;
 BalanceCard.propType = {
     balance: PropTypes.shape({
         balance: PropTypes.number.isRequired,
-        balanceInSelectedCurrency: PropTypes.number.isRequired
+        balanceInSelectedCurrency: PropTypes.number.isRequired,
+        minerIncoming: PropTypes.number.isRequired,
+        otherIncoming: PropTypes.number.isRequired,
     }),
     selectedCurrency: PropTypes.string.isRequired
 };

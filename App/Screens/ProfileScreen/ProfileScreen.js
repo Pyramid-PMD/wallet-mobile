@@ -7,24 +7,38 @@ import {
     Button,
 } from 'native-base';
 import { translate } from 'react-i18next';
-import Balance from "./Balance/Balance";
-import Settings from "./Settings/Settings";
-import ProfileScreenStyles from "./ProfileScreenStyles";
-import FormStyles from "../../Theme/FormStyles";
-import LoginActions from "../LoginScreen/LoginRedux";
+import Balance from './Balance/Balance';
+import Settings from './Settings/Settings';
+import ProfileScreenStyles from './ProfileScreenStyles';
+import FormStyles from '../../Theme/FormStyles';
+import LoginActions from '../LoginScreen/LoginRedux';
+import ProfileActions, {ProfileSelectors} from './ProfileRedux';
 
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
     componentDidMount() {
         // Get balance and incoming
+        this.props.getOverview();
     }
-    logout() {
-        this.props.logout();
-    }
+
+
+
     render() {
-        const { t, balance, selectedCurrency } = this.props;
         return(
             <Container>
+                {this.renderContent()}
+            </Container>
+        )
+    }
+
+    renderContent() {
+        const {
+            t,
+            balance,
+            selectedCurrency,
+        } = this.props;
+        if (this.props.balance) {
+            return (
                 <Content padder>
                     <Balance t={t} balance={balance} selectedCurrency={selectedCurrency}/>
                     <Settings t={t}/>
@@ -35,21 +49,23 @@ class ProfileScreen extends Component {
                         <Text style={ProfileScreenStyles.signOutButtonText}>{t('dashboard:profileScreen.signOut')}</Text>
                     </Button>
                 </Content>
-            </Container>
-        )
+            );
+        }
+    }
+
+    logout() {
+        this.props.logout();
     }
 }
 
 const mapStateToProps = (state) => ({
-    balance: {
-        balance: 2000,
-        balanceInSelectedCurrency: 123040
-    },
+    balance: ProfileSelectors.selectBalance(state),
     selectedCurrency: 'USD'
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getOverview: () => dispatch(ProfileActions.overviewRequest()),
         logout: () => dispatch(LoginActions.logoutRequest()),
     }
 };

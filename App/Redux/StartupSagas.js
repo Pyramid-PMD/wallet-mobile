@@ -1,12 +1,27 @@
 import { put, call } from 'redux-saga/effects';
-import { AsyncStorage } from 'react-native';
 import StartupActions from './StartupRedux';
+import {AsyncStorage} from 'react-native';
 import NavigationService from '../Navigation/NavigationService';
 import { addTokenToRequestHeaders } from '../Services/Api';
+import {
+    getSelectedLanguage,
+    getSelectedCurrency,
+    getToken,
+    getUserId
+} from '../Services/Storage';
 
 export function* startUpSaga(api, action) {
     yield call(checkAuthStatus, api, action);
+    yield call(loadUserSettings);
 }
+
+export function* loadUserSettings() {
+    yield call(AsyncStorage.removeItem, 'language');
+    const language = yield call(getSelectedLanguage);
+    const currency = yield call(getSelectedCurrency);
+    yield put(StartupActions.loadUserSettingSuccess(language, currency));
+}
+
 
 export function* checkAuthStatus(api, action) {
     const token = yield call(getToken);
@@ -16,30 +31,6 @@ export function* checkAuthStatus(api, action) {
         yield call(NavigationService.navigate, 'App');
     } else {
         yield call(NavigationService.navigate, 'Auth');
-    }
-}
-
-export async function getToken() {
-    try {
-        const token = await AsyncStorage.getItem('token');
-        if (token !== null) {
-            console.log(token);
-            return token;
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export async function getUserId() {
-    try {
-        const uid = await AsyncStorage.getItem('uid');
-        if (uid !== null) {
-            console.log(uid);
-            return parseInt(uid);
-        }
-    } catch (error) {
-        console.log(error);
     }
 }
 

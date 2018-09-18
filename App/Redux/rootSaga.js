@@ -9,15 +9,20 @@ import {MinerTypes} from '../Screens/MinerScreen/MinerRedux';
 import {WithdrawTypes} from '../Screens/WithdrawScreen/WithdrawRedux';
 import {NotificationTypes} from '../Screens/NotificationScreen/NotificationRedux';
 import {NewsTypes} from '../Screens/NewsScreen/NewsRedux';
+import {ChangeLanguageTypes} from '../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
+import {ProfileTypes} from '../Screens/ProfileScreen/ProfileRedux';
+
 
 /* ------------- Sagas ------------- */
-import {checkAuthStatus} from "./StartupSagas";
+import {checkAuthStatus, startUpSaga} from "./StartupSagas";
 import {loginSaga, logoutSaga} from '../Screens/LoginScreen/LoginSaga';
 import { getMinersAndExchangeIndex } from '../Screens/HomeScreen/HomeSaga';
 import { getMiner } from '../Screens/MinerScreen/MinerSaga';
 import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/WithdrawSaga';
 import { getNotifications } from '../Screens/NotificationScreen/NotificationSaga';
 import { getNews } from '../Screens/NewsScreen/NewsSaga';
+import { changeLanguage } from '../Screens/ChangeLanguageScreen/ChangeLanguageSaga';
+import {getOverview} from '../Screens/ProfileScreen/ProfileSaga';
 
 
 /* ------------- API ------------- */
@@ -30,7 +35,7 @@ const wpApi = API.createWpApi();
 /* ------------- Connect Types To Sagas ------------- */
 export default function * root () {
     yield all([
-        takeLatest(StartupTypes.CHECK_AUTH_STATUS, checkAuthStatus, api),
+        takeLatest(StartupTypes.BOOTSTRAP_APP, startUpSaga, api),
         takeLatest(LoginTypes.LOGIN_REQUEST, loginSaga, api),
         takeLatest(LoginTypes.LOGOUT_REQUEST, logoutSaga),
         takeLatest(HomeTypes.MINERS_EXCHANGE_REQUEST, getMinersAndExchangeIndex, api),
@@ -39,6 +44,8 @@ export default function * root () {
         takeLatest(WithdrawTypes.GET_SAVED_ADDRESS_LIST, getAddressList),
         takeLatest(NotificationTypes.NOTIFICATION_REQUEST, getNotifications, api),
         takeLatest(NewsTypes.NEWS_REQUEST, getNews, wpApi),
+        takeLatest(ChangeLanguageTypes.CHANGE_LANGUAGE, changeLanguage),
+        takeLatest(ProfileTypes.OVERVIEW_REQUEST, getOverview, api),
     ]);
 };
 

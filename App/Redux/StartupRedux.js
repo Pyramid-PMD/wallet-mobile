@@ -1,8 +1,11 @@
 import { createActions, createReducer} from 'reduxsauce';
 
 const { Types, Creators } = createActions({
+    bootstrapApp: null,
     checkAuthStatus: null,
-    isAuthenticated: ['isAuthenticated']
+    loadUserSettings: null,
+    loadUserSettingSuccess: ['language', 'currency'],
+    loadUserLanguage: ['language']
 });
 
 export const StartupTypes = Types;
@@ -10,18 +13,25 @@ export default Creators;
 
 
 const INITIAL_STATE = {
-    isAuthenticated: null
+    language: null,
+    currency: null
 };
 
 export const StartupSelectors = {
     selectIsAuthenticated: state => !!state.auth.token
 };
 
-export const isAuthenticated = (state, action) => {
-   const { isAuthenticated } = action;
-   return { ...state, isAuthenticated};
+export const loadUserLanguage = (state, action) => {
+    const { language } = action;
+    return { ...state, language};
+};
+
+export const loadUserSettingSuccess = (state, action) => {
+    const { language, currency } = action;
+    return { ...state, language, currency};
 };
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.IS_AUTHENTICATED]: isAuthenticated
+    [Types.LOAD_USER_SETTING_SUCCESS]: loadUserSettingSuccess,
+    [Types.LOAD_USER_LANGUAGE]: loadUserLanguage
 });

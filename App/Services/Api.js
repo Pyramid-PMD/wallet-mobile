@@ -10,18 +10,19 @@ const create  =  (baseURL = url) => {
             'Cache-Control': 'no-cache',
             'Content-Type': 'application/json',
             'version': '1.0.0',
-            'disk_id': '123456'
         },
         timeout: 10000
     });
 
     const getRoot = () => api.get('');
 
-    const login = (credentials) => api.post('web/login', credentials);
+    const login = (credentials) => api.post('mobile/login', credentials);
     const getMiners = () => api.get('web/machine/list');
     const getMiner = (machine_id) => api.get(`web/machine/${machine_id}`);
     const postWithdrawal = (withdrawal) => api.post('web/withdraw/all', withdrawal);
-    const getNotifications = () => api.get('msg/list');
+    const getNotifications = () => api.get('mobile/msg/list');
+    const getExchangeRates = () => api.get('mobile/exchange/rate');
+    const getOverview = () => api.get('mobile/overview');
 
 
     return {
@@ -30,7 +31,9 @@ const create  =  (baseURL = url) => {
         getMiners,
         getMiner,
         postWithdrawal,
-        getNotifications
+        getNotifications,
+        getExchangeRates,
+        getOverview
     };
 };
 

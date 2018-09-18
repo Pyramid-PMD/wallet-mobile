@@ -3,6 +3,7 @@ import { reducer as formReducer} from 'redux-form';
 
 const rootReducer = combineReducers({
     form: formReducer,
+    app: require('./StartupRedux').reducer,
     auth: require('../Screens/LoginScreen/LoginRedux').reducer,
     miners: require('../Screens/HomeScreen/Miners/MinersRedux').reducer,
     home: require('../Screens/HomeScreen/HomeRedux').reducer,
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     withdraw: require('../Screens/WithdrawScreen/WithdrawRedux').reducer,
     notification: require('../Screens/NotificationScreen/NotificationRedux').reducer,
     news: require('../Screens/NewsScreen/NewsRedux').reducer,
+    profile: require('../Screens/ProfileScreen/ProfileRedux').reducer,
 });
 
 export default rootReducer;

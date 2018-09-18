@@ -12,7 +12,7 @@ import StartupActions from "../../Redux/StartupRedux";
 class AuthLoadingScreen extends Component {
     constructor(props) {
         super(props);
-        this.props.checkAuthStatus();
+        this.props.startUp();
     }
 
     // Render any loading content that you like here
@@ -28,7 +28,7 @@ class AuthLoadingScreen extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        checkAuthStatus: () => dispatch(StartupActions.checkAuthStatus())
+        startUp: () => dispatch(StartupActions.bootstrapApp())
     }
 };
 
