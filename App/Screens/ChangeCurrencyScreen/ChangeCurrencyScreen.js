@@ -1,57 +1,44 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { Text, Container, Content, ListItem, CheckBox, Body, Thumbnail, View } from 'native-base';
 import Images from "../../Theme/Images";
 import ApplicationStyles from "../../Theme/ApplicationStyles";
+import ChangeCurrencyActions, {ChangeCurrencySelectors} from './ChangeCurrencyRedux';
 
 class ChangeCurrencyScreen extends Component {
-    state = {
-        currencies: [
-            {
-                name: 'ETH',
-                icon: Images.iconETH,
-                checked: true,
-            },
-            {
-                name: 'BTC',
-                icon: Images.iconBTC,
-                checked: false
-            },
-            {
-                name: 'USDT',
-                icon: Images.iconUSDT,
-                checked: false,
-            },
-            {
-                name: 'CNY',
-                icon: Images.iconCNY,
-                checked: false,
-            }
-        ]
-    };
+
+    componentDidMount() {
+        const {userCurrency} = this.props;
+        console.log('user currency', userCurrency);
+        this.handleCheckedState(userCurrency);
+    }
 
 
     onCurrencySelect(selectedCurrency) {
         this.handleCheckedState(selectedCurrency);
-        this.changeCurrency();
+        this.changeCurrency(selectedCurrency);
     }
 
     handleCheckedState(selectedCurrency) {
-        const currencies = this.state.currencies;
+        const currencies = this.props.currencies;
         const index = currencies.indexOf(selectedCurrency);
-        currencies.map(currency => currency.checked = false);
-        currencies[index].checked = !currencies[index].checked;
-        this.setState({ currencies });
+        if (index > -1) {
+            currencies.map(currency => currency.checked = false);
+            currencies[index].checked = !currencies[index].checked;
+            this.setState({ currencies });
+        }
+
     }
 
-    changeCurrency() {
-        console.log('dispatch change currency action');
+    changeCurrency(selectedCurrency) {
+        this.props.changeCurrency(selectedCurrency)
     }
 
     renderCurrencies() {
-        return this.state.currencies.map(currency => {
+        return this.props.currencies.map(currency => {
             return (
                 <ListItem thumbnail style={ApplicationStyles.checkboxList.listItem} key={currency.name}>
-                    <Thumbnail small source={currency.icon}/>
+                    <Thumbnail small source={Images['icon' + currency.name.toUpperCase()]}/>
                     <Body style={ApplicationStyles.checkboxList.listItemBody}>
                         <View style={ApplicationStyles.checkboxList.listTextContainer}>
                             <Text>{currency.name}</Text>
@@ -73,4 +60,14 @@ class ChangeCurrencyScreen extends Component {
     }
 }
 
-export default ChangeCurrencyScreen;
+const mapStateToProps = (state) => ({
+    userCurrency: ChangeCurrencySelectors.selectUserCurrency(state),
+    currencies: ChangeCurrencySelectors.selectCurrencies(state)
+});
+
+
+const mapDispatchToProps = (dispatch) => ({
+    changeCurrency: (selectedCurrency) => dispatch(ChangeCurrencyActions.changeCurrency(selectedCurrency))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeCurrencyScreen);

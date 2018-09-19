@@ -19,7 +19,6 @@ export default {
         fontSize: 14
     },
     section: {
-        color: Colors.primaryText,
         fontSize: 14,
         width: '100%'
     }

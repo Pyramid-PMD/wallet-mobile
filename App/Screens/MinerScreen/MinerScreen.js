@@ -25,7 +25,6 @@ class MinerDetailScreen extends Component {
 
     renderContent() {
         const { loading, miner, t } = this.props;
-        console.log('miner', miner);
         if (loading) {
             return <Text>loading</Text>
         }

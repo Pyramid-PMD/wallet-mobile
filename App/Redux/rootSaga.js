@@ -10,6 +10,7 @@ import {WithdrawTypes} from '../Screens/WithdrawScreen/WithdrawRedux';
 import {NotificationTypes} from '../Screens/NotificationScreen/NotificationRedux';
 import {NewsTypes} from '../Screens/NewsScreen/NewsRedux';
 import {ChangeLanguageTypes} from '../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
+import {ChangeCurrencyTypes} from '../Screens/ChangeCurrencyScreen/ChangeCurrencyRedux';
 import {OverviewTypes} from './Common/Overview/OverviewRedux';
 
 
@@ -22,6 +23,7 @@ import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/Withdraw
 import { getNotifications } from '../Screens/NotificationScreen/NotificationSaga';
 import { getNews } from '../Screens/NewsScreen/NewsSaga';
 import { changeLanguage } from '../Screens/ChangeLanguageScreen/ChangeLanguageSaga';
+import { changeCurrency } from '../Screens/ChangeCurrencyScreen/ChangeCurrencySaga';
 import {getOverview} from './Common/Overview/OverviewSaga';
 
 
@@ -45,6 +47,7 @@ export default function * root () {
         takeLatest(NotificationTypes.NOTIFICATION_REQUEST, getNotifications, api),
         takeLatest(NewsTypes.NEWS_REQUEST, getNews, wpApi),
         takeLatest(ChangeLanguageTypes.CHANGE_LANGUAGE, changeLanguage),
+        takeLatest(ChangeCurrencyTypes.CHANGE_CURRENCY, changeCurrency),
         takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api),
     ]);
 };

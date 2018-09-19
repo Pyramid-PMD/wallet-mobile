@@ -55,6 +55,7 @@ export function* loadUserSettings(defaultCurrency) {
     if (!currency) {
         currency = defaultCurrency;
     }
+    console.log('currency', currency);
     yield put(StartupActions.loadUserSettingSuccess(language, currency));
 }
 
