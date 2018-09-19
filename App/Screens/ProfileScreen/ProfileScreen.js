@@ -57,7 +57,7 @@ class ProfileScreen extends Component {
 
 const mapStateToProps = (state) => ({
     balance: OverviewSelectors.selectBalance(state),
-    selectedCurrency: 'USD'
+    selectedCurrency: OverviewSelectors.selectUserCurrency(state)
 });
 
 const mapDispatchToProps = (dispatch) => {

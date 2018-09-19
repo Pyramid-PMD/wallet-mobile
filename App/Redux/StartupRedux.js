@@ -5,7 +5,9 @@ const { Types, Creators } = createActions({
     checkAuthStatus: null,
     loadUserSettings: null,
     loadUserSettingSuccess: ['language', 'currency'],
-    loadUserLanguage: ['language']
+    loadUserLanguage: ['language'],
+    exchangeRateSuccess: ['rates'],
+    exchangeRateFailure: ['error'],
 });
 
 export const StartupTypes = Types;
@@ -14,7 +16,8 @@ export default Creators;
 
 const INITIAL_STATE = {
     language: null,
-    currency: null
+    currency: null,
+    rates: null
 };
 
 export const StartupSelectors = {
@@ -31,7 +34,13 @@ export const loadUserSettingSuccess = (state, action) => {
     return { ...state, language, currency};
 };
 
+export const exchangeRateSuccess = (state, action) => {
+    const { rates } = action;
+    return { ...state, rates};
+};
+
 export const reducer = createReducer(INITIAL_STATE, {
     [Types.LOAD_USER_SETTING_SUCCESS]: loadUserSettingSuccess,
-    [Types.LOAD_USER_LANGUAGE]: loadUserLanguage
+    [Types.LOAD_USER_LANGUAGE]: loadUserLanguage,
+    [Types.EXCHANGE_RATE_SUCCESS]: exchangeRateSuccess
 });

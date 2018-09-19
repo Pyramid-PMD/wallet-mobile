@@ -21,7 +21,7 @@ const BalanceCard = (props) => {
                                 </Col>
                                 <Col size={3}>
                                     <Text style={ApplicationStyles.typography.numberBig}>{balance.balance}<Text>PMD</Text></Text>
-                                    <Text>≈{balance.balanceInSelectedCurrency} {selectedCurrency}</Text>
+                                    <Text>≈{balance.balanceInSelectedCurrency} {selectedCurrency.name}</Text>
                                 </Col>
                             </Row>
                             { props.children }
@@ -39,5 +39,8 @@ BalanceCard.propType = {
         balance: PropTypes.number.isRequired,
         balanceInSelectedCurrency: PropTypes.number.isRequired
     }),
-    selectedCurrency: PropTypes.string.isRequired
+    selectedCurrency: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        rate: PropTypes.number.isRequired
+    })
 };

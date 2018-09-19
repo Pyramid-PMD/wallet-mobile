@@ -3,6 +3,7 @@ import OverviewActions from './OverviewRedux';
 
 export function * getOverview(api) {
     const res = yield call(api.getOverview);
+    console.log('overview', res);
     yield call(handleOverviewResponse, res);
 }
 

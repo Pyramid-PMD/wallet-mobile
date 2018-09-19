@@ -1,8 +1,8 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, select } from 'redux-saga/effects';
 import StartupActions from './StartupRedux';
-import {AsyncStorage} from 'react-native';
 import NavigationService from '../Navigation/NavigationService';
 import { addTokenToRequestHeaders } from '../Services/Api';
+
 import {
     getSelectedLanguage,
     getSelectedCurrency,
@@ -11,14 +11,50 @@ import {
 } from '../Services/Storage';
 
 export function* startUpSaga(api, action) {
+
     yield call(checkAuthStatus, api, action);
-    yield call(loadUserSettings);
+    yield call(getExchangeRates, api);
+    const rates = yield select(state => state.app.rates);
+    if (rates) {
+        const defaultRate = rates[0];
+        yield call(loadUserSettings, defaultRate);
+    }
+
 }
 
-export function* loadUserSettings() {
-    yield call(AsyncStorage.removeItem, 'language');
+export function* getExchangeRates(api) {
+    const res = yield call(api.getExchangeRates);
+    console.log('res',res);
+    yield call(handleExchangeRateResponse, res);
+}
+
+export function* handleExchangeRateResponse(res) {
+    if (res.data) {
+        if (res.data.code === "0") {
+            console.log('success');
+            yield call(handleExchangeRateSuccess, res);
+        } else {
+            console.log('error');
+            yield call(handleExchangeRateError, res);
+        }
+    }
+}
+export function* handleExchangeRateSuccess(res) {
+    const rates = res.data.data.list;
+    console.log('rates', rates);
+    yield put(StartupActions.exchangeRateSuccess(rates));
+}
+
+export function* handleExchangeRateError(res) {
+}
+
+export function* loadUserSettings(defaultCurrency) {
+    // yield call(AsyncStorage.removeItem, 'language');
     const language = yield call(getSelectedLanguage);
-    const currency = yield call(getSelectedCurrency);
+    let currency = yield call(getSelectedCurrency);
+    if (!currency) {
+        currency = defaultCurrency;
+    }
     yield put(StartupActions.loadUserSettingSuccess(language, currency));
 }
 

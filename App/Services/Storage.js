@@ -45,11 +45,18 @@ export async function getSelectedLanguage() {
     }
 }
 
+export async function saveCurrency(currency) {
+    try {
+        await AsyncStorage.setItem('currency', JSON.stringify(currency));
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
 export async function getSelectedCurrency() {
     try {
         const currency = await AsyncStorage.getItem('currency');
         if (currency !== null) {
-            console.log(currency);
             return JSON.parse(currency);
         }
     } catch (error) {

@@ -20,10 +20,8 @@ const INITIAL_STATE = {
 export const OverviewSelectors = {
     selectBalance: state => {
         if (state.overview.overview) {
-            const balance = state.overview.overview.pmd_all;
-
-            // TODO: Get selected currency
-            const balanceInSelectedCurrency = state.overview.overview.pmd_all * 0.5;
+            const balance = state.overview.overview.pmd_all, selectedCurrency = state.app.currency;
+            const balanceInSelectedCurrency = state.overview.overview.pmd_all * state.app.currency.rate;
             return {
                 balance,
                 balanceInSelectedCurrency,
@@ -41,7 +39,8 @@ export const OverviewSelectors = {
         if (state.overview.overview) {
             const balance = state.overview.overview.pmd_all;
         }
-    }
+    },
+    selectUserCurrency: state => state.app.currency
 };
 
 export const request = (state) => {
