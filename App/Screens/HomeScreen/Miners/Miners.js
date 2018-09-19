@@ -24,7 +24,7 @@ const Miners = (props) => {
                             name="screen-desktop"
                             type="SimpleLineIcons"
                             style={HomeScreenStyles.cardItemIcon}/>
-                        <Text style={HomeScreenStyles.cardItemText}>{ miner.name }</Text>
+                        <Text style={HomeScreenStyles.cardItemText}>{ miner.machine_nick }</Text>
                     </View>
 
                     <Right>
@@ -50,8 +50,8 @@ export default Miners;
 
 Miners.propTypes = {
     miners: PropTypes.arrayOf(PropTypes.shape({
-        mid: PropTypes.number,
-        name: PropTypes.string,
+        wallet_addr: PropTypes.string,
+        machine_nick: PropTypes.string,
         status: PropTypes.number,
         statusName: PropTypes.string
     }))

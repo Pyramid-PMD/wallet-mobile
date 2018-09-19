@@ -40,7 +40,7 @@ class HomeScreen extends Component {
 const mapStateToProps = (state) => {
     return {
         loading: HomeSelectors.selectLoading(state),
-        miners: MinerListSelectors.selectMiners(state),
+        miners: OverviewSelectors.selectMiners(state),
         exchangeIndex: OverviewSelectors.selectExchangeIndex(state)
     }
 };
