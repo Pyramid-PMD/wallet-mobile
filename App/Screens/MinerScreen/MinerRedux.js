@@ -2,7 +2,7 @@ import { createActions, createReducer} from 'reduxsauce';
 import i18n from '../../I18n/i18n.config';
 
 const { Types, Creators} = createActions({
-    minerRequest: ['machineId'],
+    minerRequest: ['machine'],
     minerSuccess: ['miner'],
     minerFailure: ['error']
 });

@@ -16,13 +16,13 @@ const create  =  (baseURL = url) => {
 
     const getRoot = () => api.get('');
 
-    const login = (credentials) => api.post('mobile/login', credentials);
-    const getMiners = () => api.get('web/machine/list');
-    const getMiner = (machine_id) => api.get(`web/machine/${machine_id}`);
-    const postWithdrawal = (withdrawal) => api.post('web/withdraw/all', withdrawal);
-    const getNotifications = () => api.get('mobile/msg/list');
-    const getExchangeRates = () => api.get('mobile/exchange/rate');
-    const getOverview = () => api.get('mobile/overview');
+    const login = (credentials) => api.post('login', credentials);
+    const getMiners = () => api.get('machine/list');
+    const getMiner = (wallet_addr) => api.get(`machine/detail/${wallet_addr}`);
+    const postWithdrawal = (withdrawal) => api.post('withdraw/all', withdrawal);
+    const getNotifications = () => api.get('msg/list');
+    const getExchangeRates = () => api.get('exchange/rate');
+    const getOverview = () => api.get('overview');
 
 
     return {

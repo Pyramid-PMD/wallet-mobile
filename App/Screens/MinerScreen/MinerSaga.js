@@ -2,11 +2,12 @@ import { call, put } from 'redux-saga/effects';
 import MinerActions from './MinerRedux';
 
 export function * getMiner(api, action) {
-    const { machineId } = action;
-    const res = yield call(api.getMiner, machineId);
+    const { machine } = action;
+    const res = yield call(api.getMiner, machine.wallet_addr);
     if (res) {
         if (res.data.code === "0") {
-            const miner = res.data.data;
+            let miner = res.data.data;
+            miner = {...miner, ...machine}
             yield put(MinerActions.minerSuccess(miner));
         } else {
             let errorMsg;

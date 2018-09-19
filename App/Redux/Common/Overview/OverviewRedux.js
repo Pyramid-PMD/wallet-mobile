@@ -1,4 +1,5 @@
 import { createActions, createReducer} from 'reduxsauce';
+import i18n from '../../../I18n/i18n.config';
 
 const { Types, Creators } = createActions({
     overviewRequest: null,
@@ -37,7 +38,11 @@ export const OverviewSelectors = {
     },
     selectMiners: state => {
         if (state.overview.overview) {
-            const balance = state.overview.overview.pmd_all;
+            const miners = [...state.overview.overview.machine_list];
+            return miners.map(item => {
+                item.statusName = item.status === 1 ? i18n.t('common:interface.online') : i18n.t('common:interface.offline');
+                return item;
+            });
         }
     },
     selectUserCurrency: state => state.app.currency

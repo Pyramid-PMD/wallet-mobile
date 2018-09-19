@@ -20,7 +20,7 @@ class MinerDetailScreen extends Component {
     getMiner() {
         const { navigation } = this.props;
         const miner = navigation.getParam('miner', {});
-        this.props.getMiner(miner.mid);
+        this.props.getMiner(miner);
     }
 
     renderContent() {
@@ -36,15 +36,15 @@ class MinerDetailScreen extends Component {
                         <Icon
                             name="screen-desktop"
                             type="SimpleLineIcons" style={{ color: Colors.secondaryText, marginRight: 6}}/>
-                        <Text style={{ color: Colors.secondaryText}}>{ miner.name }</Text>
+                        <Text style={{ color: Colors.secondaryText}}>{ miner.machine_nick }</Text>
                     </View>
                     <Text>{miner.statusName}</Text>
                 </View>
 
                 <View style={{marginTop: 20}}>
-                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.elapsed')}: <Text style={[ApplicationStyles.typography.number]}>{ miner.online }</Text>h</Text>
+                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.elapsed')}: <Text style={[ApplicationStyles.typography.number]}>{ miner.elapsed }</Text>h</Text>
 
-                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.margin')}: <Text style={[ApplicationStyles.typography.number]}>{ miner.bonus }</Text>PMD</Text>
+                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.margin')}: <Text style={[ApplicationStyles.typography.number]}>{ miner.margin }</Text>PMD</Text>
                 </View>
             </Content>
         );
