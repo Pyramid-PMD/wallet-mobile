@@ -5,6 +5,6 @@ export default {
     storeConfig: {
         key: 'primary',
         storage: AsyncStorage,
-        blacklist: ['auth', 'form'],
+        blacklist: ['auth', 'form', 'verifyEmail'],
     }
 };

@@ -53,6 +53,7 @@ class RegisterScreen extends Component {
     }
     render() {
         const { handleSubmit, t, counter } = this.props;
+        console.log('counter', counter);
         return(
             <Container>
                 <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
@@ -123,6 +124,7 @@ class RegisterScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('state', state.verifyEmail);
     const selector = formValueSelector('registerForm');
     const email = selector(state, 'email');
     return {

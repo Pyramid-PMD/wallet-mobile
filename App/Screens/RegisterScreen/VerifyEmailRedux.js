@@ -4,7 +4,8 @@ import { createActions, createReducer } from 'reduxsauce';
 const { Types, Creators} = createActions({
     verifyEmailRequest: ['email'],
     verifyEmailSuccess: ['verified'],
-    verifyEmailFailure: null
+    verifyEmailFailure: null,
+    getCounter: ['counter']
 });
 
 export const VerifyEmailTypes = Types;
@@ -37,9 +38,12 @@ export const failure = (state, action) => {
     return { ...state, loading: false, error: true, verified: false  };
 };
 
+export const getCounter = (state, action) => ({ ...state, counter: action.counter});
+
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
     [Types.VERIFY_EMAIL_REQUEST]: request,
     [Types.VERIFY_EMAIL_SUCCESS]: success,
-    [Types.VERIFY_EMAIL_FAILURE]: failure
+    [Types.VERIFY_EMAIL_FAILURE]: failure,
+    [Types.GET_COUNTER]: getCounter
 });
