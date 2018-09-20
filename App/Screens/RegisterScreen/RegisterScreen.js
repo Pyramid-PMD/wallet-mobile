@@ -1,36 +1,58 @@
 import React, {Component} from 'react';
-import { Container, Content, Form, Item, Input, Button, Text, View, Grid, Row, Col } from 'native-base';
-import { reduxForm, Field } from 'redux-form';
+import {connect} from 'react-redux';
+import {
+    Container,
+    Content,
+    Form,
+    Item,
+    Input,
+    Button,
+    Text,
+    View
+} from 'native-base';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { translate } from 'react-i18next';
 import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
+import RegisterActions from './RegisterRedux';
+import VerifyEmailActions, {VerifyEmailSelectors} from './VerifyEmailRedux';
 
 @translate(['common', 'auth'], { wait: true })
 class RegisterScreen extends Component {
-    renderInput({ input, placeholder, label, type, style, meta: { touched, error, warning } }){
+    renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
         if(error !== undefined){
             hasError= true;
         }
         return(
             <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input placeholder={placeholder} {...input}/>
+                <Input placeholder={placeholder} {...input} secureTextEntry={secureTextEntry}/>
                 {hasError ? <Text>{error}</Text> : <Text />}
             </Item>
         )
     }
 
     register(values) {
-        NavigationService.navigate('Pin');
+        const user = {
+            ...values,
+            trade_pwd: values.pwd,
+            trade_pwd_repeat: values.pwd,
+        };
+        this.props.register(user);
+    }
+
+    verifyEmail() {
+        const { email, verifyEmail } = this.props;
+        verifyEmail(email);
     }
 
     goToLoginPage() {
         NavigationService.navigate('Login');
     }
     render() {
-        const { handleSubmit, t } = this.props;
+        const { handleSubmit, t, counter } = this.props;
         return(
             <Container>
                 <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
@@ -45,30 +67,40 @@ class RegisterScreen extends Component {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                                 <Field
                                     style={{ marginLeft: 0, flex: 1}}
-                                    name="code"
+                                    name="verify_code"
                                     placeholder={t('auth:register.SMSCode')}
                                     component={this.renderInput}/>
 
                                 <Button
+                                    disabled={counter > 0}
                                     transparent
+                                    onPress={this.verifyEmail.bind(this)}
                                     light
                                     style={{ marginLeft: 10}}>
-                                    <Text>{t('auth:register.sendSMS')}</Text>
+                                    { counter === 0 ?
+                                        <Text>{t('auth:register.sendSMS')}</Text>
+                                        : <Text>{counter}</Text>
+                                    }
                                 </Button>
+
+
+
                             </View>
 
                             <Field
-                                name="password"
+                                name="pwd"
+                                secureTextEntry
                                 placeholder={t('auth:password')}
                                 component={this.renderInput}/>
 
                             <Field
-                                name="confirmPassword"
+                                name="pwd_repeat"
+                                secureTextEntry
                                 placeholder={t('auth:confirmPassword')}
                                 component={this.renderInput}/>
                         </Form>
 
-                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.register)}>
+                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.register.bind(this))}>
                             <Text>{t('common:interface.next')}</Text>
                         </Button>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
@@ -90,6 +122,28 @@ class RegisterScreen extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    const selector = formValueSelector('registerForm');
+    const email = selector(state, 'email');
+    return {
+        email,
+        counter: VerifyEmailSelectors.selectCounter(state)
+    }
+
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    register: (user) => dispatch(RegisterActions.registerRequest(user)),
+    verifyEmail: (email) => dispatch(VerifyEmailActions.verifyEmailRequest(email))
+});
+
 export default reduxForm({
+    initialValues: {
+        email: 'elhakim.nada@gmail.com',
+        verify_code: '5555',
+        pwd: 'final30788',
+        pwd_repeat: 'final30788',
+
+    },
     form: 'registerForm'
-})(RegisterScreen);
+})(connect(mapStateToProps, mapDispatchToProps)(RegisterScreen));

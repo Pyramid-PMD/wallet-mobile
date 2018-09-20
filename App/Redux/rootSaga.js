@@ -4,6 +4,7 @@ import config from '../Config/AppConfig';
 /* ------------- Types ------------- */
 import {StartupTypes} from './StartupRedux';
 import {LoginTypes} from '../Screens/LoginScreen/LoginRedux';
+import {RegisterTypes} from '../Screens/RegisterScreen/RegisterRedux';
 import {HomeTypes} from '../Screens/HomeScreen/HomeRedux';
 import {MinerTypes} from '../Screens/MinerScreen/MinerRedux';
 import {WithdrawTypes} from '../Screens/WithdrawScreen/WithdrawRedux';
@@ -12,11 +13,12 @@ import {NewsTypes} from '../Screens/NewsScreen/NewsRedux';
 import {ChangeLanguageTypes} from '../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
 import {ChangeCurrencyTypes} from '../Screens/ChangeCurrencyScreen/ChangeCurrencyRedux';
 import {OverviewTypes} from './Common/Overview/OverviewRedux';
-
+import {VerifyEmailTypes} from '../Screens/RegisterScreen/VerifyEmailRedux';
 
 /* ------------- Sagas ------------- */
 import {checkAuthStatus, startUpSaga} from "./StartupSagas";
 import {loginSaga, logoutSaga} from '../Screens/LoginScreen/LoginSaga';
+import {registerSaga} from '../Screens/RegisterScreen/RegisterSaga';
 import { getMinersAndExchangeIndex } from '../Screens/HomeScreen/HomeSaga';
 import { getMiner } from '../Screens/MinerScreen/MinerSaga';
 import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/WithdrawSaga';
@@ -25,6 +27,7 @@ import { getNews } from '../Screens/NewsScreen/NewsSaga';
 import { changeLanguage } from '../Screens/ChangeLanguageScreen/ChangeLanguageSaga';
 import { changeCurrency } from '../Screens/ChangeCurrencyScreen/ChangeCurrencySaga';
 import {getOverview} from './Common/Overview/OverviewSaga';
+import {verifyEmailSaga} from '../Screens/RegisterScreen/VerifyEmailSaga';
 
 
 /* ------------- API ------------- */
@@ -40,6 +43,8 @@ export default function * root () {
         takeLatest(StartupTypes.BOOTSTRAP_APP, startUpSaga, api),
         takeLatest(LoginTypes.LOGIN_REQUEST, loginSaga, api),
         takeLatest(LoginTypes.LOGOUT_REQUEST, logoutSaga),
+        takeLatest(RegisterTypes.REGISTER_REQUEST, registerSaga, api),
+        takeLatest(VerifyEmailTypes.VERIFY_EMAIL_REQUEST, verifyEmailSaga, api),
         takeLatest(HomeTypes.MINERS_EXCHANGE_REQUEST, getMinersAndExchangeIndex, api),
         takeLatest(MinerTypes.MINER_REQUEST, getMiner, api),
         takeLatest(WithdrawTypes.SEND_WITHDRAW_REQUEST, sendWithdraw, api),

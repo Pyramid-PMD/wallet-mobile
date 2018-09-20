@@ -31,7 +31,6 @@ class ChangeLanguageScreen extends Component {
             languages[index].checked = !languages[index].checked;
             this.setState({ languages });
         }
-
     }
 
     changeLanguage(selectedLanguage) {

@@ -5,6 +5,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     app: require('./StartupRedux').reducer,
     auth: require('../Screens/LoginScreen/LoginRedux').reducer,
+    verifyEmail: require('../Screens/RegisterScreen/VerifyEmailRedux').reducer,
     miners: require('../Screens/HomeScreen/Miners/MinersRedux').reducer,
     home: require('../Screens/HomeScreen/HomeRedux').reducer,
     miner: require('../Screens/MinerScreen/MinerRedux').reducer,
@@ -12,6 +13,8 @@ const rootReducer = combineReducers({
     notification: require('../Screens/NotificationScreen/NotificationRedux').reducer,
     news: require('../Screens/NewsScreen/NewsRedux').reducer,
     overview: require('./Common/Overview/OverviewRedux').reducer,
+    loadingIndicator: require('../Components/LoadingIndicator/LoadingIndicatorRedux').reducer,
+
 });
 
 export default rootReducer;

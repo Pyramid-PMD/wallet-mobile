@@ -21,7 +21,7 @@ class ChangeCurrencyScreen extends Component {
 
     handleCheckedState(selectedCurrency) {
         const currencies = this.props.currencies;
-        const index = currencies.indexOf(selectedCurrency);
+        const index = currencies.findIndex(currency => currency.name === selectedCurrency.name);
         if (index > -1) {
             currencies.map(currency => currency.checked = false);
             currencies[index].checked = !currencies[index].checked;
