@@ -19,6 +19,8 @@ const create  =  (baseURL = url) => {
     const login = (credentials) => api.post('login', credentials);
     const register = (user) => api.post('register', user);
     const verifyEmail = (email) => api.get('sendVerify', {email});
+    const changePassword = (password) => api.get('reset/passwrd', password);
+    const changePin = (password) => api.get('reset/passwrd', password)
     const getMiners = () => api.get('machine/list');
     const getMiner = (wallet_addr) => api.get(`machine/detail/${wallet_addr}`);
     const postWithdrawal = (withdrawal) => api.post('withdraw/all', withdrawal);
@@ -32,6 +34,8 @@ const create  =  (baseURL = url) => {
         login,
         register,
         verifyEmail,
+        changePassword,
+        changePin,
         getMiners,
         getMiner,
         postWithdrawal,

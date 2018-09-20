@@ -14,6 +14,9 @@ import {ChangeLanguageTypes} from '../Screens/ChangeLanguageScreen/ChangeLanguag
 import {ChangeCurrencyTypes} from '../Screens/ChangeCurrencyScreen/ChangeCurrencyRedux';
 import {OverviewTypes} from './Common/Overview/OverviewRedux';
 import {VerifyEmailTypes} from '../Screens/RegisterScreen/VerifyEmailRedux';
+import {ChangePasswordTypes} from '../Screens/ChangePasswordScreen/ChangePasswordRedux';
+import {ChangePinTypes} from '../Screens/ChangePinScreen/ChangePinRedux';
+
 
 /* ------------- Sagas ------------- */
 import {checkAuthStatus, startUpSaga} from "./StartupSagas";
@@ -28,6 +31,8 @@ import { changeLanguage } from '../Screens/ChangeLanguageScreen/ChangeLanguageSa
 import { changeCurrency } from '../Screens/ChangeCurrencyScreen/ChangeCurrencySaga';
 import {getOverview} from './Common/Overview/OverviewSaga';
 import {verifyEmailSaga} from '../Screens/RegisterScreen/VerifyEmailSaga';
+import {changePasswordSaga} from '../Screens/ChangePasswordScreen/ChangePasswordSaga';
+import {changePinSaga} from '../Screens/ChangePinScreen/ChangePinSaga';
 
 
 /* ------------- API ------------- */
@@ -45,6 +50,8 @@ export default function * root () {
         takeLatest(LoginTypes.LOGOUT_REQUEST, logoutSaga),
         takeLatest(RegisterTypes.REGISTER_REQUEST, registerSaga, api),
         takeLatest(VerifyEmailTypes.VERIFY_EMAIL_REQUEST, verifyEmailSaga, api),
+        takeLatest(ChangePasswordTypes.CHANGE_PASSWORD_REQUEST, changePasswordSaga, api),
+        takeLatest(ChangePinTypes.CHANGE_PIN_REQUEST, changePinSaga, api),
         takeLatest(HomeTypes.MINERS_EXCHANGE_REQUEST, getMinersAndExchangeIndex, api),
         takeLatest(MinerTypes.MINER_REQUEST, getMiner, api),
         takeLatest(WithdrawTypes.SEND_WITHDRAW_REQUEST, sendWithdraw, api),
