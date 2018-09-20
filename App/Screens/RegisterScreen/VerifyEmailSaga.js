@@ -38,7 +38,7 @@ export function countdown(secs) {
     return eventChannel(emitter => {
         const iv = setInterval(() => {
             secs -= 1
-            if (secs > 0) {
+            if (secs >= 0) {
                 emitter(secs)
             } else {
                 emitter(END)

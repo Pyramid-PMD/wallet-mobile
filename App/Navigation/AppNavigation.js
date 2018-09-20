@@ -27,6 +27,7 @@ import HeaderNotificationButton from '../Components/HeaderNotificationButton/Hea
 import NavigationStyles from './NavigationStyles';
 import WithdrawScreen from "../Screens/WithdrawScreen/WithdrawScreen";
 import QrCodeScannerScreen from "../Screens/QrCodeScannerScreen/QrCodeScannerScreen";
+import Colors from "../Theme/Colors";
 
 
 
@@ -92,12 +93,31 @@ const ProfileStack = createStackNavigator({
 });
 
 const AuthNavigation = createStackNavigator({
-    Login: LoginScreen,
-    Register: RegisterScreen,
-    Pin: PinCodeScreen
+    Login: {
+        screen: LoginScreen,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Register: {
+        screen: RegisterScreen,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Pin: {
+        screen: PinCodeScreen,
+        navigationOptions: {
+            headerTintColor: '#fff',
+            headerStyle: {
+                backgroundColor: Colors.primaryBackground,
+                borderBottomWidth: 0
+            }
+        }
+    }
 }, {
-    headerMode: 'none',
     initialRouteName: 'Login',
+
 });
 
 const TabNavigation = createBottomTabNavigator({

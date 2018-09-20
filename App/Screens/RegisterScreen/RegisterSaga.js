@@ -25,7 +25,7 @@ export function* handleRegisterResponse(res) {
 
 export function* handleRegisterSuccess(res) {
     yield put(RegisterActions.registerSuccess());
-    NavigationService.navigate('Pin');
+    NavigationService.navigate('Login');
 }
 
 export function* handleRegisterError(res) {

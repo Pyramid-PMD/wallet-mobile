@@ -34,13 +34,19 @@ class RegisterScreen extends Component {
         )
     }
 
-    register(values) {
-        const user = {
-            ...values,
-            trade_pwd: values.pwd,
-            trade_pwd_repeat: values.pwd,
-        };
-        this.props.register(user);
+    register(user) {
+        // TODO: not sure whether to register now or
+        // After entering pin
+
+        // const user = {
+        //     ...values,
+        //     trade_pwd: values.pwd,
+        //     trade_pwd_repeat: values.pwd,
+        // };
+        // this.props.register(user);
+
+        NavigationService.navigate('Pin', {user});
+
     }
 
     verifyEmail() {
