@@ -15,6 +15,15 @@ function navigate(routeName, params) {
     );
 }
 
+function push(routeName, params) {
+    _navigator.dispatch(
+        NavigationActions.push({
+            routeName,
+            params,
+        })
+    );
+}
+
 function goBack() {
     _navigator.dispatch(
         NavigationActions.goBack()
@@ -26,6 +35,7 @@ function goBack() {
 export default {
     navigate,
     goBack,
+    push,
     setTopLevelNavigator,
 };
 

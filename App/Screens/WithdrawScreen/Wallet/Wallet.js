@@ -185,5 +185,9 @@ const mapDispatchToProps = (dispatch) => ({
     withdraw: (withdrawal) => dispatch(WithdrawActions.sendWithdrawRequest(withdrawal)),
 });
 export default reduxForm({
+    initialValues: {
+        to_addr: '0x863D0C461818D74D7012443E362DC21B7E4A9C52',
+        amount: '1'
+    },
     form: 'withdrawForm'
 })(connect(mapStateToProps, mapDispatchToProps)(Wallet));

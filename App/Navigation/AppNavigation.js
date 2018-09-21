@@ -28,6 +28,8 @@ import NavigationStyles from './NavigationStyles';
 import WithdrawScreen from "../Screens/WithdrawScreen/WithdrawScreen";
 import QrCodeScannerScreen from "../Screens/QrCodeScannerScreen/QrCodeScannerScreen";
 import Colors from "../Theme/Colors";
+import AppLogo from "../Components/AppLogo/AppLogo";
+import QrCodeButton from "../Components/QrCodeButton/QrCodeButton";
 
 
 
@@ -35,7 +37,9 @@ const HomeStack = createStackNavigator({
     Home: {
         screen: HomeScreen,
         navigationOptions: {
+            headerTitle: (<AppLogo orientation="horizontal" />),
             headerRight: (<HeaderNotificationButton />),
+            headerLeft: (<QrCodeButton />),
             ...NavigationStyles
         }
     },
@@ -52,7 +56,9 @@ const NewsStack = createStackNavigator({
     News: {
         screen: NewsScreen,
         navigationOptions: {
+            headerTitle: (<AppLogo orientation="horizontal" />),
             headerRight: (<HeaderNotificationButton />),
+            headerLeft: (<QrCodeButton />),
             ...NavigationStyles
         }
     },
@@ -71,6 +77,7 @@ const ProfileStack = createStackNavigator({
     Profile: {
         screen: ProfileScreen,
         navigationOptions: {
+            headerTitle: (<AppLogo orientation="horizontal" />),
             headerRight: (<HeaderNotificationButton />),
             ...NavigationStyles
         }
@@ -83,7 +90,6 @@ const ProfileStack = createStackNavigator({
     HelpDetail: HelpDetailScreen,
     Notification: NotificationScreen,
     Withdraw: WithdrawScreen,
-    QrCodeScan: QrCodeScannerScreen
 
 }, {
     initialRouteName: 'Profile',
@@ -147,10 +153,10 @@ const RootNavigation = createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: TabNavigation,
     Auth: AuthNavigation,
+    QrCodeScan: QrCodeScannerScreen
 },
 {
     initialRouteName: 'AuthLoading',
-    mode: 'modal'
 });
 
 // Wrapping a stack with translation hoc asserts we trigger new render on language change
