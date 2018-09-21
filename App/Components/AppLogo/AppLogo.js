@@ -41,5 +41,9 @@ const AppLogo = (props) => {
 export default translate('common')(AppLogo);
 
 AppLogo.propTypes = {
-   orientation: PropTypes.string.isRequired
+   orientation: PropTypes.string
+};
+
+AppLogo.defaultProps = {
+    orientation: 'vertical'
 };

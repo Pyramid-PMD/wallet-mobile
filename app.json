@@ -4,6 +4,7 @@
     "version": "1.0.1",
     "sdkVersion": "27.0.0",
     "icon": "./App/Icons/icon.png",
+    "orientation": "portrait",
     "splash": {
       "image": "./App/Splash/splash.png",
       "resizeMode": "cover"

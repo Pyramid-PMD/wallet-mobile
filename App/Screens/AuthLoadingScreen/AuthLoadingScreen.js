@@ -5,6 +5,7 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    AsyncStorage,
     View,
 } from 'react-native';
 import StartupActions from "../../Redux/StartupRedux";

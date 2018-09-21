@@ -100,7 +100,7 @@ const mapDispatchToProps = (dispatch) => {
 export default reduxForm({
     initialValues: {
         email: 'nada-hakim@hotmail.com',
-        pwd: 'final30788'
+        pwd: 'final30789'
     },
     form: 'loginForm'
 })(connect(mapStateToProps, mapDispatchToProps)(LoginScreen));

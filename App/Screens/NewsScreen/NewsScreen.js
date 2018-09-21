@@ -8,6 +8,7 @@ import NavigationService from '../../Navigation/NavigationService';
 class NewsScreen extends Component {
     componentDidMount() {
         this.props.getNews();
+        console.log('news', this.news);
     }
 
     goToNewsDetail(news) {

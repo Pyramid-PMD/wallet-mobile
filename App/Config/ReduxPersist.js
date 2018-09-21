@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
 export default {
-    active: true,
+    active: false,
     storeConfig: {
         key: 'primary',
         storage: AsyncStorage,

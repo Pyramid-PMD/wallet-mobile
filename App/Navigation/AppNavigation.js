@@ -79,6 +79,7 @@ const ProfileStack = createStackNavigator({
         navigationOptions: {
             headerTitle: (<AppLogo orientation="horizontal" />),
             headerRight: (<HeaderNotificationButton />),
+            headerLeft: (<QrCodeButton />),
             ...NavigationStyles
         }
     },

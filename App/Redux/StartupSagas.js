@@ -11,15 +11,12 @@ import {
 } from '../Services/Storage';
 
 export function* startUpSaga(api, action) {
-
-    yield call(checkAuthStatus, api, action);
-    yield call(getExchangeRates, api);
-    const rates = yield select(state => state.app.rates);
-    if (rates) {
-        const defaultRate = rates[0];
-        yield call(loadUserSettings, defaultRate);
+    const isAuthenticated = yield call(checkAuthStatus, api, action);
+    console.log('is authenticated', isAuthenticated);
+    yield call(loadUserLanguage);
+    if (isAuthenticated) {
+        yield call(loadUserCurrency, api);
     }
-
 }
 
 export function* getExchangeRates(api) {
@@ -55,10 +52,30 @@ export function* loadUserSettings(defaultCurrency) {
     if (!currency) {
         currency = defaultCurrency;
     }
-    console.log('currency', currency);
     yield put(StartupActions.loadUserSettingSuccess(language, currency));
 }
 
+export function* loadUserLanguage() {
+    const language = yield call(getSelectedLanguage);
+    yield put(StartupActions.loadUserLanguage(language));
+}
+
+export function* loadUserCurrency(api) {
+    const rates = yield call(getExchangeRates, api);
+    console.log('rates', rates);
+    let currency = yield call(getSelectedCurrency);
+    if (!currency) {
+        currency = rates[0];
+    }
+    yield put(StartupActions.loadUserCurrency(currency));
+
+    // yield call(getExchangeRates, api);
+    // const rates = yield select(state => state.app.rates);
+    // if (rates) {
+    //     const defaultRate = rates[0];
+    //     yield call(loadUserSettings, defaultRate);
+    // }
+}
 
 export function* checkAuthStatus(api, action) {
     const token = yield call(getToken);
@@ -69,6 +86,7 @@ export function* checkAuthStatus(api, action) {
     } else {
         yield call(NavigationService.navigate, 'Auth');
     }
+    return token !== undefined;
 }
 
 
