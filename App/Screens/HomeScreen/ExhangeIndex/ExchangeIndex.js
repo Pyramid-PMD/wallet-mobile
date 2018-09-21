@@ -4,20 +4,32 @@ import Images from '../../../Theme/Images';
 import PropTypes from 'prop-types';
 import { List, ListItem, Text, View, H2 } from 'native-base';
 import ExchangeIndexStyles from "./ExchangeIndexStyles";
+import ApplicationStyles from "../../../Theme/ApplicationStyles";
 
 const ExchangeIndex = (props) => {
     const {t, exchangeIndex} = props;
-    const renderExchangeIndexItem = (exchangeIndex, sectionId, rowId) => {
+    const renderExchangeIndexItem = (exchangeIndexItem, sectionId, rowId) => {
+        console.log('exchange index', exchangeIndex);
+        const comingSoon = parseInt(rowId) === exchangeIndex.length - 1;
         const listItemStyle = rowId === "0" ?
             [ExchangeIndexStyles.listItem, ExchangeIndexStyles.listItemFirstChild]:
                   ExchangeIndexStyles.listItem;
+
+        console.log('coming soon', comingSoon);
+        if (comingSoon) {
+            return (
+                <ListItem style={[listItemStyle, ExchangeIndexStyles.comingSoonItem]}>
+                    <Text style={[ApplicationStyles.typography.secondaryText]}>{exchangeIndexItem.name}</Text>
+                </ListItem>
+            )
+        }
         return (
             <ListItem style={listItemStyle}>
-                <Image source={Images['bg' + exchangeIndex.name]} style={ExchangeIndexStyles.backgroundImage} />
-                <Image source={Images['icon' + exchangeIndex.name]} style={ExchangeIndexStyles.icon} />
+                <Image source={Images['bg' + exchangeIndexItem.name]} style={ExchangeIndexStyles.backgroundImage} />
+                <Image source={Images['icon' + exchangeIndexItem.name]} style={ExchangeIndexStyles.icon} />
                 <View>
-                    <Text>{exchangeIndex.name}</Text>
-                    <Text>{exchangeIndex.price}</Text>
+                    <Text>{exchangeIndexItem.name}</Text>
+                    <Text>{exchangeIndexItem.price}</Text>
                 </View>
             </ListItem>
         )

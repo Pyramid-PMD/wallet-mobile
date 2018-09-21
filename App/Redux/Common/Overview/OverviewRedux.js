@@ -33,7 +33,13 @@ export const OverviewSelectors = {
     },
     selectExchangeIndex: state => {
         if (state.overview.overview) {
-            return state.overview.overview.exchangeIndex;
+            const exchangeIndex = [...state.overview.overview.exchangeIndex];
+            const comingSoonItem = {
+                name: i18n.t('common:interface.comingSoon'),
+                price: "0"
+            };
+            exchangeIndex.push(comingSoonItem);
+            return exchangeIndex;
         }
     },
     selectMiners: state => {

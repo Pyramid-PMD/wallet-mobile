@@ -9,7 +9,7 @@ export default StyleSheet.create({
     },
     list: {
         flex: 1,
-        marginLeft: 0
+        marginLeft: 0,
     },
     listItem: {
         borderBottomWidth: 0,
@@ -19,6 +19,10 @@ export default StyleSheet.create({
         backgroundColor: Colors.secondaryBackground,
         borderRadius: 5,
         width: 170
+    },
+    comingSoonItem: {
+        flex: 1,
+        justifyContent: 'flex-end',
     },
     listItemFirstChild: {
         marginLeft: 0,
