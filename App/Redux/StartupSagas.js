@@ -62,10 +62,9 @@ export function* loadUserLanguage() {
 
 export function* loadUserCurrency(api) {
     const rates = yield call(getExchangeRates, api);
-    console.log('rates', rates);
     let currency = yield call(getSelectedCurrency);
     if (!currency) {
-        currency = rates[0];
+        currency = rates ? rates[0]: [];
     }
     yield put(StartupActions.loadUserCurrency(currency));
 

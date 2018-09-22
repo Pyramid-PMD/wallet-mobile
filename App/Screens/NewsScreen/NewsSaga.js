@@ -4,13 +4,14 @@ import NewsActions from './NewsRedux';
 export function* getNews(api, action) {
     const res = yield call(api.getNews);
     console.log('res', res);
+    yield call(handleNewsResponse, res);
 }
 
 export function* handleNewsResponse(res) {
     if (res.status === 200) {
         yield call(handleNewsSuccess, res);
     } else {
-        yield put(NewsActions.newsSuccess(res.data))
+        yield call(handleNewsError, res);
     }
 }
 
