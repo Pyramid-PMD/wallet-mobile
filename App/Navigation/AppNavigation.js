@@ -45,6 +45,8 @@ const HomeStack = createStackNavigator({
     },
     MinerDetail: MinerDetailScreen,
     Notification: NotificationScreen,
+    QrCodeScan: QrCodeScannerScreen
+
 }, {
     initialRouteName: 'Home',
     navigationOptions: {
@@ -63,7 +65,9 @@ const NewsStack = createStackNavigator({
         }
     },
     NewsDetail: NewsDetailScreen,
-    Notification: NotificationScreen
+    Notification: NotificationScreen,
+    QrCodeScan: QrCodeScannerScreen
+
 
 }, {
     initialRouteName: 'News',
@@ -91,6 +95,7 @@ const ProfileStack = createStackNavigator({
     HelpDetail: HelpDetailScreen,
     Notification: NotificationScreen,
     Withdraw: WithdrawScreen,
+    QrCodeScan: QrCodeScannerScreen,
 
 }, {
     initialRouteName: 'Profile',
@@ -153,8 +158,7 @@ const TabNavigation = createBottomTabNavigator({
 const RootNavigation = createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: TabNavigation,
-    Auth: AuthNavigation,
-    QrCodeScan: QrCodeScannerScreen
+    Auth: AuthNavigation
 },
 {
     initialRouteName: 'AuthLoading',

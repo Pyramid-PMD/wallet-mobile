@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, LayoutAnimation, Alert } from 'react-native';
 import { Container, Text } from 'native-base';
 import { BarCodeScanner, Permissions } from 'expo';
+import NavigationService from '../../Navigation/NavigationService';
+
 class QrCodeScannerScreen extends Component {
     state = {
         hasCameraPermission: null,
@@ -23,6 +25,8 @@ class QrCodeScannerScreen extends Component {
         if (result.data !== this.state.lastScannedUrl) {
             LayoutAnimation.spring();
             this.setState({ lastScannedUrl: result.data });
+            Alert.alert('Qrcode scanned');
+            NavigationService.goBack();
         }
     };
 
@@ -36,7 +40,8 @@ class QrCodeScannerScreen extends Component {
                     Camera permission is not granted
                 </Text>
                 : <BarCodeScanner
-                    onBarCodeRead={this._handleBarCodeRead}
+                    barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                    onBarCodeRead={this._handleBarCodeRead.bind(this)}
                     style={{
                         height: Dimensions.get('window').height,
                         width: Dimensions.get('window').width,

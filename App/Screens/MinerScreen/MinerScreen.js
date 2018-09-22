@@ -13,6 +13,7 @@ import Colors from "../../Theme/Colors";
 
 @translate(['common', 'dashboard'], { wait: true })
 class MinerDetailScreen extends Component {
+
     componentDidMount() {
         this.getMiner();
     }
@@ -20,12 +21,14 @@ class MinerDetailScreen extends Component {
     getMiner() {
         const { navigation } = this.props;
         const miner = navigation.getParam('miner', {});
+        console.log('miner', miner);
         this.props.getMiner(miner);
     }
 
     renderContent() {
         const { loading, miner, t } = this.props;
-        if (loading) {
+        console.log('miner', miner);
+        if (!miner) {
             return <Text>loading</Text>
         }
         return(

@@ -3,7 +3,7 @@ import { Button, Icon } from 'native-base';
 import NavigationService from '../../Navigation/NavigationService';
 import Colors from "../../Theme/Colors";
 
-const QrCodeButton = () => {
+const QrCodeButton = (props) => {
     const scanQrCode = () => {
         NavigationService.navigate('QrCodeScan');
     };
