@@ -61,19 +61,13 @@ export function* loadUserLanguage() {
 }
 
 export function* loadUserCurrency(api) {
-    const rates = yield call(getExchangeRates, api);
+    yield call(getExchangeRates, api);
+    const rates = yield select(state => state.app.currencies);
     let currency = yield call(getSelectedCurrency);
     if (!currency) {
-        currency = rates ? rates[0]: [];
+        currency = rates ? rates[0]: {};
     }
     yield put(StartupActions.loadUserCurrency(currency));
-
-    // yield call(getExchangeRates, api);
-    // const rates = yield select(state => state.app.rates);
-    // if (rates) {
-    //     const defaultRate = rates[0];
-    //     yield call(loadUserSettings, defaultRate);
-    // }
 }
 
 export function* checkAuthStatus(api, action) {

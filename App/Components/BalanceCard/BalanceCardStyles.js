@@ -6,7 +6,6 @@ export default StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
         paddingHorizontal: 0,
-        backgroundColor: 'red',
     },
     cardSection: {
         marginBottom: Metrics.section
