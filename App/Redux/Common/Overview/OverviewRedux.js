@@ -1,5 +1,6 @@
 import { createActions, createReducer} from 'reduxsauce';
 import i18n from '../../../I18n/i18n.config';
+import {formatDecimal} from "../../../Services/Utils";
 
 const { Types, Creators } = createActions({
     overviewRequest: null,
@@ -21,13 +22,17 @@ const INITIAL_STATE = {
 export const OverviewSelectors = {
     selectBalance: state => {
         if (state.overview.overview) {
-            const balance = state.overview.overview.pmd_all, selectedCurrency = state.app.currency;
-            const balanceInSelectedCurrency = state.overview.overview.pmd_all * state.app.currency.rate;
+            const balance = state.overview.overview.pmd_all,
+                selectedCurrency = state.app.currency,
+                balanceInSelectedCurrency = state.overview.overview.pmd_all * state.app.currency.rate,
+                otherIncoming = state.overview.overview.other_incoming,
+                minerIncoming = state.overview.overview.mining_profit;
+
             return {
-                balance,
-                balanceInSelectedCurrency,
-                otherIncoming: state.overview.overview.other_incoming,
-                minerIncoming: state.overview.overview.mining_profit
+                balance: formatDecimal(balance),
+                balanceInSelectedCurrency: formatDecimal(balanceInSelectedCurrency),
+                otherIncoming: formatDecimal(otherIncoming),
+                minerIncoming: formatDecimal(minerIncoming)
             }
         }
     },

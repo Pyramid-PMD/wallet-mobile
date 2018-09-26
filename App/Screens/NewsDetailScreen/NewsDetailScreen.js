@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import { Image, Dimensions } from 'react-native';
+import {translate} from 'react-i18next';
 import { Text, Container, Content, H3, View } from 'native-base';
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 import HTML from 'react-native-render-html';
 import NewsDetailStyles from "./NewsDetailStyles";
 
+@translate(['common', 'dashboard'], { wait: true })
 class NewsDetailScreen extends Component {
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:newsScreen.title')
+        }
+    };
 
     getNews() {
         const { navigation } = this.props;

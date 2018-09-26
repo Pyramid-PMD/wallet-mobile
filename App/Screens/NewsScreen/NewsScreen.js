@@ -1,12 +1,24 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Text, Container, Content, List, ListItem, Thumbnail, Body, Left, View } from 'native-base';
+import {
+    Text,
+    Container,
+    Content,
+    List,
+    ListItem,
+    Thumbnail,
+    Body,
+    Left,
+    Spinner,
+    View
+} from 'native-base';
 import NewsStyles from './NewsStyles';
 import NewsActions, {NewsSelectors} from './NewsRedux';
 import NavigationService from '../../Navigation/NavigationService';
+import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 
 class NewsScreen extends Component {
-    componentDidMount() {
+    componentWillMount() {
         this.props.getNews();
         console.log('news', this.news);
     }
@@ -33,20 +45,21 @@ class NewsScreen extends Component {
         const {news} = this.props;
         if (news) {
             return (
-                <List dataArray={news}
-                      style={NewsStyles.list}
-                      renderRow={this.renderNewsItem.bind(this)}>
-                </List>
+                <Content padder>
+                    <List dataArray={news}
+                          style={NewsStyles.list}
+                          renderRow={this.renderNewsItem.bind(this)}>
+                    </List>
+                </Content>
             );
         }
+        return <LoadingIndicator/>
     }
 
     render() {
         return(
             <Container>
-                <Content padder>
-                    {this.renderNews()}
-                </Content>
+                {this.renderNews()}
             </Container>
         )
     }

@@ -19,6 +19,12 @@ import { translate } from 'react-i18next';
 
 @translate(['common', 'dashboard'], { wait: true })
 class NotificationScreen extends Component {
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:notificationScreen.title')
+        }
+    };
 
     componentDidMount() {
         this.props.getNotifications();

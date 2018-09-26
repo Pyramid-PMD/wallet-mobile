@@ -39,7 +39,11 @@
       "withdraw": "Withdraw"
     }
   },
+  "newsScreen": {
+    "title": "News"
+  },
   "notificationScreen": {
+    "title": "Notifications",
     "system": "System",
     "transaction": "Transaction",
     "withdraw": "Withdraw"
@@ -50,6 +54,7 @@
     "confirmPinCode": "Confirm Pin Code"
   },
   "withdrawScreen": {
+    "title": "Withdraw",
     "wallet": "Wallet",
     "withdraw": "Withdraw",
     "enterAmount": "Enter amount"

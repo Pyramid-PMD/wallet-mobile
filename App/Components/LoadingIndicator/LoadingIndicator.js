@@ -1,21 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Spinner, Content } from 'native-base';
+import Colors from "../../Theme/Colors";
+import ApplicationStyles from "../../Theme/ApplicationStyles";
 
 const LoadingIndicator = (props) => {
-    const { show } = props;
     return (
-        show ?
-        <View>
-            <img src="./src/assets/img/loaders/oval.svg"/>
-        </View> : null
+        <Content contentContainerStyle={ApplicationStyles.layout.centerContent}>
+            <Spinner color={Colors.primaryLight}/>
+        </Content>
     );
 };
 
 export default LoadingIndicator;
-
-LoadingIndicator.propTypes = {
-    show: PropTypes.bool
-};
-
-

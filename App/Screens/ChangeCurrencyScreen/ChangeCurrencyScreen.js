@@ -41,7 +41,7 @@ class ChangeCurrencyScreen extends Component {
                     <Thumbnail small source={Images['icon' + currency.name.toUpperCase()]}/>
                     <Body style={ApplicationStyles.checkboxList.listItemBody}>
                         <View style={ApplicationStyles.checkboxList.listTextContainer}>
-                            <Text>{currency.name}</Text>
+                            <Text>{currency.name.toUpperCase()}</Text>
                             <CheckBox style={ApplicationStyles.checkboxList.checkbox} checked={currency.checked} onPress={this.onCurrencySelect.bind(this, currency)}/>
                         </View>
                     </Body>

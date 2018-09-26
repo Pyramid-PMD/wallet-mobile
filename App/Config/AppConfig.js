@@ -21,6 +21,9 @@ export default {
     api: {
         baseUrl: 'http://101.132.161.0/api/mobile/',
         wpApi: 'https://jhfund.vip/wp-json/wp/v2/'
+    },
+    balance: {
+        precision: 6
     }
 };
 
