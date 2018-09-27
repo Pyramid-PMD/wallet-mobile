@@ -28,12 +28,13 @@ class WithdrawScreen extends Component {
         };
     }
     render() {
-        const { balance, selectedCurrency} = this.getNavigationParams();
+        const {balance, selectedCurrency} = this.getNavigationParams();
+        const {t} = this.props;
         return(
             <Container>
                 <Content padder>
                     <BalanceCard balance={balance} selectedCurrency={selectedCurrency}/>
-                    <Wallet balance={balance}/>
+                    <Wallet balance={balance} t={t}/>
                 </Content>
             </Container>
         );

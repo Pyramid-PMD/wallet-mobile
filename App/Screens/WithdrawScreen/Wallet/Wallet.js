@@ -15,7 +15,6 @@ import { TouchableOpacity } from 'react-native';
 import {reduxForm, Field} from 'redux-form';
 import {connect} from 'react-redux';
 import Autocomplete from 'native-base-autocomplete';
-import { translate } from 'react-i18next';
 import ApplicationStyles from '../../../Theme/ApplicationStyles';
 import FormStyles from "../../../Theme/FormStyles";
 import ProfileScreenStyles from '../../ProfileScreen/ProfileScreenStyles';
@@ -25,8 +24,8 @@ import UnderLinedInputWithButtonStyles from '../../../Theme/UnderlinedInputWithB
 import NavigationService from '../../../Navigation/NavigationService';
 import PinCodeModal from "../../../Modals/PinCodeModal/PinCodeModal";
 import WithdrawActions, {WithdrawSelectors} from '../WithdrawRedux';
+import {isAddress, required} from "../../../Services/Validators";
 
-@translate(['common', 'dashboard'], { wait: true })
 class Wallet extends Component {
      state = {
         addresses: [
@@ -35,7 +34,8 @@ class Wallet extends Component {
         ],
         query: '',
         modalVisible: false,
-        withdrawal: null
+        withdrawal: null,
+        addressError: null
     };
 
      componentDidMount() {
@@ -65,23 +65,36 @@ class Wallet extends Component {
         this.setState({ modalVisible: false })
     }
 
-    renderInput({ input, placeholder, style, meta: { touched, error, warning } }){
+    renderInput({ input, placeholder, onButtonPress, meta: { touched, error, warning } }){
         let hasError= false;
-        if(error !== undefined){
+        if(error !== undefined && touched){
             hasError= true;
         }
         return(
+        <View style={{flex: 1}}>
+            <View style={UnderLinedInputWithButtonStyles.container}>
                 <Input
                     {...input}
                     placeholder={placeholder}
                     style={UnderLinedInputWithButtonStyles.input}/>
+                <Button
+                    onPress={onButtonPress}
+                    transparent style={UnderLinedInputWithButtonStyles.button}>
+                    <Text style={UnderLinedInputWithButtonStyles.buttonText}>All</Text>
+                </Button>
+            </View>
+            {hasError ? <Text style={FormStyles.error}>{error}</Text> : <Text />}
+        </View>
 
         )
     }
 
+
     setAllBalance() {
         const { balance } = this.props;
-        this.props.change('amount', balance.balance.toString());
+        if (balance.balance) {
+            this.props.change('amount', balance.balance.toString());
+        }
     }
 
     renderAutoCompleteInput() {
@@ -89,29 +102,31 @@ class Wallet extends Component {
         const addresses = this.findAddress(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
         return (
-            <Autocomplete
-                autoCapitalize="none"
-                autoCorrect={false}
-                inputContainerStyle={AutoCompleteInput.inputContainer}
-                containerStyle={AutoCompleteInput.autoCompleteContainer}
-                listContainerStyle={AutoCompleteInput.listContainerStyle}
-                listStyle={AutoCompleteInput.listStyle}
-                data={addresses.length === 1 && comp(query, addresses[0]) ? [] : addresses}
-                defaultValue={query}
-                onChangeText={text => this.setState({ query: text })}
-                style={AutoCompleteInput.inputStyle}
-                placeholder="Enter wallet address"
-                renderItem={(address) => (
-                    <TouchableOpacity onPress={() => this.setState({ query: address })}>
-                        <View style={AutoCompleteInput.listItemStyle}>
-                            <Text style={AutoCompleteInput.textStyle}>
-                                { address }
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                )}
-            />
-
+            <View style={{flex:1}}>
+                <Autocomplete
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    inputContainerStyle={AutoCompleteInput.inputContainer}
+                    containerStyle={AutoCompleteInput.autoCompleteContainer}
+                    listContainerStyle={AutoCompleteInput.listContainerStyle}
+                    listStyle={AutoCompleteInput.listStyle}
+                    data={addresses.length === 1 && comp(query, addresses[0]) ? [] : addresses}
+                    defaultValue={query}
+                    onChangeText={text => this.setState({ query: text })}
+                    style={AutoCompleteInput.inputStyle}
+                    placeholder="Enter wallet address"
+                    renderItem={(address) => (
+                        <TouchableOpacity onPress={() => this.setState({ query: address })}>
+                            <View style={AutoCompleteInput.listItemStyle}>
+                                <Text style={AutoCompleteInput.textStyle}>
+                                    { address }
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    )}
+                />
+                {this.state.addressError ? <Text style={FormStyles.error}>{this.state.addressError }</Text> : <Text />}
+            </View>
         );
     }
 
@@ -120,8 +135,20 @@ class Wallet extends Component {
             amount: values.amount,
             to_addr: this.state.query
         };
-        this.setState({withdrawal})
-        this.openPinCodeModal();
+
+        const isAddressValid = this.validateWalletAddress(values.amount);
+
+        if (isAddressValid){
+            this.setState({withdrawal});
+            this.openPinCodeModal();
+        } else {
+            this.setState({addressError: 'Please enter valid address'})
+        }
+
+    }
+
+    validateWalletAddress(address) {
+        return address ? isAddress(address) : false;
     }
 
     onGetPinCode(pin) {
@@ -153,14 +180,13 @@ class Wallet extends Component {
                         closeModal={this.closePinCodeModal.bind(this)}/>
                     <Form>
                         { this.renderAutoCompleteInput() }
-                        <View style={UnderLinedInputWithButtonStyles.container}>
-                            <Field name="amount" component={this.renderInput} placeholder={t('dashboard:withdrawScreen.enterAmount')}/>
-                            <Button
-                                onPress={this.setAllBalance.bind(this)}
-                                transparent style={UnderLinedInputWithButtonStyles.button}>
-                                <Text style={UnderLinedInputWithButtonStyles.buttonText}>All</Text>
-                            </Button>
-                        </View>
+
+                        <Field
+                            name="amount"
+                            component={this.renderInput}
+                            onButtonPress={this.setAllBalance.bind(this)}
+                            placeholder={t('dashboard:withdrawScreen.enterAmount')}/>
+
                     </Form>
                     {/*</CardItem>*/}
                 </Card>
@@ -184,10 +210,21 @@ const mapDispatchToProps = (dispatch) => ({
     getAddressList: () => dispatch(WithdrawActions.getSavedAddressList()),
     withdraw: (withdrawal) => dispatch(WithdrawActions.sendWithdrawRequest(withdrawal)),
 });
+
+const validate = (values, props) => {
+    const {t} = props,
+        errors = {};
+
+    errors.amount = required(values.amount, t('dashboard:withdrawScreen.errors.amountRequired'));
+
+    return errors;
+};
+
 export default reduxForm({
     initialValues: {
         to_addr: '0x863D0C461818D74D7012443E362DC21B7E4A9C52',
         amount: '1'
     },
-    form: 'withdrawForm'
+    form: 'withdrawForm',
+    validate
 })(connect(mapStateToProps, mapDispatchToProps)(Wallet));

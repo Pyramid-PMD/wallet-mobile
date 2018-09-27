@@ -57,7 +57,12 @@
     "title": "Withdraw",
     "wallet": "Wallet",
     "withdraw": "Withdraw",
-    "enterAmount": "Enter amount"
+    "enterAmount": "Enter amount",
+    "errors": {
+      "amountRequired": "Please enter amount",
+      "addressRequired": "Please enter wallet address",
+      "wrongAddressFormat": "Please enter valid address format"
+    }
   },
   "pinCodeModal": {
     "enterPin": "Please enter your pin code"
