@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
-import NavigationService from '../../Navigation/NavigationService';
 import Metrics from "../../Theme/Metrics";
 import RegisterActions from '../RegisterScreen/RegisterRedux';
+import {required, email, matchField, lengthBetween} from "../../Services/Validators";
 
 
 @translate(['common', 'dashboard'], { wait: true })
@@ -16,17 +16,19 @@ class PinCodeScreen extends Component {
 
     renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
-        if(error !== undefined){
+        if(error !== undefined && touched){
             hasError= true;
         }
         return(
-            <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input
-                    placeholder={placeholder}
-                    secureTextEntry={secureTextEntry}
-                    {...input} />
-                {hasError ? <Text>{error}</Text> : <Text />}
-            </Item>
+            <View style={[style]}>
+                <Item regular style={[FormStyles.regularInput]} error= {hasError}>
+                    <Input
+                        placeholder={placeholder}
+                        secureTextEntry={secureTextEntry}
+                        {...input} />
+                </Item>
+                {hasError ? <Text style={FormStyles.error}>{error}</Text> : <Text />}
+            </View>
         )
     }
 
@@ -78,6 +80,20 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
+const validate = (values, {screenProps}) => {
+    const {t} = screenProps,
+        errors = {};
+
+    errors.trade_pwd = required(values.trade_pwd, t('auth:register.errors.pinRequired'));
+
+    errors.trade_pwd_repeat =
+        required(values.trade_pwd_repeat, t('auth:register.errors.pinRepeatRequired')) ||
+        matchField(values.trade_pwd_repeat, values.trade_pwd, t('auth:register.errors.pinMismatch'));
+
+    return errors;
+};
+
 export default reduxForm({
-    form: 'pinForm'
+    form: 'pinForm',
+    validate
 })(connect(null, mapDispatchToProps)(PinCodeScreen));

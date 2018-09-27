@@ -159,13 +159,13 @@ const validate = (values, {screenProps}) => {
 };
 
 export default reduxForm({
-    // initialValues: {
-    //     email: 'elhakim.nada@gmail.com',
-    //     verify_code: '5555',
-    //     pwd: 'final30788',
-    //     pwd_repeat: 'final30788',
-    //
-    // },
+    initialValues: {
+        email: 'elhakim.nada88@gmail.com',
+        verify_code: '5555',
+        pwd: 'final30788',
+        pwd_repeat: 'final30788',
+
+    },
     validate,
     form: 'registerForm'
 })(connect(mapStateToProps, mapDispatchToProps)(RegisterScreen));

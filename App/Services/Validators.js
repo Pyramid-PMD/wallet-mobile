@@ -1,5 +1,4 @@
 export const required = (value, message) => {
-    console.log('message', message);
     return value ? undefined : message;
 };
 

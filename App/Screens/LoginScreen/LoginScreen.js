@@ -115,8 +115,8 @@ const validate = (values, {screenProps}) => {
 
 export default reduxForm({
     initialValues: {
-        email: 'nada-hakim@hotmail.com',
-        pwd: 'final30789'
+        email: 'elhakim.nada88@gmail.com',
+        pwd: 'final30788'
     },
     validate,
     form: 'loginForm'

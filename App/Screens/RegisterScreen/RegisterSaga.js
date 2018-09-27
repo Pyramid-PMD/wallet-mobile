@@ -2,6 +2,7 @@ import { put, call } from 'redux-saga/effects';
 import RegisterActions from './RegisterRedux';
 import i18n from '../../I18n/i18n.config';
 import NavigationService from '../../Navigation/NavigationService';
+import ToastActions from '../../Redux/Common/Toast/ToastRedux';
 
 
 export function * registerSaga(api, action) {
@@ -60,4 +61,5 @@ export function* handleRegisterError(res) {
             // errorMsg = yield call(handleGenericNetworkErrors, res);
     }
     yield put(RegisterActions.registerFailure(errorMsg));
+    yield put(ToastActions.showToast(errorMsg));
 }
