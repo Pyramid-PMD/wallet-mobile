@@ -17,7 +17,7 @@ import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/Ov
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
     componentDidMount() {
-        console.log('Profile component did mount');
+        console.log('profile screen did mount');
         this.props.getOverview();
     }
 
@@ -35,6 +35,9 @@ class ProfileScreen extends Component {
             balance,
             selectedCurrency,
         } = this.props;
+
+        console.log('balance', balance);
+
         if (this.props.balance) {
             return (
                 <Content padder>

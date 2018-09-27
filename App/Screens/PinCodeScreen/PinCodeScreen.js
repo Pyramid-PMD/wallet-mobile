@@ -8,7 +8,7 @@ import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import Metrics from "../../Theme/Metrics";
 import RegisterActions from '../RegisterScreen/RegisterRedux';
-import {required, email, matchField, lengthBetween} from "../../Services/Validators";
+import {required, matchField} from "../../Services/Validators";
 
 
 @translate(['common', 'dashboard'], { wait: true })

@@ -63,6 +63,7 @@ export function* loadUserLanguage() {
 export function* loadUserCurrency(api) {
     yield call(getExchangeRates, api);
     const rates = yield select(state => state.app.currencies);
+    console.log('rates', rates);
     let currency = yield call(getSelectedCurrency);
     if (!currency) {
         currency = rates ? rates[0]: {};

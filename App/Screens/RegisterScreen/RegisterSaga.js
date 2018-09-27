@@ -3,18 +3,19 @@ import RegisterActions from './RegisterRedux';
 import i18n from '../../I18n/i18n.config';
 import NavigationService from '../../Navigation/NavigationService';
 import ToastActions from '../../Redux/Common/Toast/ToastRedux';
+import LoadingIndicatorActions from '../../Components/LoadingIndicator/LoadingIndicatorRedux';
 
 
 export function * registerSaga(api, action) {
+    yield put(LoadingIndicatorActions.showLoadingIndicator(true));
     const { user } = action;
-    console.log(user);
     const res = yield call(api.register, user);
-    console.log('register', res);
     yield call(handleRegisterResponse, res);
 
 }
 
 export function* handleRegisterResponse(res) {
+    yield put(LoadingIndicatorActions.showLoadingIndicator(false));
     if (res.data) {
         if (res.data.code === "0") {
             yield call(handleRegisterSuccess, res);

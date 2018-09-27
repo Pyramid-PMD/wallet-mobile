@@ -11,6 +11,7 @@ export function* handleOverviewResponse(res) {
     if (res && res.data) {
         if (res.data.code === "0") {
             const overview = res.data.data;
+            console.log('overview', overview);
             yield put(OverviewActions.overviewSuccess(overview));
         }
     } else {

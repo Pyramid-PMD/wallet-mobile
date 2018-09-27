@@ -34,7 +34,7 @@ export function *handleLoginSuccess(api, res) {
     yield call(saveTokenToStorage, token);
     yield call(saveUserIdToStorage, uid);
     yield call(addTokenToRequestHeaders, api, token, uid);
-    yield call(NavigationService.navigate, 'App');
+    yield call(NavigationService.navigate, 'AuthLoading');
     yield put(LoginActions.loginSuccess(res.data.data));
 }
 

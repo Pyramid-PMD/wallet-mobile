@@ -7,22 +7,26 @@ import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import ChangePasswordActions from './ChangePasswordRedux';
 import NavigationService from '../../Navigation/NavigationService';
+import {required, email, matchField, lengthBetween} from "../../Services/Validators";
+import config from "../../Config/AppConfig";
 
 @translate(['common', 'dashboard'], { wait: true })
 class ChangePasswordScreen extends Component {
     renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
-        if(error !== undefined){
+        if(error !== undefined && touched){
             hasError= true;
         }
         return(
-            <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input
-                    placeholder={placeholder}
-                    {...input}
-                    secureTextEntry={secureTextEntry}/>
-                {hasError ? <Text>{error}</Text> : <Text />}
-            </Item>
+            <View style={[style]}>
+                <Item regular style={[FormStyles.regularInput]} error= {hasError}>
+                    <Input
+                        placeholder={placeholder}
+                        secureTextEntry={secureTextEntry}
+                        {...input} />
+                </Item>
+                {hasError ? <Text style={FormStyles.error}>{error}</Text> : <Text />}
+            </View>
         )
     }
 
@@ -85,6 +89,25 @@ const mapDispatchToProps = (dispatch) => ({
     changePassword: (password) => dispatch(ChangePasswordActions.changePasswordRequest(password))
 });
 
+const validate = (values, {screenProps}) => {
+    const {t} = screenProps,
+        errors = {};
+
+    errors.old_pwd = required(values.old_pwd, t('auth:register.errors.oldPasswordRequired'));
+
+
+    errors.pwd =
+        required(values.pwd, t('auth:login.errors.passwordRequired')) ||
+        lengthBetween(values.pwd, {min: config.password.min, max: config.password.max}, t('auth:register.errors.passwordLength', { min: config.password.min, max: config.password.max }));
+
+    errors.pwd_repeat =
+        required(values.pwd_repeat, t('auth:register.errors.passwordRepeatRequired')) ||
+        matchField(values.pwd_repeat, values.pwd, t('auth:register.errors.passwordMismatch'));
+
+    return errors;
+};
+
 export default reduxForm({
-    form: 'changePasswordForm'
+    form: 'changePasswordForm',
+    validate
 })(connect(null, mapDispatchToProps)(ChangePasswordScreen));

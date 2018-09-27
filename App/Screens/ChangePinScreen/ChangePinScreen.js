@@ -7,19 +7,25 @@ import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 import ChangePinActions from './ChangePinRedux';
+import {required, matchField} from "../../Services/Validators";
 
 @translate(['common', 'dashboard'], { wait: true })
 class ChangePinScreen extends Component {
     renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
-        if(error !== undefined){
+        if(error !== undefined && touched){
             hasError= true;
         }
         return(
-            <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input placeholder={placeholder} {...input} secureTextEntry={secureTextEntry}/>
-                {hasError ? <Text>{error}</Text> : <Text />}
-            </Item>
+            <View style={[style]}>
+                <Item regular style={[FormStyles.regularInput]} error= {hasError}>
+                    <Input
+                        placeholder={placeholder}
+                        secureTextEntry={secureTextEntry}
+                        {...input} />
+                </Item>
+                {hasError ? <Text style={FormStyles.error}>{error}</Text> : <Text />}
+            </View>
         )
     }
 
@@ -79,6 +85,23 @@ class ChangePinScreen extends Component {
 const mapDispatchToProps = (dispatch) => ({
     changePin: (pin) => dispatch(ChangePinActions.changePinRequest(pin))
 });
+
+const validate = (values, {screenProps}) => {
+    const {t} = screenProps,
+        errors = {};
+
+    errors.old_trade_pwd = required(values.old_trade_pwd, t('auth:register.errors.oldPinRequired'));
+
+    errors.trade_pwd = required(values.trade_pwd, t('auth:register.errors.pinRequired'));
+
+    errors.trade_pwd_repeat =
+        required(values.trade_pwd_repeat, t('auth:register.errors.pinRepeatRequired')) ||
+        matchField(values.trade_pwd_repeat, values.trade_pwd, t('auth:register.errors.pinMismatch'));
+
+    return errors;
+};
+
 export default reduxForm({
-    form: 'changePinForm'
+    form: 'changePinForm',
+    validate
 })(connect(null, mapDispatchToProps)(ChangePinScreen));

@@ -9,6 +9,7 @@ export function formatDateTimeAgo(date) {
 }
 
 export function formatDecimal(number, precision = config.balance.precision) {
+    console.log('number', number, +parseInt(number).toFixed(precision));
     if (number) {
         return +parseInt(number).toFixed(precision);
     }
