@@ -4,18 +4,23 @@ import LoginActions from './LoginRedux';
 import i18n from '../../I18n/i18n.config';
 import NavigationService from '../../Navigation/NavigationService';
 import { addTokenToRequestHeaders } from '../../Services/Api';
+import LoadingIndicatorActions from '../../Components/LoadingIndicator/LoadingIndicatorRedux';
+import ToastActions from '../../Redux/Common/Toast/ToastRedux';
+
+
 export function * loginSaga(api, action) {
-    const { credentials } = action;
     try {
+        const { credentials } = action;
+        yield put(LoadingIndicatorActions.showLoadingIndicator(true));
         const res = yield call(api.login, credentials);
         yield call(handleLoginResponse, api, res);
     } catch (error) {
-        console.log('error', error);
+        yield put(LoadingIndicatorActions.showLoadingIndicator(false));
     }
 }
 
 export function *handleLoginResponse(api, res) {
-    console.log('handle login response', api, res);
+    yield put(LoadingIndicatorActions.showLoadingIndicator(false));
     if (res.data.code === '0') {
         yield call(handleLoginSuccess, api, res);
     } else {
@@ -64,6 +69,7 @@ export function *handleLoginErrors(res) {
             errorMsg = '';
     }
     yield put(LoginActions.loginFailure(errorMsg));
+    yield put(ToastActions.showToast(errorMsg));
 }
 
 

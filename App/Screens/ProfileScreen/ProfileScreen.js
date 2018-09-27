@@ -17,6 +17,7 @@ import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/Ov
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
     componentDidMount() {
+        console.log('Profile component did mount');
         this.props.getOverview();
     }
 

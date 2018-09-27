@@ -7,7 +7,7 @@ export const LoadingIndicatorTypes = Types;
 export default Creators;
 
 export const LoadingIndicatorSelectors = {
-    selectLoadingIndicator: state => state.loadingIndicator.show
+    selectLoading: state => state.loadingIndicator.show
 };
 
 const INITIAL_STATE = {

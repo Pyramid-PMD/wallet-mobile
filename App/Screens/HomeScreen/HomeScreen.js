@@ -11,6 +11,7 @@ import ExchangeIndex from './ExhangeIndex/ExchangeIndex';
 @translate(['common', 'dashboard'], { wait: true })
 class HomeScreen extends Component {
     componentDidMount() {
+        console.log('home component did mount');
         this.props.getOverview();
     }
 

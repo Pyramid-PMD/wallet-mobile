@@ -13,6 +13,7 @@ import {NewsTypes} from '../Screens/NewsScreen/NewsRedux';
 import {ChangeLanguageTypes} from '../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
 import {ChangeCurrencyTypes} from '../Screens/ChangeCurrencyScreen/ChangeCurrencyRedux';
 import {OverviewTypes} from './Common/Overview/OverviewRedux';
+import {ToastTypes} from './Common/Toast/ToastRedux';
 import {VerifyEmailTypes} from '../Screens/RegisterScreen/VerifyEmailRedux';
 import {ChangePasswordTypes} from '../Screens/ChangePasswordScreen/ChangePasswordRedux';
 import {ChangePinTypes} from '../Screens/ChangePinScreen/ChangePinRedux';
@@ -30,6 +31,7 @@ import { getNews } from '../Screens/NewsScreen/NewsSaga';
 import { changeLanguage } from '../Screens/ChangeLanguageScreen/ChangeLanguageSaga';
 import { changeCurrency } from '../Screens/ChangeCurrencyScreen/ChangeCurrencySaga';
 import {getOverview} from './Common/Overview/OverviewSaga';
+import {showToastSaga} from './Common/Toast/ToastSaga';
 import {verifyEmailSaga} from '../Screens/RegisterScreen/VerifyEmailSaga';
 import {changePasswordSaga} from '../Screens/ChangePasswordScreen/ChangePasswordSaga';
 import {changePinSaga} from '../Screens/ChangePinScreen/ChangePinSaga';
@@ -61,5 +63,6 @@ export default function * root () {
         takeLatest(ChangeLanguageTypes.CHANGE_LANGUAGE, changeLanguage),
         takeLatest(ChangeCurrencyTypes.CHANGE_CURRENCY, changeCurrency),
         takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api),
+        takeLatest(ToastTypes.SHOW_TOAST, showToastSaga)
     ]);
 };

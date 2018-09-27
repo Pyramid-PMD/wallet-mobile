@@ -25,7 +25,7 @@ export default (rootReducer, rootSaga) => {
     /*-------------- Redux Persist ---------------*/
     const persistedReducer = persistReducer(ReduxPersist.storeConfig, rootReducer);
 
-    const store = createAppropriateStore(persistedReducer, compose(...enhancers));
+    const store = createAppropriateStore(rootReducer, compose(...enhancers));
     // kick off root saga
     let sagasManager = sagaMiddleware.run(rootSaga);
     let persistor = persistStore(store);

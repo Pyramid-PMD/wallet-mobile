@@ -18,9 +18,9 @@ import NavigationService from '../../Navigation/NavigationService';
 import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 
 class NewsScreen extends Component {
-    componentWillMount() {
+    componentDidMount() {
+        console.log('show loader');
         this.props.getNews();
-        console.log('news', this.news);
     }
 
     goToNewsDetail(news) {
@@ -53,7 +53,6 @@ class NewsScreen extends Component {
                 </Content>
             );
         }
-        return <LoadingIndicator/>
     }
 
     render() {

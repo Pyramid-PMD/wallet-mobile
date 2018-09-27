@@ -7,9 +7,10 @@ const formStyles = StyleSheet.create({
         borderColor: Colors.inputBorderColor,
         backgroundColor: Colors.inputBackgroundColor,
         borderWidth: 4,
-        marginBottom: Metrics.formInput.marginVertical
+        // marginBottom: Metrics.formInput.marginVertical
     },
     regularInputLast: {
+        backgroundColor: 'red',
         marginBottom: 0
     },
     submitButton: {
@@ -21,6 +22,11 @@ const formStyles = StyleSheet.create({
     },
     linkButtonText: {
         color: Colors.secondaryText,
+    },
+    error: {
+        color: Colors.danger,
+        marginBottom: 6,
+        marginTop: 3
     }
 });
 export default formStyles;

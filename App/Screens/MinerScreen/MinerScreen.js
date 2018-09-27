@@ -27,7 +27,6 @@ class MinerDetailScreen extends Component {
 
     renderContent() {
         const { loading, miner, t } = this.props;
-        console.log('miner', miner);
         if (!miner) {
             return <Text>loading</Text>
         }
@@ -44,9 +43,9 @@ class MinerDetailScreen extends Component {
                 </View>
 
                 <View style={{marginTop: 20}}>
-                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.elapsed')}: <Text style={[ApplicationStyles.typography.number]}>{ miner.elapsed }</Text>h</Text>
+                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText, {marginBottom: 10}]}>{t('dashboard:minerDetailScreen.elapsed')}: <Text style={[ApplicationStyles.typography.numberBig]}>{ miner.elapsed }</Text>h</Text>
 
-                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.margin')}: <Text style={[ApplicationStyles.typography.number]}>{ miner.margin }</Text>PMD</Text>
+                    <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.margin')}: <Text style={[ApplicationStyles.typography.numberBig]}>{ miner.margin }</Text>PMD</Text>
                 </View>
             </Content>
         );

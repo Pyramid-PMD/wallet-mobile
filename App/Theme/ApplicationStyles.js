@@ -90,6 +90,9 @@ const ApplicationStyles = {
         overflow: 'hidden',
         backgroundColor: Colors.secondaryBackground,
         padding: 14
+    },
+    errorMessage: {
+
     }
 };
 

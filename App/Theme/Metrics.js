@@ -6,7 +6,7 @@ const metrics = {
     marginVertical: 10,
     section: 30,
     formInput: {
-        marginVertical: 20,
+        marginVertical: 0,
     },
     cardBorderRadius: 8,
     baseMargin: 10,

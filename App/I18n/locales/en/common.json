@@ -29,7 +29,8 @@
     "netTest": "Test net",
     "online": "Working",
     "offline": "Stopped",
-    "ensure": "Ensure"
+    "ensure": "Ensure",
+    "ok": "Ok"
   },
   "networkErrors": {
     "somethingWentWrong": "Something went wrong. Please try again",

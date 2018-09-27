@@ -1,85 +1,98 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Container, Content, Form, Item, Input, Button, Text, View } from 'native-base';
+import { Container, Content, Form, Item, Input, Button, Text, View, Card, CardItem, Body } from 'native-base';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import AppLogo from '../../Components/AppLogo/AppLogo';
 import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
-import LoginActions from './LoginRedux';
+import LoginActions, {LoginSelectors} from './LoginRedux';
+import Metrics from "../../Theme/Metrics";
+import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 
 @translate(['auth', 'common'], { wait: true })
 class LoginScreen extends Component {
     renderInput({ input, placeholder, secureTextEntry, style, meta: { touched, error, warning } }){
         let hasError= false;
-        if(error !== undefined){
+        if(error !== undefined && touched){
             hasError= true;
         }
         return(
-            <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input
-                    secureTextEntry={secureTextEntry}
-                    placeholder={placeholder}
-                    {...input}/>
-                {hasError ? <Text>{error}</Text> : <Text />}
-            </Item>
+            <View>
+                <Item regular style={[FormStyles.regularInput]} error= {hasError}>
+                    <Input
+                        secureTextEntry={secureTextEntry}
+                        placeholder={placeholder}
+                        {...input}/>
+                </Item>
+                {hasError ? <Text style={FormStyles.error}>{error}</Text> : <Text />}
+            </View>
         )
     }
 
     onLogin = (credentials) => {
-        console.log('credentials', credentials);
         this.props.login(credentials);
-        // NavigationService.navigate('App');
     };
 
     goToRegisterPage() {
-        console.log('navigate to register')
         NavigationService.navigate('Register');
     }
-    render() {
+
+    renderErrorMessage() {
+       const {error} = this.props;
+       return error ? <ErrorMessage error={error}/> : null;
+    }
+
+    renderLoginForm() {
         const { t, handleSubmit } = this.props;
-        return(
-            <Container>
-                <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
-                    <View style={ApplicationStyles.layout.contentWidth}>
-                        <AppLogo/>
-                        <Form>
-                            <Field
-                                name="email"
-                                placeholder={t('auth:email')}
-                                component={this.renderInput}/>
 
-                            <Field
-                                name="pwd"
-                                placeholder={t('auth:password')}
-                                secureTextEntry={true}
-                                style={FormStyles.regularInputLast}
-                                component={this.renderInput}/>
+        return (
+            <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
+                <View style={ApplicationStyles.layout.contentWidth}>
+                    <AppLogo/>
+                    <Form>
+                        <Field
+                            name="email"
+                            placeholder={t('auth:email')}
+                            component={this.renderInput}/>
 
-                            <Button transparent light>
-                                <Text style={FormStyles.linkButtonText}>{t('auth:login.forgotPassword')}</Text>
-                            </Button>
-                        </Form>
-                        <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.onLogin)}>
-                            <Text>{t('auth:login.title')}</Text>
+                        <Field
+                            name="pwd"
+                            placeholder={t('auth:password')}
+                            secureTextEntry={true}
+                            style={FormStyles.regularInputLast}
+                            component={this.renderInput}/>
+
+                        <Button transparent light>
+                            <Text style={FormStyles.linkButtonText}>{t('auth:login.forgotPassword')}</Text>
                         </Button>
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                            <Button transparent style={{ marginRight: 6}} disabled>
-                                <Text style={FormStyles.linkButtonText}>
-                                    {t('auth:noAccount')}
-                                </Text>
-                            </Button>
-                            <Button light transparent onPress={this.goToRegisterPage}>
-                                <Text>
-                                    {t('auth:register.title')}
-                                </Text>
-                            </Button>
-                        </View>
-
+                    </Form>
+                    <Button block style={FormStyles.submitButton} onPress={handleSubmit(this.onLogin)}>
+                        <Text>{t('auth:login.title')}</Text>
+                    </Button>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                        <Button transparent style={{ marginRight: 6}} disabled>
+                            <Text style={FormStyles.linkButtonText}>
+                                {t('auth:noAccount')}
+                            </Text>
+                        </Button>
+                        <Button light transparent onPress={this.goToRegisterPage}>
+                            <Text>
+                                {t('auth:register.title')}
+                            </Text>
+                        </Button>
                     </View>
 
-                </Content>
+                </View>
+
+            </Content>
+        )
+    }
+    render() {
+        return(
+            <Container>
+                {this.renderLoginForm()}
             </Container>
         )
     }
@@ -87,7 +100,8 @@ class LoginScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: true
+        loading: LoginSelectors.selectLoading(state),
+        error: LoginSelectors.selectError(state)
     };
 };
 
@@ -97,10 +111,19 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
+const validate = (values, {screenProps}) => {
+    console.log('values', values, screenProps);
+    const errors = {}, {t} = screenProps;
+    errors.email = !values.email ? t('auth:login.errors.emailRequired') : undefined;
+    errors.pwd = !values.pwd ? t('auth:login.errors.passwordRequired') : undefined;
+    return errors;
+};
+
 export default reduxForm({
     initialValues: {
         email: 'nada-hakim@hotmail.com',
         pwd: 'final30789'
     },
+    validate,
     form: 'loginForm'
 })(connect(mapStateToProps, mapDispatchToProps)(LoginScreen));
