@@ -18,35 +18,31 @@ import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 import RegisterActions from './RegisterRedux';
 import VerifyEmailActions, {VerifyEmailSelectors} from './VerifyEmailRedux';
+import {required, email, matchField, lengthBetween} from "../../Services/Validators";
+import config from "../../Config/AppConfig";
 
 @translate(['common', 'auth'], { wait: true })
 class RegisterScreen extends Component {
+
     renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
-        if(error !== undefined){
+        if(error !== undefined && touched){
             hasError= true;
         }
         return(
-            <Item regular style={[FormStyles.regularInput, style]} error= {hasError}>
-                <Input placeholder={placeholder} {...input} secureTextEntry={secureTextEntry}/>
-                {hasError ? <Text>{error}</Text> : <Text />}
-            </Item>
+            <View style={[style]}>
+                <Item regular style={[FormStyles.regularInput]} error= {hasError}>
+                    <Input placeholder={placeholder} {...input} secureTextEntry={secureTextEntry}/>
+                </Item>
+                {hasError ? <Text style={FormStyles.error}>{error}</Text> : <Text />}
+            </View>
+
         )
     }
 
+
     register(user) {
-        // TODO: not sure whether to register now or
-        // After entering pin
-
-        // const user = {
-        //     ...values,
-        //     trade_pwd: values.pwd,
-        //     trade_pwd_repeat: values.pwd,
-        // };
-        // this.props.register(user);
-
         NavigationService.navigate('Pin', {user});
-
     }
 
     verifyEmail() {
@@ -71,9 +67,9 @@ class RegisterScreen extends Component {
                                 placeholder={t('auth:email')}
                                 component={this.renderInput}/>
 
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                 <Field
-                                    style={{ marginLeft: 0, flex: 1}}
+                                    style={{flex:1}}
                                     name="verify_code"
                                     placeholder={t('auth:register.SMSCode')}
                                     component={this.renderInput}/>
@@ -89,9 +85,6 @@ class RegisterScreen extends Component {
                                         : <Text>{counter}</Text>
                                     }
                                 </Button>
-
-
-
                             </View>
 
                             <Field
@@ -137,7 +130,6 @@ const mapStateToProps = (state) => {
         email,
         counter: VerifyEmailSelectors.selectCounter(state)
     }
-
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -145,13 +137,35 @@ const mapDispatchToProps = (dispatch) => ({
     verifyEmail: (email) => dispatch(VerifyEmailActions.verifyEmailRequest(email))
 });
 
-export default reduxForm({
-    initialValues: {
-        email: 'elhakim.nada@gmail.com',
-        verify_code: '5555',
-        pwd: 'final30788',
-        pwd_repeat: 'final30788',
+const validate = (values, {screenProps}) => {
+    const {t} = screenProps,
+          errors = {};
 
-    },
+    errors.email =
+        required(values.email, t('auth:login.errors.emailRequired')) ||
+        email(values.email, t('auth:login.errors.wrongEmailFormat'));
+
+    errors.pwd =
+        required(values.pwd, t('auth:login.errors.passwordRequired')) ||
+        lengthBetween(values.pwd, {min: config.password.min, max: config.password.max}, t('auth:register.errors.passwordLength', { min: config.password.min, max: config.password.max }));
+
+    errors.verify_code = required(values.verify_code, t('auth:register.errors.enterValidCode'));
+
+    errors.pwd_repeat =
+        required(values.pwd_repeat, t('auth:register.errors.passwordRepeatRequired')) ||
+        matchField(values.pwd_repeat, values.pwd, t('auth:register.errors.passwordMismatch'));
+
+    return errors;
+};
+
+export default reduxForm({
+    // initialValues: {
+    //     email: 'elhakim.nada@gmail.com',
+    //     verify_code: '5555',
+    //     pwd: 'final30788',
+    //     pwd_repeat: 'final30788',
+    //
+    // },
+    validate,
     form: 'registerForm'
 })(connect(mapStateToProps, mapDispatchToProps)(RegisterScreen));

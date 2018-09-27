@@ -24,6 +24,10 @@ export default {
     },
     balance: {
         precision: 6
+    },
+    password: {
+        min: 6,
+        max: 15
     }
 };
 

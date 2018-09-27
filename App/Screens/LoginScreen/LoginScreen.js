@@ -8,8 +8,8 @@ import FormStyles from '../../Theme/FormStyles'
 import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 import LoginActions, {LoginSelectors} from './LoginRedux';
-import Metrics from "../../Theme/Metrics";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
+import {required, email} from "../../Services/Validators";
 
 @translate(['auth', 'common'], { wait: true })
 class LoginScreen extends Component {
@@ -37,11 +37,6 @@ class LoginScreen extends Component {
 
     goToRegisterPage() {
         NavigationService.navigate('Register');
-    }
-
-    renderErrorMessage() {
-       const {error} = this.props;
-       return error ? <ErrorMessage error={error}/> : null;
     }
 
     renderLoginForm() {
@@ -112,10 +107,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const validate = (values, {screenProps}) => {
-    console.log('values', values, screenProps);
     const errors = {}, {t} = screenProps;
-    errors.email = !values.email ? t('auth:login.errors.emailRequired') : undefined;
-    errors.pwd = !values.pwd ? t('auth:login.errors.passwordRequired') : undefined;
+    errors.email = required(values.email, t('auth:login.errors.emailRequired')) || email(values.email, t('auth:login.errors.wrongEmailFormat'));
+    errors.pwd = required(values.pwd, t('auth:login.errors.passwordRequired'));
     return errors;
 };
 
