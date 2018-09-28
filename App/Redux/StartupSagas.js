@@ -68,6 +68,8 @@ export function* loadUserCurrency(api) {
     if (!currency) {
         currency = rates ? rates[0]: {};
     }
+
+    console.log('selected currency', currency);
     yield put(StartupActions.loadUserCurrency(currency));
 }
 
@@ -77,7 +79,8 @@ export function* checkAuthStatus(api, action) {
     if(token) {
         yield call(addTokenToRequestHeaders, api, token, uid);
         yield call(NavigationService.navigate, 'App');
-    } else {
+    }
+    else {
         yield call(NavigationService.navigate, 'Auth');
     }
     return token !== undefined;

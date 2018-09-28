@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Container, Content, Text } from 'native-base';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import { NavigationEvents } from 'react-navigation';
+import {RefreshControl} from 'react-native';
 import Miners from './Miners/Miners';
 import HomeActions, { HomeSelectors } from './HomeRedux';
 import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/OverviewRedux';
@@ -10,23 +12,11 @@ import ExchangeIndex from './ExhangeIndex/ExchangeIndex';
 
 @translate(['common', 'dashboard'], { wait: true })
 class HomeScreen extends Component {
+
     componentDidMount() {
-        console.log('home component did mount');
         this.props.getOverview();
     }
 
-    renderContent() {
-        const { t, miners, loading, exchangeIndex } = this.props;
-        if (loading) {
-            return <Text>loading</Text>
-        }
-        return (
-            <Content padder>
-                {exchangeIndex ? <ExchangeIndex t={t} exchangeIndex={exchangeIndex}/> : null}
-                {miners ? <Miners miners={miners} t={t} />: null}
-            </Content>
-        );
-    }
     render() {
         return(
             <Container>
@@ -34,6 +24,32 @@ class HomeScreen extends Component {
             </Container>
         )
     }
+
+    renderContent() {
+        const { t, miners, loading, exchangeIndex } = this.props;
+
+        return (
+            <Content
+                padder
+                refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={this.onRefresh}
+                    />}>
+                {exchangeIndex ? <ExchangeIndex t={t} exchangeIndex={exchangeIndex}/> : null}
+                {miners ? <Miners miners={miners} t={t} />: null}
+            </Content>
+        );
+    }
+
+
+    onScreenFocus = () => {
+        this.props.getOverview();
+    };
+
+    onRefresh = () => {
+        this.props.getOverview();
+    };
 }
 
 const mapStateToProps = (state) => {

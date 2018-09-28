@@ -13,6 +13,7 @@ export function * loginSaga(api, action) {
         const { credentials } = action;
         yield put(LoadingIndicatorActions.showLoadingIndicator(true));
         const res = yield call(api.login, credentials);
+        console.log('res', res);
         yield call(handleLoginResponse, api, res);
     } catch (error) {
         yield put(LoadingIndicatorActions.showLoadingIndicator(false));

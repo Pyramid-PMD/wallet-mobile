@@ -23,18 +23,18 @@ function push(routeName, params) {
         })
     );
 }
-
-function goBack() {
-    _navigator.dispatch(
-        NavigationActions.goBack()
-    );
-}
+//
+// function goBack() {
+//     _navigator.dispatch(
+//         NavigationActions.goBack()
+//     );
+// }
 
 // add other navigation functions that you need and export them
 
 export default {
     navigate,
-    goBack,
+    // goBack,
     push,
     setTopLevelNavigator,
 };

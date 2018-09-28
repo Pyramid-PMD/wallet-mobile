@@ -11,7 +11,7 @@ const create  =  (baseURL = url) => {
             'Content-Type': 'application/json',
             'version': '1.0.0',
         },
-        timeout: 10000
+        timeout: 30000
     });
 
     const getRoot = () => api.get('');

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
+import { NavigationEvents } from 'react-navigation';
 import {
     Text,
     Container,
@@ -8,23 +10,51 @@ import {
     ListItem,
     Thumbnail,
     Body,
-    Left,
-    Spinner,
-    View
+    Left
 } from 'native-base';
 import NewsStyles from './NewsStyles';
 import NewsActions, {NewsSelectors} from './NewsRedux';
 import NavigationService from '../../Navigation/NavigationService';
-import LoadingIndicator from "../../Components/LoadingIndicator/LoadingIndicator";
 
 class NewsScreen extends Component {
-    componentDidMount() {
-        console.log('show loader');
-        this.props.getNews();
+
+    render() {
+        return(
+            <Container>
+                {this.renderContent()}
+            </Container>
+        )
     }
 
-    goToNewsDetail(news) {
-        NavigationService.navigate('NewsDetail', {news});
+    renderContent() {
+        return (
+            <Content
+                padder
+                refreshControl={
+                <RefreshControl
+                    refreshing={false}
+                    onRefresh={this.onRefresh}
+                />
+            }>
+                <NavigationEvents
+                    onDidFocus={this.onScreenFocus.bind(this)}
+                />
+                {this.renderNews()}
+
+            </Content>
+        );
+    }
+
+    renderNews() {
+        const {news} = this.props;
+        if (news) {
+            return (
+                <List dataArray={news}
+                      style={NewsStyles.list}
+                      renderRow={this.renderNewsItem.bind(this)}>
+                </List>
+            );
+        }
     }
 
     renderNewsItem (news, sectionId, rowId) {
@@ -34,34 +64,24 @@ class NewsScreen extends Component {
                     <Thumbnail large square source={news.thumb}/>
                 </Left>
                 <Body style={NewsStyles.listItemBody}>
-                    <Text style={{ marginBottom: 32 }}>{news.title}</Text>
-                    <Text note>{news.date}</Text>
+                <Text style={{ marginBottom: 32 }}>{news.title}</Text>
+                <Text note>{news.date}</Text>
                 </Body>
             </ListItem>
         )
     }
 
-    renderNews() {
-        const {news} = this.props;
-        if (news) {
-            return (
-                <Content padder>
-                    <List dataArray={news}
-                          style={NewsStyles.list}
-                          renderRow={this.renderNewsItem.bind(this)}>
-                    </List>
-                </Content>
-            );
-        }
+    onScreenFocus() {
+        this.props.getNews();
     }
 
-    render() {
-        return(
-            <Container>
-                {this.renderNews()}
-            </Container>
-        )
+    goToNewsDetail(news) {
+        NavigationService.navigate('NewsDetail', {news});
     }
+
+    onRefresh = () => {
+        this.props.getNews();
+    };
 }
 
 const mapStateToProps = (state) => ({

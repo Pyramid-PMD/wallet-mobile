@@ -5,7 +5,10 @@ import {
     Container,
     Content,
     Button,
+    View
 } from 'native-base';
+import { NavigationEvents } from 'react-navigation';
+import {RefreshControl} from 'react-native';
 import { translate } from 'react-i18next';
 import Balance from './Balance/Balance';
 import Settings from './Settings/Settings';
@@ -16,10 +19,6 @@ import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/Ov
 
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
-    componentDidMount() {
-        console.log('profile screen did mount');
-        this.props.getOverview();
-    }
 
     render() {
         return(
@@ -30,17 +29,32 @@ class ProfileScreen extends Component {
     }
 
     renderContent() {
+        return (
+            <Content
+                padder
+                refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={this.onRefresh}
+                    />}>
+                <NavigationEvents
+                    onDidFocus={this.onScreenFocus.bind(this)}
+                />
+                {this.renderBalance()}
+            </Content>
+        );
+    }
+
+    renderBalance() {
         const {
             t,
             balance,
             selectedCurrency,
         } = this.props;
 
-        console.log('balance', balance);
-
-        if (this.props.balance) {
+        if (balance) {
             return (
-                <Content padder>
+                <View style={{flex:-1}}>
                     <Balance t={t} balance={balance} selectedCurrency={selectedCurrency}/>
                     <Settings t={t}/>
                     <Button
@@ -49,14 +63,22 @@ class ProfileScreen extends Component {
                         style={[FormStyles.submitButton, ProfileScreenStyles.signOutButton]}>
                         <Text style={ProfileScreenStyles.signOutButtonText}>{t('dashboard:profileScreen.signOut')}</Text>
                     </Button>
-                </Content>
-            );
+                </View>
+            )
         }
     }
 
     logout() {
         this.props.logout();
     }
+
+    onScreenFocus() {
+        this.props.getOverview();
+    }
+
+    onRefresh = () => {
+        this.props.getOverview();
+    };
 }
 
 const mapStateToProps = (state) => ({

@@ -28,7 +28,7 @@ const AppLogo = (props) => {
                     <Text
                         numberOfLines={1}
                         style={[ApplicationStyles.logoTextHorizontal,
-                            ApplicationStyles.typography.smallText]}>{ t('common:brand.slogan').toUpperCase() }</Text>
+                            ApplicationStyles.typography.smallText, {marginLeft: 3}]}>{ t('common:brand.slogan').toUpperCase() }</Text>
                 </View>
             </View>
         );

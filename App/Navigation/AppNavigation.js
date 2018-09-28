@@ -3,6 +3,7 @@ import { createBottomTabNavigator, createStackNavigator, createSwitchNavigator }
 import NavigationService from './NavigationService';
 import { translate } from 'react-i18next';
 import i18n from '../I18n/i18n.config';
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
 
 import AuthLoadingScreen from '../Screens/AuthLoadingScreen/AuthLoadingScreen';
@@ -49,6 +50,7 @@ const HomeStack = createStackNavigator({
 
 }, {
     initialRouteName: 'Home',
+    transitionConfig: getSlideFromRightTransition,
     navigationOptions: {
      ...NavigationStyles
     }
@@ -71,6 +73,7 @@ const NewsStack = createStackNavigator({
 
 }, {
     initialRouteName: 'News',
+    transitionConfig: getSlideFromRightTransition,
     navigationOptions: {
         ...NavigationStyles
     }
@@ -99,6 +102,7 @@ const ProfileStack = createStackNavigator({
 
 }, {
     initialRouteName: 'Profile',
+    transitionConfig: getSlideFromRightTransition,
     navigationOptions: {
         ...NavigationStyles
     }
@@ -129,6 +133,7 @@ const AuthNavigation = createStackNavigator({
     }
 }, {
     initialRouteName: 'Login',
+    transitionConfig: getSlideFromRightTransition
 
 });
 
@@ -139,6 +144,9 @@ const TabNavigation = createBottomTabNavigator({
 }, {
     initialRouteName: 'Home',
     tabBarComponent: NavigationTabs,
+    lazy: true,
+    swipeEnabled: true,
+    animationEnabled: true,
     navigationOptions: ({navigation}) => {
         const {index, routes} = navigation.state;
         const {routeName} = routes[index];
@@ -153,8 +161,6 @@ const TabNavigation = createBottomTabNavigator({
 });
 
 
-
-
 const RootNavigation = createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: TabNavigation,
@@ -162,6 +168,7 @@ const RootNavigation = createSwitchNavigator({
 },
 {
     initialRouteName: 'AuthLoading',
+    transitionConfig: getSlideFromRightTransition
 });
 
 // Wrapping a stack with translation hoc asserts we trigger new render on language change
