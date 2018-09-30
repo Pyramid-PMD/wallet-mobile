@@ -16,17 +16,26 @@ export function * loginSaga(api, action) {
         console.log('res', res);
         yield call(handleLoginResponse, api, res);
     } catch (error) {
+        console.log('login error', error);
         yield put(LoadingIndicatorActions.showLoadingIndicator(false));
+
     }
 }
 
 export function *handleLoginResponse(api, res) {
     yield put(LoadingIndicatorActions.showLoadingIndicator(false));
-    if (res.data.code === '0') {
-        yield call(handleLoginSuccess, api, res);
+    if (res.data) {
+        if (res.data.code === '0') {
+            yield call(handleLoginSuccess, api, res);
+        } else {
+            yield call(handleLoginErrors, res);
+        }
     } else {
-        yield call(handleLoginErrors, res);
+        if (res.problem === 'NETWORK_ERROR') {
+            yield put(ToastActions.showToast('no network'))
+        }
     }
+
 }
 
 export function *handleLoginSuccess(api, res) {
