@@ -36,7 +36,7 @@ export const NewsSelectors = {
     }
 };
 
-export const request = state => ({...state, loading: true, news: null});
+export const request = state => ({...state, loading: true});
 export const success = (state, action) => ({...state, loading: false, news: action.news, error: false});
 export const failure = (state, action) => ({...state, loading: false, error: action.error });
 

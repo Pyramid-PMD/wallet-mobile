@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {RefreshControl} from 'react-native';
+import {RefreshControl, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import { NavigationEvents } from 'react-navigation';
 import {
@@ -49,23 +49,22 @@ class NewsScreen extends Component {
         const {news} = this.props;
         if (news) {
             return (
-                <List dataArray={news}
+                <FlatList data={news}
                       style={NewsStyles.list}
-                      renderRow={this.renderNewsItem.bind(this)}>
-                </List>
+                          renderItem={this.renderNewsItem.bind(this)}/>
             );
         }
     }
 
-    renderNewsItem (news, sectionId, rowId) {
+    renderNewsItem ({item}) {
         return (
-            <ListItem thumbnail style={NewsStyles.listItem} button={true} onPress={this.goToNewsDetail.bind(this, news)}>
+            <ListItem thumbnail style={NewsStyles.listItem} button={true} onPress={this.goToNewsDetail.bind(this, item)}>
                 <Left>
-                    <Thumbnail large square source={news.thumb}/>
+                    <Thumbnail large square source={item.thumb}/>
                 </Left>
                 <Body style={NewsStyles.listItemBody}>
-                <Text style={{ marginBottom: 32 }}>{news.title}</Text>
-                <Text note>{news.date}</Text>
+                <Text style={{ marginBottom: 32 }}>{item.title}</Text>
+                <Text note>{item.date}</Text>
                 </Body>
             </ListItem>
         )
