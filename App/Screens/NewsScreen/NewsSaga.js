@@ -3,11 +3,17 @@ import NewsActions from './NewsRedux';
 import LoadingIndicatorActions from '../../Components/LoadingIndicator/LoadingIndicatorRedux';
 
 export function* getNews(api, action) {
-    console.log('get news');
-    yield put(LoadingIndicatorActions.showLoadingIndicator(true));
-    const res = yield call(api.getNews);
-    console.log('res', res);
-    yield call(handleNewsResponse, res);
+    try {
+        const {refreshing} = action;
+        if (!refreshing) {
+            yield put(LoadingIndicatorActions.showLoadingIndicator(true));
+        }
+        const res = yield call(api.getNews);
+        yield call(handleNewsResponse, res);
+    } catch (error) {
+        yield put(LoadingIndicatorActions.showLoadingIndicator(false));
+    }
+
 }
 
 export function* handleNewsResponse(res) {
@@ -24,5 +30,5 @@ export function* handleNewsSuccess(res) {
 }
 
 export function* handleNewsError(res) {
-
+    // TODO: handle news error
 }

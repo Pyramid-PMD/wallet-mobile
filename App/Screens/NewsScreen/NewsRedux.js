@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import {formatDateTimeAgo} from '../../Services/Utils'
 
 const { Types, Creators} = createActions({
-    newsRequest: null,
+    newsRequest: ['refreshing'],
     newsSuccess: ['news'],
     newsFailure: ['error']
 });
@@ -15,7 +15,8 @@ export default Creators;
 const INITIAL_STATE = {
     loading: null,
     news: null,
-    error: null
+    error: null,
+    refreshing: false
 };
 
 export const NewsSelectors = {
@@ -33,12 +34,16 @@ export const NewsSelectors = {
                 });
             }
         }
-    }
+    },
+    selectRefreshStatus: state => state.news.refreshing
 };
 
-export const request = state => ({...state, loading: true});
-export const success = (state, action) => ({...state, loading: false, news: action.news, error: false});
-export const failure = (state, action) => ({...state, loading: false, error: action.error });
+export const request = (state, action) => {
+    const {refreshing} = action;
+    return {...state, loading: true, refreshing: !!refreshing};
+};
+export const success = (state, action) => ({...state, loading: false, news: action.news, error: false, refreshing: false});
+export const failure = (state, action) => ({...state, loading: false, error: action.error, refreshing: false });
 
 export const reducer = createReducer(INITIAL_STATE, {
     [Types.NEWS_REQUEST]: request,

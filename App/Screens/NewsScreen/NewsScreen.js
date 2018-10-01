@@ -6,7 +6,6 @@ import {
     Text,
     Container,
     Content,
-    List,
     ListItem,
     Thumbnail,
     Body,
@@ -18,6 +17,10 @@ import NavigationService from '../../Navigation/NavigationService';
 
 class NewsScreen extends Component {
 
+    componentDidMount() {
+        this.props.getNews();
+    }
+
     render() {
         return(
             <Container>
@@ -27,12 +30,14 @@ class NewsScreen extends Component {
     }
 
     renderContent() {
+        const {refreshing} = this.props;
+        console.log('refreshing', refreshing);
         return (
             <Content
                 padder
                 refreshControl={
                 <RefreshControl
-                    refreshing={false}
+                    refreshing={refreshing}
                     onRefresh={this.onRefresh}
                 />
             }>
@@ -71,7 +76,7 @@ class NewsScreen extends Component {
     }
 
     onScreenFocus() {
-        this.props.getNews();
+        // this.props.getNews();
     }
 
     goToNewsDetail(news) {
@@ -79,16 +84,17 @@ class NewsScreen extends Component {
     }
 
     onRefresh = () => {
-        this.props.getNews();
+        this.props.getNews({refreshing: true});
     };
 }
 
 const mapStateToProps = (state) => ({
-    news: NewsSelectors.selectNews(state)
+    news: NewsSelectors.selectNews(state),
+    refreshing: NewsSelectors.selectRefreshStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getNews: () => dispatch(NewsActions.newsRequest())
+    getNews: (refreshing) => dispatch(NewsActions.newsRequest(refreshing))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsScreen);
