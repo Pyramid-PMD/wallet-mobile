@@ -9,6 +9,7 @@ import BalanceCard from "../../../Components/BalanceCard/BalanceCard";
 
 const Balance = (props) => {
     const {t, balance, selectedCurrency} = props;
+    console.log('balance', balance);
     const goToWithdrawScreen = () => {
         NavigationService.navigate('Withdraw', { balance, selectedCurrency});
     };

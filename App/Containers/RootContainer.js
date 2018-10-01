@@ -32,6 +32,8 @@ class RootContainer extends Component {
     }
 }
 
-export default DebugConfig.useReactotron
-    ? console.tron.overlay(RootContainer)
-    : RootContainer
+export default RootContainer;
+
+// DebugConfig.useReactotron
+//     ? console.tron.overlay(RootContainer)
+//     :

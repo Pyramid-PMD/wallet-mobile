@@ -32,6 +32,11 @@
     "ensure": "Ensure",
     "ok": "Ok"
   },
+  "errors": {
+    "genericError": "Something went wrong",
+    "noNetwork": "No network",
+    "networkTimeout": "Network timeout"
+  },
   "networkErrors": {
     "somethingWentWrong": "Something went wrong. Please try again",
     "tokenExpired": "Token expired",

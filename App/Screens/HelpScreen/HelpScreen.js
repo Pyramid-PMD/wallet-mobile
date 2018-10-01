@@ -4,6 +4,7 @@ import { Text, Container, Content, List, ListItem, Left, Icon, Right } from 'nat
 import NavigationService from '../../Navigation/NavigationService';
 import HelpScreenStyles from "./HelpScreenStyles";
 import ApplicationStyles from "../../Theme/ApplicationStyles";
+import {ChangeLanguageSelectors} from '../../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
 import help from './help.json';
 
 class HelpScreen extends Component {
@@ -31,7 +32,8 @@ class HelpScreen extends Component {
         );
     }
     render() {
-        const helpItems = help[this.props.language.code];
+        const {currentLanguage} = this.props,
+            helpItems = help[currentLanguage.code];
         return(
             <Container>
                 <Content>
@@ -45,10 +47,7 @@ class HelpScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    language: {
-        title: 'English',
-        code: 'en'
-    }
+    currentLanguage: ChangeLanguageSelectors.selectLanguage(state)
 });
 
 export default connect(mapStateToProps)(HelpScreen);

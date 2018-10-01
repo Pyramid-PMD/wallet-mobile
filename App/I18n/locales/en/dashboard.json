@@ -6,7 +6,8 @@
   },
   "homeScreen": {
     "miners": "Miners",
-    "priceIndex": "Price Index"
+    "priceIndex": "Price Index",
+    "minersEmpty": "Machine list is empty"
   },
   "changePasswordScreen": {
     "oldPassword": "Old account password",

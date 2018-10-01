@@ -18,7 +18,7 @@ import ApplicationStyles from '../../Theme/ApplicationStyles';
 import NavigationService from '../../Navigation/NavigationService';
 import RegisterActions from './RegisterRedux';
 import VerifyEmailActions, {VerifyEmailSelectors} from './VerifyEmailRedux';
-import {required, email, matchField, lengthBetween} from "../../Services/Validators";
+import {required, email, matchField, lengthBetween, isEmail} from "../../Services/Validators";
 import config from "../../Config/AppConfig";
 
 @translate(['common', 'auth'], { wait: true })
@@ -47,6 +47,7 @@ class RegisterScreen extends Component {
 
     verifyEmail() {
         const { email, verifyEmail } = this.props;
+        console.log(this.props);
         verifyEmail(email);
     }
 
@@ -54,8 +55,8 @@ class RegisterScreen extends Component {
         NavigationService.navigate('Login');
     }
     render() {
-        const { handleSubmit, t, counter } = this.props;
-        console.log('counter', counter);
+        const { handleSubmit, t, counter, email } = this.props;
+        const buttonTextAlignment = counter === 0 ? 'flex-end': 'center';
         return(
             <Container>
                 <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
@@ -75,11 +76,11 @@ class RegisterScreen extends Component {
                                     component={this.renderInput}/>
 
                                 <Button
-                                    disabled={counter > 0}
+                                    disabled={counter > 0 || !email}
                                     transparent
                                     onPress={this.verifyEmail.bind(this)}
                                     light
-                                    style={{ marginLeft: 10}}>
+                                    style={{ marginLeft: 10, width: 70, justifyContent: buttonTextAlignment }}>
                                     { counter === 0 ?
                                         <Text>{t('auth:register.sendSMS')}</Text>
                                         : <Text>{counter}</Text>
@@ -123,9 +124,8 @@ class RegisterScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state', state.verifyEmail);
     const selector = formValueSelector('registerForm');
-    const email = selector(state, 'email');
+    const email = isEmail(selector(state, 'email')) ? selector(state, 'email'): undefined;
     return {
         email,
         counter: VerifyEmailSelectors.selectCounter(state)
@@ -159,13 +159,13 @@ const validate = (values, {screenProps}) => {
 };
 
 export default reduxForm({
-    initialValues: {
-        email: 'elhakim.nada88@gmail.com',
-        verify_code: '5555',
-        pwd: 'final30788',
-        pwd_repeat: 'final30788',
-
-    },
+    // initialValues: {
+    //     email: 'elhakim.nada88@gmail.com',
+    //     verify_code: '5555',
+    //     pwd: 'final30788',
+    //     pwd_repeat: 'final30788',
+    //
+    // },
     validate,
     form: 'registerForm'
 })(connect(mapStateToProps, mapDispatchToProps)(RegisterScreen));

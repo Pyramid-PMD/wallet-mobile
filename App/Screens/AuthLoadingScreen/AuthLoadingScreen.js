@@ -16,6 +16,7 @@ class AuthLoadingScreen extends Component {
     }
 
     componentDidMount() {
+        // AsyncStorage.clear();
         this.props.startUp();
     }
 

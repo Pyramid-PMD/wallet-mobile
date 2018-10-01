@@ -22,11 +22,13 @@ const INITIAL_STATE = {
 export const OverviewSelectors = {
     selectBalance: state => {
         if (state.overview.overview) {
-            const balance = state.overview.overview.pmd_all,
+            const
+                overview = {...state.overview.overview},
+                balance = overview.pmd_all,
                 selectedCurrency = state.app.currency,
-                balanceInSelectedCurrency = state.overview.overview.pmd_all * state.app.currency.rate,
-                otherIncoming = state.overview.overview.other_incoming,
-                minerIncoming = state.overview.overview.mining_profit;
+                balanceInSelectedCurrency = selectedCurrency ? overview.pmd_all * selectedCurrency.rate: null,
+                otherIncoming = overview.other_incoming,
+                minerIncoming = overview.mining_profit;
 
             return {
                 balance: formatDecimal(balance),
@@ -60,7 +62,7 @@ export const OverviewSelectors = {
 };
 
 export const request = (state) => {
-    return { ...state, loading: true };
+    return { ...state, loading: true};
 };
 
 export const success = (state, action) => {

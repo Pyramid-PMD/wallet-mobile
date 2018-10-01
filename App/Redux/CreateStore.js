@@ -17,7 +17,7 @@ export default (rootReducer, rootSaga) => {
     const sagaMiddleware = createSagaMiddleware({});
     middleware.push(sagaMiddleware);
 
-    const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore;
+    // const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore;
 
     /* ------------- Assemble Middleware ------------- */
     enhancers.push(applyMiddleware(...middleware));
@@ -25,7 +25,7 @@ export default (rootReducer, rootSaga) => {
     /*-------------- Redux Persist ---------------*/
     const persistedReducer = persistReducer(ReduxPersist.storeConfig, rootReducer);
 
-    const store = createAppropriateStore(rootReducer, compose(...enhancers));
+    const store = createStore(rootReducer, compose(...enhancers));
     // kick off root saga
     let sagasManager = sagaMiddleware.run(rootSaga);
     let persistor = persistStore(store);

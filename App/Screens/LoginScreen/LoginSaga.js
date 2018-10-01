@@ -6,6 +6,7 @@ import NavigationService from '../../Navigation/NavigationService';
 import { addTokenToRequestHeaders } from '../../Services/Api';
 import LoadingIndicatorActions from '../../Components/LoadingIndicator/LoadingIndicatorRedux';
 import ToastActions from '../../Redux/Common/Toast/ToastRedux';
+import {handleConnectivityError, handleGenericNetworkErrors} from '../../Redux/Common/NetworkErrors/NetworkErrorsSaga';
 
 
 export function * loginSaga(api, action) {
@@ -16,7 +17,6 @@ export function * loginSaga(api, action) {
         console.log('res', res);
         yield call(handleLoginResponse, api, res);
     } catch (error) {
-        console.log('login error', error);
         yield put(LoadingIndicatorActions.showLoadingIndicator(false));
 
     }
@@ -31,9 +31,7 @@ export function *handleLoginResponse(api, res) {
             yield call(handleLoginErrors, res);
         }
     } else {
-        if (res.problem === 'NETWORK_ERROR') {
-            yield put(ToastActions.showToast('no network'))
-        }
+        yield call(handleConnectivityError, res);
     }
 
 }
@@ -76,7 +74,7 @@ export function *handleLoginErrors(res) {
             errorMsg = i18n.t('auth:login.errors.wrongPassword');
             break;
         default:
-            errorMsg = '';
+            errorMsg = yield call(handleGenericNetworkErrors, res);
     }
     yield put(LoginActions.loginFailure(errorMsg));
     yield put(ToastActions.showToast(errorMsg));

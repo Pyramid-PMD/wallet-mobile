@@ -8,6 +8,8 @@ const metrics = {
     formInput: {
         marginVertical: 0,
     },
+    paddingVertical: 16,
+    paddingHorizontal: 6,
     cardBorderRadius: 8,
     baseMargin: 10,
     doubleBaseMargin: 20,
@@ -24,6 +26,6 @@ const metrics = {
         large: 60,
         logo: 200
     }
-}
+};
 
 export default metrics;

@@ -73,3 +73,10 @@ export const isAddress =  (address) => {
         return isChecksumAddress(address);
     }
 };
+
+
+export const isEmail = (value) => {
+    if (value) {
+        return (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(value));
+    }
+};

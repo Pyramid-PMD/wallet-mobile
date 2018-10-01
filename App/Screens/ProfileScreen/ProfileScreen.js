@@ -53,6 +53,7 @@ class ProfileScreen extends Component {
         } = this.props;
 
         if (balance) {
+            console.log('balance', balance);
             return (
                 <View style={{flex:-1}}>
                     <Balance t={t} balance={balance} selectedCurrency={selectedCurrency}/>

@@ -14,6 +14,7 @@ class ChangeLanguageScreen extends Component {
 
     componentDidMount() {
         const {currentLanguage} = this.props;
+        console.log('current language', currentLanguage);
         this.handleCheckedState(currentLanguage);
     }
 
@@ -24,8 +25,7 @@ class ChangeLanguageScreen extends Component {
 
     handleCheckedState(selectedLanguage) {
         let languages = this.state.languages;
-        const index = languages.indexOf(selectedLanguage);
-        // TODO: indexof sometimes returns -1
+        const index = languages.findIndex(language => language.code === selectedLanguage.code);
         if (index > -1) {
             languages.map(language => language.checked = false);
             languages[index].checked = !languages[index].checked;
