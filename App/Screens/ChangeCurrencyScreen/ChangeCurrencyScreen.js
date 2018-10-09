@@ -4,12 +4,12 @@ import { Text, Container, Content, ListItem, CheckBox, Body, Thumbnail, View } f
 import Images from "../../Theme/Images";
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 import ChangeCurrencyActions, {ChangeCurrencySelectors} from './ChangeCurrencyRedux';
+import ListRadioButton from "../../Components/ListRadioButton/ListRadioButton";
 
 class ChangeCurrencyScreen extends Component {
 
     componentDidMount() {
         const {userCurrency} = this.props;
-        console.log('user currency', userCurrency);
         this.handleCheckedState(userCurrency);
     }
 
@@ -36,16 +36,16 @@ class ChangeCurrencyScreen extends Component {
 
     renderCurrencies() {
         return this.props.currencies.map(currency => {
+            const thumbnail = Images['icon' + currency.name.toUpperCase()];
             return (
-                <ListItem thumbnail style={ApplicationStyles.checkboxList.listItem} key={currency.name}>
-                    <Thumbnail small source={Images['icon' + currency.name.toUpperCase()]}/>
-                    <Body style={ApplicationStyles.checkboxList.listItemBody}>
-                        <View style={ApplicationStyles.checkboxList.listTextContainer}>
-                            <Text>{currency.name.toUpperCase()}</Text>
-                            <CheckBox style={ApplicationStyles.checkboxList.checkbox} checked={currency.checked} onPress={this.onCurrencySelect.bind(this, currency)}/>
-                        </View>
-                    </Body>
-                </ListItem>
+                <ListRadioButton
+                    key={currency.name}
+                    title={currency.name.toUpperCase()}
+                    thumbnail={thumbnail}
+                    selectedItem={currency}
+                    checked={currency.checked}
+                    onPress={this.onCurrencySelect.bind(this)}
+                />
             );
         });
     }

@@ -5,6 +5,7 @@ import { translate } from 'react-i18next';
 import { languages } from '../../Config/AppConfig';
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 import ChangeLanguageActions, {ChangeLanguageSelectors} from './ChangeLanguageRedux';
+import ListRadioButton from "../../Components/ListRadioButton/ListRadioButton";
 
 @translate(['common'], { wait: true })
 class ChangeLanguageScreen extends Component {
@@ -14,7 +15,6 @@ class ChangeLanguageScreen extends Component {
 
     componentDidMount() {
         const {currentLanguage} = this.props;
-        console.log('current language', currentLanguage);
         this.handleCheckedState(currentLanguage);
     }
 
@@ -41,14 +41,13 @@ class ChangeLanguageScreen extends Component {
     renderLanguages() {
         return this.state.languages.map(language => {
             return (
-                <ListItem thumbnail style={ApplicationStyles.checkboxList.listItem} key={language.name}>
-                    <Body style={ApplicationStyles.checkboxList.listItemBody}>
-                        <View style={ApplicationStyles.checkboxList.listTextContainer}>
-                            <Text>{language.name}</Text>
-                            <CheckBox style={ApplicationStyles.checkboxList.checkbox} checked={language.checked} onPress={this.onLanguageSelect.bind(this, language)}/>
-                        </View>
-                    </Body>
-                </ListItem>
+                <ListRadioButton
+                    key={language.name}
+                    title={language.name}
+                    selectedItem={language}
+                    checked={language.checked}
+                    onPress={this.onLanguageSelect.bind(this)}
+                />
             );
         });
     }
