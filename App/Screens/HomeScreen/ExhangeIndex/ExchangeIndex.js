@@ -1,21 +1,21 @@
 import React from 'react';
 import { Image } from 'react-native';
-import Images from '../../../Theme/Images';
+import { Constants, WebBrowser } from 'expo';
 import PropTypes from 'prop-types';
 import { List, ListItem, Text, View, H2 } from 'native-base';
 import ExchangeIndexStyles from "./ExchangeIndexStyles";
 import ApplicationStyles from "../../../Theme/ApplicationStyles";
+import Images from '../../../Theme/Images';
+
 
 const ExchangeIndex = (props) => {
     const {t, exchangeIndex} = props;
+
     const renderExchangeIndexItem = (exchangeIndexItem, sectionId, rowId) => {
-        console.log('exchange index', exchangeIndex);
         const comingSoon = parseInt(rowId) === exchangeIndex.length - 1;
         const listItemStyle = rowId === "0" ?
             [ExchangeIndexStyles.listItem, ExchangeIndexStyles.listItemFirstChild]:
                   ExchangeIndexStyles.listItem;
-
-        console.log('coming soon', comingSoon);
         if (comingSoon) {
             return (
                 <ListItem style={[listItemStyle, ExchangeIndexStyles.comingSoonItem]}>
@@ -24,7 +24,7 @@ const ExchangeIndex = (props) => {
             )
         }
         return (
-            <ListItem style={listItemStyle}>
+            <ListItem style={listItemStyle} button onPress={() => openUrl(exchangeIndexItem)}>
                 <Image source={Images['bg' + exchangeIndexItem.name]} style={ExchangeIndexStyles.backgroundImage} />
                 <Image source={Images['icon' + exchangeIndexItem.name]} style={ExchangeIndexStyles.icon} />
                 <View>
@@ -33,6 +33,10 @@ const ExchangeIndex = (props) => {
                 </View>
             </ListItem>
         )
+    };
+
+    const openUrl = (coin) => {
+        WebBrowser.openBrowserAsync('https://exchange.fcoin.com/ex/gpm/pmd-eth');
     };
 
     return (

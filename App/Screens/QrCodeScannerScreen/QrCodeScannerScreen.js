@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Dimensions, LayoutAnimation, Alert } from 'react-native';
 import { Container, Text } from 'native-base';
 import { BarCodeScanner, Permissions } from 'expo';
-import NavigationService from '../../Navigation/NavigationService';
 
 class QrCodeScannerScreen extends Component {
     state = {
@@ -22,12 +21,15 @@ class QrCodeScannerScreen extends Component {
     };
 
     _handleBarCodeRead = result => {
-        if (result.data !== this.state.lastScannedUrl) {
-            LayoutAnimation.spring();
-            this.setState({ lastScannedUrl: result.data });
-            Alert.alert('Qrcode scanned');
-            NavigationService.goBack();
-        }
+        const {navigation} = this.props;
+        // if (result.data !== this.state.lastScannedUrl) {
+        //     LayoutAnimation.spring();
+            // this.setState({ lastScannedUrl: result.data });
+            // Alert.alert('Qrcode scanned');
+            // NavigationService.goBack();
+        // }
+        console.log('qr code', result.data);
+        navigation.navigate('QrCodeSuccess', {qrCode: result.data});
     };
 
     render() {

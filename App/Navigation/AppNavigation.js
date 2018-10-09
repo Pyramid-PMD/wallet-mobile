@@ -22,6 +22,7 @@ import HelpScreen from "../Screens/HelpScreen/HelpScreen";
 import ChangePinScreen from "../Screens/ChangePinScreen/ChangePinScreen";
 import HelpDetailScreen from "../Screens/HelpDetailScreen/HelpDetailScreen";
 import MinerDetailScreen from "../Screens/MinerScreen/MinerScreen";
+import QrCodeSuccessScreen from "../Screens/QrCodeSuccessScreen/QrCodeSuccessScreen";
 
 import NavigationTabs from './NavigationTabs';
 import HeaderNotificationButton from '../Components/HeaderNotificationButton/HeaderNotificationButton';
@@ -46,7 +47,8 @@ const HomeStack = createStackNavigator({
     },
     MinerDetail: MinerDetailScreen,
     Notification: NotificationScreen,
-    QrCodeScan: QrCodeScannerScreen
+    QrCodeScan: QrCodeScannerScreen,
+    QrCodeSuccess: QrCodeSuccessScreen
 
 }, {
     initialRouteName: 'Home',
@@ -68,8 +70,8 @@ const NewsStack = createStackNavigator({
     },
     NewsDetail: NewsDetailScreen,
     Notification: NotificationScreen,
-    QrCodeScan: QrCodeScannerScreen
-
+    QrCodeScan: QrCodeScannerScreen,
+    QrCodeSuccess: QrCodeSuccessScreen
 
 }, {
     initialRouteName: 'News',
@@ -99,6 +101,7 @@ const ProfileStack = createStackNavigator({
     Notification: NotificationScreen,
     Withdraw: WithdrawScreen,
     QrCodeScan: QrCodeScannerScreen,
+    QrCodeSuccess: QrCodeSuccessScreen,
 
 }, {
     initialRouteName: 'Profile',
