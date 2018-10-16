@@ -4,6 +4,7 @@ import config from '../Config/AppConfig';
 /* ------------- Types ------------- */
 import {StartupTypes} from './StartupRedux';
 import {LoginTypes} from '../Screens/LoginScreen/LoginRedux';
+import {QrCodeTypes} from '../Screens/QrCodeSuccessScreen/QrCodeRedux';
 import {RegisterTypes} from '../Screens/RegisterScreen/RegisterRedux';
 import {HomeTypes} from '../Screens/HomeScreen/HomeRedux';
 import {MinerTypes} from '../Screens/MinerScreen/MinerRedux';
@@ -20,11 +21,12 @@ import {ChangePinTypes} from '../Screens/ChangePinScreen/ChangePinRedux';
 
 
 /* ------------- Sagas ------------- */
-import {checkAuthStatus, startUpSaga} from "./StartupSagas";
+import {startUpSaga} from "./StartupSagas";
+import {sendQrCodeSaga, bindMachineSaga} from '../Screens/QrCodeSuccessScreen/QrCodeSaga';
 import {loginSaga, logoutSaga} from '../Screens/LoginScreen/LoginSaga';
 import {registerSaga} from '../Screens/RegisterScreen/RegisterSaga';
 import { getMinersAndExchangeIndex } from '../Screens/HomeScreen/HomeSaga';
-import { getMiner } from '../Screens/MinerScreen/MinerSaga';
+import { getMiner, unbindMachineSaga } from '../Screens/MinerScreen/MinerSaga';
 import { sendWithdraw, getAddressList } from '../Screens/WithdrawScreen/WithdrawSaga';
 import { getNotifications } from '../Screens/NotificationScreen/NotificationSaga';
 import { getNews } from '../Screens/NewsScreen/NewsSaga';
@@ -63,6 +65,10 @@ export default function * root () {
         takeLatest(ChangeLanguageTypes.CHANGE_LANGUAGE, changeLanguage),
         takeLatest(ChangeCurrencyTypes.CHANGE_CURRENCY, changeCurrency),
         takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api),
-        takeLatest(ToastTypes.SHOW_TOAST, showToastSaga)
+        takeLatest(ToastTypes.SHOW_TOAST, showToastSaga),
+        takeLatest(QrCodeTypes.SEND_QR_CODE_REQUEST, sendQrCodeSaga, api),
+        takeLatest(QrCodeTypes.BIND_MACHINE_REQUEST, bindMachineSaga, api),
+        takeLatest(MinerTypes.UNBIND_REQUEST, unbindMachineSaga, api),
+
     ]);
 };

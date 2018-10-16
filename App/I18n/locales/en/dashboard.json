@@ -23,7 +23,12 @@
   },
   "minerDetailScreen": {
     "elapsed": "Elapsed",
-    "margin": "Margin"
+    "margin": "Margin",
+    "unbindMachine": "Unbind machine",
+    "errors": {
+      "machineNotFound": "Unbind failed. Machine not found",
+      "machineHasBalance": "Unbind failed. Machine has balance"
+    }
   },
   "profileScreen": {
     "signOut": "Sign out",
@@ -67,5 +72,14 @@
   },
   "pinCodeModal": {
     "enterPin": "Please enter your pin code"
+  },
+  "qrCodeLoginScreen": {
+    "cancelLogin": "Cancel login",
+    "machineHasUsers": "This machine has bound user",
+    "contactSupport": "Contact support",
+    "machineIsBound": "Machine is bound to your account",
+    "confirmLogin": "Confirm login",
+    "machineIsNotBound": "Machine is not bound to your account",
+    "bindMachine": "Bind"
   }
 }
