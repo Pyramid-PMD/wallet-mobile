@@ -80,6 +80,8 @@
     "machineIsBound": "Machine is bound to your account",
     "confirmLogin": "Confirm login",
     "machineIsNotBound": "Machine is not bound to your account",
-    "bindMachine": "Bind"
+    "bindMachine": "Bind",
+    "bindMachineSuccess": "Machine has been successfully bound",
+    "unbindMachineSuccess": "Machine has been successfully unbound"
   }
 }

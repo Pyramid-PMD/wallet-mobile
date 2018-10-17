@@ -1,37 +1,45 @@
 {
   "brand": {
     "name": "Pyramid",
-    "slogan": "新一代去中心化存储协议"
+    "slogan": "新一代分布式存储协议"
   },
   "interface": {
     "next": "下一步",
-    "skip": "忽略",
+    "balance": "余额",
+    "skip": "跳过",
     "update": "更新",
     "comingSoon": "即将推出",
-    "copy": "复制",
+    "copy": "拷贝",
     "max": "全部",
     "send": "发送",
     "address": "地址",
-    "amount": "金额",
+    "amount": "数量",
     "state": "状态",
-    "withdraw": "提币",
-    "currency": "货币单位",
+    "withdraw": "提现",
+    "currency": "货币",
     "language": "语言",
     "ui": "界面",
     "save": "保存",
     "cancel": "取消",
-    "disk": "磁盘",
+    "disk": "硬盘",
     "done": "完成",
     "logout": "注销",
-    "diskSerial": "硬盘 ID",
-    "copiedToCB": "复制",
-    "netTest": "测试网",
-    "online": "Working",
-    "offline": "Stopped"
+    "diskSerial": "硬盘序列号",
+    "copiedToCB": "复制到剪贴板",
+    "netTest": "测试网络",
+    "online": "工作中",
+    "offline": "已停止",
+    "ensure": "确认",
+    "ok": "好的"
+  },
+  "errors": {
+    "genericError": "出了点问题，请稍后重试",
+    "noNetwork": "无网络连接",
+    "networkTimeout": "网络超时"
   },
   "networkErrors": {
-    "somethingWentWrong": "出了些问题。请再试一次",
-    "tokenExpired": "令牌已过期",
-    "installNewUpdate": "您当前的版本已过时。请重新启动应用以进行更新"
+    "somethingWentWrong": "网络出了点问题，请稍后重试",
+    "tokenExpired": "登录过期",
+    "installNewUpdate": "当前版本太旧，请重启程序以更新"
   }
 }

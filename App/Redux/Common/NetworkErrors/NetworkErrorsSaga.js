@@ -30,13 +30,13 @@ export function* handleConnectivityError(res) {
     let errorMsg;
     switch (res.problem) {
         case 'TIMEOUT_ERROR':
-            errorMsg = i18n.t('common:interface.errors.networkTimeout');
+            errorMsg = i18n.t('common:errors.networkTimeout');
             break;
         case 'NETWORK_ERROR':
-            errorMsg = i18n.t('common:interface.errors.noNetwork');
+            errorMsg = i18n.t('common:errors.noNetwork');
             break;
         default:
-            errorMsg = i18n.t('common:interface.errors.genericError');
+            errorMsg = i18n.t('common:errors.genericError');
     }
     yield put(ToastActions.showToast(errorMsg));
 }

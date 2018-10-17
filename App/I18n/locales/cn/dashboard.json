@@ -1,56 +1,85 @@
 {
   "navigationTabs": {
-    "home": "chinese",
-    "news": "News",
-    "profile": "Profile"
+    "home": "首页",
+    "news": "新闻",
+    "profile": "资产"
   },
   "homeScreen": {
-    "miners": "Miners",
-    "priceIndex": "Price Index"
+    "miners": "矿机",
+    "priceIndex": "行情",
+    "minersEmpty": "您还没有绑定任何矿机"
   },
   "changePasswordScreen": {
-    "oldPassword": "Old account password",
-    "newPassword": "New account password",
-    "confirmPassword": "Confirm new password",
-    "changePinCode": "Change PIN code"
+    "oldPassword": "旧的登录密码",
+    "newPassword": "新的登录密码",
+    "confirmPassword": "确认新的密码",
+    "changePinCode": "修改交易密码"
   },
   "changePinScreen": {
-    "oldPin": "Old PIN",
-    "newPin": "New PIN",
-    "confirmPin": "Confirm new PIN",
-    "changePassword": "Change Account Password"
+    "oldPin": "旧的交易密码",
+    "newPin": "新的交易密码",
+    "confirmPin": "确认新的交易密码",
+    "changePassword": "修改登录密码"
   },
   "minerDetailScreen": {
-    "elapsed": "Elapsed",
-    "margin": "Margin"
-  },
-  "profileScreen": {
-    "signOut": "Sign out",
-    "settings": {
-      "help": "Help",
-      "baseCurrency": "Base currency",
-      "languages": "Languages",
-      "password": "Password"
-    },
-    "balance": {
-      "balance": "Balance",
-      "minerIncoming": "Incoming from mining",
-      "otherIncoming": "Other incoming",
-      "withdraw": "Withdraw"
+    "elapsed": "已工作时间",
+    "margin": "预计收益为",
+    "unbindMachine": "解绑",
+    "errors": {
+      "machineNotFound": "解绑失败，请截图并联系客服",
+      "machineHasBalance": "解绑失败，您矿机中还有资金，请转出余额后再次解绑"
     }
   },
+  "profileScreen": {
+    "signOut": "注销",
+    "settings": {
+      "help": "帮助",
+      "baseCurrency": "货币单位",
+      "languages": "语言",
+      "password": "密码安全"
+    },
+    "balance": {
+      "balance": "余额",
+      "minerIncoming": "挖矿所得",
+      "otherIncoming": "转入资金",
+      "withdraw": "提现"
+    }
+  },
+  "newsScreen": {
+    "title": "新闻"
+  },
   "notificationScreen": {
-    "system": "System",
-    "transaction": "Transaction",
-    "withdraw": "Withdraw"
+    "title": "通知",
+    "system": "系统",
+    "transaction": "转账",
+    "withdraw": "提币"
   },
   "pinCodeScreen": {
-    "description": "Some description here Some description here Some description here Some description here",
-    "pinCode": "Pin Code",
-    "confirmPinCode": "Confirm Pin Code"
+    "description": "所有涉及资金操作的地方，都会用到该密码，请妥善保管您的交易密码",
+    "pinCode": "交易密码",
+    "confirmPinCode": "确认交易密码"
   },
   "withdrawScreen": {
-    "wallet": "Wallet",
-    "withdraw": "Withdraw"
+    "title": "提现",
+    "wallet": "钱包地址",
+    "withdraw": "提现",
+    "enterAmount": "输入金额",
+    "errors": {
+      "amountRequired": "请输入待提现金额",
+      "addressRequired": "请输入钱包地址",
+      "wrongAddressFormat": "请输入正确的钱包地址"
+    }
+  },
+  "pinCodeModal": {
+    "enterPin": "请输入交易密码"
+  },
+  "qrCodeLoginScreen": {
+    "cancelLogin": "取消登录",
+    "machineHasUsers": "该台矿机已被其他用户绑定",
+    "contactSupport": "联系客服",
+    "machineIsBound": "该矿机已绑定到您的账户",
+    "confirmLogin": "确认登录",
+    "machineIsNotBound": "该矿机尚未绑定到您的账户",
+    "bindMachine": "绑定"
   }
 }

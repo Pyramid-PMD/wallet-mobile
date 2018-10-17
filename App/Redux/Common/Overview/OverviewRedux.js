@@ -46,6 +46,7 @@ export const OverviewSelectors = {
                 price: "0"
             };
             exchangeIndex.push(comingSoonItem);
+            console.log('exchangeIndex', exchangeIndex);
             return exchangeIndex;
         }
     },
@@ -62,7 +63,7 @@ export const OverviewSelectors = {
 };
 
 export const request = (state) => {
-    return { ...state, loading: true};
+    return { ...state, loading: true, overview: null};
 };
 
 export const success = (state, action) => {

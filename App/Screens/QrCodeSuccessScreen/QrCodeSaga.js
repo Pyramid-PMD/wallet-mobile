@@ -3,6 +3,10 @@ import {handleConnectivityError} from "../../Redux/Common/NetworkErrors/NetworkE
 import QrCodeLoginActions from './QrCodeRedux';
 import LoadingIndicatorActions from '../../Components/LoadingIndicator/LoadingIndicatorRedux';
 import ToastActions from '../../Redux/Common/Toast/ToastRedux';
+import NavigationService from '../../Navigation/NavigationService';
+import i18n from '../../I18n/i18n.config';
+import OverviewActions from '../../Redux/Common/Overview/OverviewRedux';
+
 
 export function* sendQrCodeSaga(api, action) {
     try {
@@ -48,6 +52,7 @@ export function* bindMachineSaga(api, action) {
         yield put(LoadingIndicatorActions.showLoadingIndicator(true));
         const {walletAddress} = action;
         const res = yield call(api.bindMachine, walletAddress);
+        console.log('binding res', res);
         yield call(handleBindMachineResponse, res);
     } catch (error) {
         console.log('error', error);
@@ -60,7 +65,7 @@ export function* handleBindMachineResponse(res) {
     yield put(LoadingIndicatorActions.showLoadingIndicator(false));
     if (res.data) {
         if (res.data.code === '0') {
-            yield call(handleBindMachineSuccess());
+            yield call(handleBindMachineSuccess);
         } else {
             yield call(handleBindMachineError, res);
         }
@@ -70,9 +75,14 @@ export function* handleBindMachineResponse(res) {
 }
 
 export function* handleBindMachineSuccess() {
-    yield put(QrCodeLoginActions.bindMachineSuccess());
+    yield put(ToastActions.showToast(i18n.t('dashboard:qrCodeLoginScreen.bindMachineSuccess'), 'success'));
+    // yield put(QrCodeLoginActions.bindMachineSuccess());
+    yield put(OverviewActions.overviewRequest());
+    yield call(NavigationService.navigate, 'Home');
 }
 
 export function* handleBindMachineError(res) {
+    // TODO: Ask for error codes
+    yield put(ToastActions.showToast('error'));
     yield put(QrCodeLoginActions.bindMachineFailure('error'));
 }

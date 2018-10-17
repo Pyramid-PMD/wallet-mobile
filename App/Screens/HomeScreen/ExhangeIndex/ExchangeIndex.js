@@ -10,7 +10,7 @@ import Images from '../../../Theme/Images';
 
 const ExchangeIndex = (props) => {
     const {t, exchangeIndex} = props;
-
+    console.log('miner exhange index', exchangeIndex);
     const renderExchangeIndexItem = (exchangeIndexItem, sectionId, rowId) => {
         const comingSoon = parseInt(rowId) === exchangeIndex.length - 1;
         const listItemStyle = rowId === "0" ?

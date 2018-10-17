@@ -28,6 +28,7 @@ class HomeScreen extends Component {
     renderContent() {
         const { t, miners, loading, exchangeIndex } = this.props;
 
+        console.log('home exchange index', exchangeIndex)
         return (
             <Content
                 padder

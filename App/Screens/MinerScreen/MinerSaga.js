@@ -4,6 +4,8 @@ import i18n from '../../I18n/i18n.config';
 import LoadingIndicatorActions from '../../Components/LoadingIndicator/LoadingIndicatorRedux';
 import {handleConnectivityError} from "../../Redux/Common/NetworkErrors/NetworkErrorsSaga";
 import ToastActions from '../../Redux/Common/Toast/ToastRedux';
+import NavigationService from '../../Navigation/NavigationService';
+import OverviewActions from '../../Redux/Common/Overview/OverviewRedux';
 
 export function * getMiner(api, action) {
     const { machine } = action;
@@ -64,7 +66,10 @@ export function* handleUnbindMachineResponse(res) {
 }
 
 export function* handleUnbindMachineSuccess(res) {
+    yield put(ToastActions.showToast(i18n.t('dashboard:qrCodeLoginScreen.unbindMachineSuccess'), 'success'));
     yield put(MinerActions.unbindSuccess());
+    yield put(OverviewActions.overviewRequest());
+    yield call(NavigationService.navigate, 'Home');
 }
 
 export function* handleUnbindMachineErrors(res) {
