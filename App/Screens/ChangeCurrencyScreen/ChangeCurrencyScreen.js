@@ -5,9 +5,16 @@ import Images from "../../Theme/Images";
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 import ChangeCurrencyActions, {ChangeCurrencySelectors} from './ChangeCurrencyRedux';
 import ListRadioButton from "../../Components/ListRadioButton/ListRadioButton";
+import {translate} from "react-i18next";
 
+@translate(['dashboard'], { wait: true })
 class ChangeCurrencyScreen extends Component {
-
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:changeCurrencyScreen.title')
+        }
+    };
     componentDidMount() {
         const {userCurrency} = this.props;
         this.handleCheckedState(userCurrency);

@@ -30,6 +30,8 @@ const create  =  (baseURL = url) => {
     const getNotifications = () => api.get('msg/list');
     const getExchangeRates = () => api.get('exchange/rate');
     const getOverview = () => api.get('overview');
+    const getBonusChart = (walletAddress, q) => api.get(`bonus/info/${walletAddress}`, {q});
+
 
 
     return {
@@ -47,7 +49,8 @@ const create  =  (baseURL = url) => {
         postWithdrawal,
         getNotifications,
         getExchangeRates,
-        getOverview
+        getOverview,
+        getBonusChart
     };
 };
 

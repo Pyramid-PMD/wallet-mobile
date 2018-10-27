@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {
     Text,
@@ -19,7 +20,9 @@ import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/Ov
 
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
-
+    componentDidMount() {
+        this.props.getOverview();
+    }
     render() {
         return(
             <Container>
@@ -70,11 +73,20 @@ class ProfileScreen extends Component {
     }
 
     logout() {
-        this.props.logout();
+        const {t} = this.props;
+        Alert.alert(
+            t('dashboard:profileScreen.signOut'),
+            t('dashboard:profileScreen.confirmSignOut'),
+            [
+                {text: t('common:interface.cancel'), style: 'cancel'},
+                {text: t('common:interface.ok'), onPress: () => this.props.logout()},
+            ],
+        );
+
     }
 
     onScreenFocus() {
-        this.props.getOverview();
+        // this.props.getOverview();
     }
 
     onRefresh = () => {

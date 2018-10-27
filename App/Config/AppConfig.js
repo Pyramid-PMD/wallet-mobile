@@ -14,8 +14,8 @@ export default {
     i18n: {
         locales: ['en', 'cn'],
         languages,
-        fallbackLng: languages[0],
-        initialLang: languages[0],
+        fallbackLng: languages[1],
+        initialLang: languages[1],
         namespace: ['common', 'menu', 'auth', 'dashboard']
     },
     api: {

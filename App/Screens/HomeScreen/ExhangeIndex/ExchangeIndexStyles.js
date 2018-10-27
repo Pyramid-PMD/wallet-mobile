@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Metrics } from '../../../Theme';
+import {Dimensions} from 'react-native';
+
 export default StyleSheet.create({
     container: {
         marginBottom: Metrics.section
@@ -18,7 +20,7 @@ export default StyleSheet.create({
         paddingVertical: 2,
         backgroundColor: Colors.secondaryBackground,
         borderRadius: 5,
-        width: 170
+        width: (Dimensions.get('window').width - 50) / 2
     },
     comingSoonItem: {
         flex: 1,

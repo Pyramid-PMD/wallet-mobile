@@ -43,8 +43,7 @@ const ApplicationStyles = {
         },
         secondaryText: {
             color: Colors.secondaryText
-        },
-
+        }
     },
     checkboxList: {
         listItem: {

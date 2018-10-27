@@ -10,8 +10,9 @@ import QrCodeSuccessView from "./QrCodeSuccessView";
 @translate(['dashboard', 'common'], { wait: true })
 class QrCodeSuccessScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
         return {
-            title: 'Scan to login'
+            title: t('dashboard:qrCodeLoginScreen.title')
         }
     };
 

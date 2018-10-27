@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, FlatList } from 'react-native';
 import { Constants, WebBrowser } from 'expo';
 import PropTypes from 'prop-types';
 import { List, ListItem, Text, View, H2 } from 'native-base';
@@ -10,12 +10,11 @@ import Images from '../../../Theme/Images';
 
 const ExchangeIndex = (props) => {
     const {t, exchangeIndex} = props;
-    console.log('miner exhange index', exchangeIndex);
     const renderExchangeIndexItem = (exchangeIndexItem, sectionId, rowId) => {
         const comingSoon = parseInt(rowId) === exchangeIndex.length - 1;
         const listItemStyle = rowId === "0" ?
             [ExchangeIndexStyles.listItem, ExchangeIndexStyles.listItemFirstChild]:
-                  ExchangeIndexStyles.listItem;
+            ExchangeIndexStyles.listItem;
         if (comingSoon) {
             return (
                 <ListItem style={[listItemStyle, ExchangeIndexStyles.comingSoonItem]}>
@@ -35,6 +34,32 @@ const ExchangeIndex = (props) => {
         )
     };
 
+
+
+    // const renderExchangeIndexItem = ({item, index}) => {
+    //     const comingSoon = parseInt(index) === exchangeIndex.length - 1;
+    //     const listItemStyle = index === "0" ?
+    //         [ExchangeIndexStyles.listItem, ExchangeIndexStyles.listItemFirstChild]:
+    //         ExchangeIndexStyles.listItem;
+    //     if (comingSoon) {
+    //         return (
+    //             <ListItem style={[listItemStyle, ExchangeIndexStyles.comingSoonItem]}>
+    //                 <Text style={[ApplicationStyles.typography.secondaryText]}>{item.name}</Text>
+    //             </ListItem>
+    //         )
+    //     }
+    //     return (
+    //         <ListItem style={listItemStyle} button onPress={() => openUrl(item)}>
+    //             <Image source={Images['bg' + item.name]} style={ExchangeIndexStyles.backgroundImage} />
+    //             <Image source={Images['icon' + item.name]} style={ExchangeIndexStyles.icon} />
+    //             <View>
+    //                 <Text>{item.name}</Text>
+    //                 <Text>{item.price}</Text>
+    //             </View>
+    //         </ListItem>
+    //     )
+    // };
+
     const openUrl = (coin) => {
         WebBrowser.openBrowserAsync('https://exchange.fcoin.com/ex/gpm/pmd-eth');
     };
@@ -46,6 +71,9 @@ const ExchangeIndex = (props) => {
             <List  style={ExchangeIndexStyles.list} dataArray={exchangeIndex} horizontal={true}
                    renderRow={renderExchangeIndexItem}>
             </List>
+            {/*<FlatList data={exchangeIndex}*/}
+                      {/*style={ExchangeIndexStyles.list}*/}
+                      {/*renderItem={renderExchangeIndexItem}/>*/}
         </View> : null
     );
 };

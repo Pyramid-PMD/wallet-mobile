@@ -11,6 +11,12 @@ import {required, matchField} from "../../Services/Validators";
 
 @translate(['common', 'dashboard'], { wait: true })
 class ChangePinScreen extends Component {
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:changePinScreen.title')
+        }
+    };
     renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
         if(error !== undefined && touched){

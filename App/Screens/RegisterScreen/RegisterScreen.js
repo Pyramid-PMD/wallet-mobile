@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {KeyboardAvoidingView} from 'react-native';
 import {connect} from 'react-redux';
 import {
     Container,
@@ -60,7 +61,7 @@ class RegisterScreen extends Component {
         return(
             <Container>
                 <Content padder contentContainerStyle={ApplicationStyles.layout.centerContent}>
-                    <View style={ApplicationStyles.layout.contentWidth}>
+                    <KeyboardAvoidingView style={ApplicationStyles.layout.contentWidth} behavior="padding">
                         <AppLogo/>
                         <Form>
                             <Field
@@ -116,7 +117,7 @@ class RegisterScreen extends Component {
                                 </Text>
                             </Button>
                         </View>
-                    </View>
+                    </KeyboardAvoidingView>
                 </Content>
             </Container>
         )

@@ -10,18 +10,21 @@
     "minersEmpty": "您还没有绑定任何矿机"
   },
   "changePasswordScreen": {
+    "title": "密码",
     "oldPassword": "旧的登录密码",
     "newPassword": "新的登录密码",
     "confirmPassword": "确认新的密码",
     "changePinCode": "修改交易密码"
   },
   "changePinScreen": {
+    "title": "换针",
     "oldPin": "旧的交易密码",
     "newPin": "新的交易密码",
     "confirmPin": "确认新的交易密码",
     "changePassword": "修改登录密码"
   },
   "minerDetailScreen": {
+    "title": "矿工细节",
     "elapsed": "已工作时间",
     "margin": "预计收益为",
     "unbindMachine": "解绑",
@@ -32,6 +35,7 @@
   },
   "profileScreen": {
     "signOut": "注销",
+    "confirmSignOut": "您确定要退出吗",
     "settings": {
       "help": "帮助",
       "baseCurrency": "货币单位",
@@ -45,6 +49,15 @@
       "withdraw": "提现"
     }
   },
+  "helpScreen": {
+    "title": "帮助"
+  },
+  "changeLanguageScreen": {
+    "title": "语言"
+  },
+  "changeCurrencyScreen": {
+    "title": "货币"
+  },
   "newsScreen": {
     "title": "新闻"
   },
@@ -55,6 +68,7 @@
     "withdraw": "提币"
   },
   "pinCodeScreen": {
+    "title": "输入密码",
     "description": "所有涉及资金操作的地方，都会用到该密码，请妥善保管您的交易密码",
     "pinCode": "交易密码",
     "confirmPinCode": "确认交易密码"
@@ -74,12 +88,15 @@
     "enterPin": "请输入交易密码"
   },
   "qrCodeLoginScreen": {
+    "title": "扫描QR码以登录",
     "cancelLogin": "取消登录",
     "machineHasUsers": "该台矿机已被其他用户绑定",
     "contactSupport": "联系客服",
     "machineIsBound": "该矿机已绑定到您的账户",
     "confirmLogin": "确认登录",
     "machineIsNotBound": "该矿机尚未绑定到您的账户",
-    "bindMachine": "绑定"
+    "bindMachine": "绑定",
+    "bindMachineSuccess": "机器已成功绑定",
+    "unbindMachineSuccess": "机器已成功解除绑定"
   }
 }

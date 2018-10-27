@@ -13,6 +13,7 @@ import MinerActions, { MinerSelectors } from './MinerRedux'
 import ApplicationStyles from "../../Theme/ApplicationStyles";
 import Colors from "../../Theme/Colors";
 import FormStyles from "../../Theme/FormStyles";
+import BonusChart from "./BonusChart/BonusChart";
 
 @translate(['common', 'dashboard'], { wait: true })
 class MinerDetailScreen extends Component {
@@ -46,9 +47,13 @@ class MinerDetailScreen extends Component {
 
     renderContent() {
         const { miner, t } = this.props;
+        const walletAddress = this.getMinerFromParams().wallet_addr;
+
         if (miner) {
+            const statusColor = miner.status === 0 ? Colors.danger : Colors.secondary;
             return(
                 <Content padder>
+                    <BonusChart walletAddress={walletAddress}/>
                     <View style={[ApplicationStyles.borders.borderBottom, ApplicationStyles.layout.justifyContentBetween]}>
                         <View style={ApplicationStyles.layout.justifyContentStart}>
                             <Icon
@@ -56,7 +61,7 @@ class MinerDetailScreen extends Component {
                                 type="SimpleLineIcons" style={{ color: Colors.secondaryText, marginRight: 6}}/>
                             <Text style={{ color: Colors.secondaryText}}>{ miner.machine_nick }</Text>
                         </View>
-                        <Text>{miner.statusName}</Text>
+                        <Text style={{color: statusColor}}>{miner.statusName}</Text>
                     </View>
 
                     <View style={{marginTop: 20}}>

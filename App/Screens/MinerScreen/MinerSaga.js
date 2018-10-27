@@ -66,7 +66,7 @@ export function* handleUnbindMachineResponse(res) {
 }
 
 export function* handleUnbindMachineSuccess(res) {
-    yield put(ToastActions.showToast(i18n.t('dashboard:qrCodeLoginScreen.unbindMachineSuccess'), 'success'));
+    // yield put(ToastActions.showToast(i18n.t('dashboard:qrCodeLoginScreen.unbindMachineSuccess'), 'success'));
     yield put(MinerActions.unbindSuccess());
     yield put(OverviewActions.overviewRequest());
     yield call(NavigationService.navigate, 'Home');

@@ -114,10 +114,10 @@ const validate = (values, {screenProps}) => {
 };
 
 export default reduxForm({
-    // initialValues: {
-    //     email: 'alsor.zhou@qq.com',
-    //     pwd: 'qpwoei2010'
-    // },
+    initialValues: {
+        email: 'elhakim.nada88@gmail.com',
+        pwd: 'final30788'
+    },
     validate,
     form: 'loginForm'
 })(connect(mapStateToProps, mapDispatchToProps)(LoginScreen));

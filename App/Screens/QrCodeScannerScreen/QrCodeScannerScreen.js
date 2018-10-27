@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { Dimensions, LayoutAnimation, Alert } from 'react-native';
+import {translate} from 'react-i18next';
+import { Dimensions} from 'react-native';
 import { Container, Text } from 'native-base';
 import { BarCodeScanner, Permissions } from 'expo';
 
+@translate(['dashboard', 'common'], { wait: true })
 class QrCodeScannerScreen extends Component {
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:qrCodeLoginScreen.title')
+        }
+    };
+
     state = {
         hasCameraPermission: null,
         lastScannedUrl: null,

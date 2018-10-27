@@ -39,8 +39,9 @@ export const OverviewSelectors = {
         }
     },
     selectExchangeIndex: state => {
-        if (state.overview.overview) {
-            const exchangeIndex = [...state.overview.overview.exchangeIndex];
+        const overview = {...state.overview};
+        if (overview.overview) {
+            const exchangeIndex = [...overview.overview.exchangeIndex];
             const comingSoonItem = {
                 name: i18n.t('common:interface.comingSoon'),
                 price: "0"
@@ -59,11 +60,12 @@ export const OverviewSelectors = {
             });
         }
     },
-    selectUserCurrency: state => state.app.currency
+    selectUserCurrency: state => state.app.currency,
+    selectLoading: state => state.overview.loading
 };
 
 export const request = (state) => {
-    return { ...state, loading: true, overview: null};
+    return { ...state, loading: true, overview: null };
 };
 
 export const success = (state, action) => {

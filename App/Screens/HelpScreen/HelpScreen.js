@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {translate} from 'react-i18next';
 import { Text, Container, Content, List, ListItem, Left, Icon, Right } from 'native-base';
 import NavigationService from '../../Navigation/NavigationService';
 import HelpScreenStyles from "./HelpScreenStyles";
@@ -7,7 +8,15 @@ import ApplicationStyles from "../../Theme/ApplicationStyles";
 import {ChangeLanguageSelectors} from '../../Screens/ChangeLanguageScreen/ChangeLanguageRedux';
 import help from './help.json';
 
+@translate(['dashboard'], { wait: true })
 class HelpScreen extends Component {
+
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:helpScreen.title')
+        }
+    };
 
     goToHelpDetail(help) {
         NavigationService.navigate('HelpDetail', { help });

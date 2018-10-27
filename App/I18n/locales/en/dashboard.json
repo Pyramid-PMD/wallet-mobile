@@ -10,18 +10,21 @@
     "minersEmpty": "Machine list is empty"
   },
   "changePasswordScreen": {
+    "title": "Password",
     "oldPassword": "Old account password",
     "newPassword": "New account password",
     "confirmPassword": "Confirm new password",
     "changePinCode": "Change PIN code"
   },
   "changePinScreen": {
+    "title": "Change pin",
     "oldPin": "Old PIN",
     "newPin": "New PIN",
     "confirmPin": "Confirm new PIN",
     "changePassword": "Change Account Password"
   },
   "minerDetailScreen": {
+    "title": "Miner detail",
     "elapsed": "Elapsed",
     "margin": "Margin",
     "unbindMachine": "Unbind machine",
@@ -32,6 +35,7 @@
   },
   "profileScreen": {
     "signOut": "Sign out",
+    "confirmSignOut": "Are you sure you want to sign out?",
     "settings": {
       "help": "Help",
       "baseCurrency": "Base currency",
@@ -45,6 +49,15 @@
       "withdraw": "Withdraw"
     }
   },
+  "helpScreen": {
+    "title": "Help"
+  },
+  "changeLanguageScreen": {
+    "title": "Languages"
+  },
+  "changeCurrencyScreen": {
+    "title": "Base Currency"
+  },
   "newsScreen": {
     "title": "News"
   },
@@ -55,6 +68,7 @@
     "withdraw": "Withdraw"
   },
   "pinCodeScreen": {
+    "title": "Enter pin",
     "description": "Some description here Some description here Some description here Some description here",
     "pinCode": "Pin Code",
     "confirmPinCode": "Confirm Pin Code"
@@ -74,6 +88,7 @@
     "enterPin": "Please enter your pin code"
   },
   "qrCodeLoginScreen": {
+    "title": "Scan QR Code to login",
     "cancelLogin": "Cancel login",
     "machineHasUsers": "This machine has bound user",
     "contactSupport": "Contact support",

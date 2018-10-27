@@ -11,6 +11,7 @@ import {
     getToken,
     getUserId
 } from '../Services/Storage';
+import {setMomentLocale} from "../Services/Utils";
 
 export function* startUpSaga(api, action) {
     const isAuthenticated = yield call(checkAuthStatus, api, action);
@@ -56,6 +57,7 @@ export function* loadUserSettings(defaultCurrency) {
 export function* loadUserLanguage() {
     const language = yield call(getSelectedLanguage);
     i18n.changeLanguage(language.code);
+    yield call(setMomentLocale, language.code);
     yield put(StartupActions.loadUserLanguage(language));
 }
 

@@ -18,6 +18,7 @@ import {ToastTypes} from './Common/Toast/ToastRedux';
 import {VerifyEmailTypes} from '../Screens/RegisterScreen/VerifyEmailRedux';
 import {ChangePasswordTypes} from '../Screens/ChangePasswordScreen/ChangePasswordRedux';
 import {ChangePinTypes} from '../Screens/ChangePinScreen/ChangePinRedux';
+import {BonusChartTypes} from '../Screens/MinerScreen/BonusChart/BonusChartRedux';
 
 
 /* ------------- Sagas ------------- */
@@ -37,6 +38,7 @@ import {showToastSaga} from './Common/Toast/ToastSaga';
 import {verifyEmailSaga} from '../Screens/RegisterScreen/VerifyEmailSaga';
 import {changePasswordSaga} from '../Screens/ChangePasswordScreen/ChangePasswordSaga';
 import {changePinSaga} from '../Screens/ChangePinScreen/ChangePinSaga';
+import {getBonusChart} from '../Screens/MinerScreen/BonusChart/BonusChartSaga';
 
 
 /* ------------- API ------------- */
@@ -69,6 +71,6 @@ export default function * root () {
         takeLatest(QrCodeTypes.SEND_QR_CODE_REQUEST, sendQrCodeSaga, api),
         takeLatest(QrCodeTypes.BIND_MACHINE_REQUEST, bindMachineSaga, api),
         takeLatest(MinerTypes.UNBIND_REQUEST, unbindMachineSaga, api),
-
+        takeLatest(BonusChartTypes.BONUS_REQUEST, getBonusChart, api),
     ]);
 };

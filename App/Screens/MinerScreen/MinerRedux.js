@@ -7,7 +7,10 @@ const { Types, Creators} = createActions({
     minerFailure: ['error'],
     unbindRequest: ['walletAddress'],
     unbindSuccess: null,
-    unbindFailure: ['error']
+    unbindFailure: ['error'],
+    bonusRequest: ['walletAddress', 'interval'],
+    bonusSuccess: ['chart'],
+    bonusFailure: ['error']
 });
 
 export const MinerTypes = Types;

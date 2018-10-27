@@ -7,8 +7,15 @@ import ApplicationStyles from "../../Theme/ApplicationStyles";
 import ChangeLanguageActions, {ChangeLanguageSelectors} from './ChangeLanguageRedux';
 import ListRadioButton from "../../Components/ListRadioButton/ListRadioButton";
 
-@translate(['common'], { wait: true })
+@translate(['common', 'dashboard'], { wait: true })
 class ChangeLanguageScreen extends Component {
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:changeLanguageScreen.title')
+        }
+    };
+
     state = {
         languages
     };

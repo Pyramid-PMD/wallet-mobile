@@ -4,6 +4,7 @@ import HomeScreenStyles from '../HomeScreenStyles';
 import NavigationService from '../../../Navigation/NavigationService';
 import PropTypes from 'prop-types';
 import Metrics from "../../../Theme/Metrics";
+import Colors from "../../../Theme/Colors";
 
 const Miners = (props) => {
     const { t, miners } = props;
@@ -18,6 +19,8 @@ const Miners = (props) => {
                     [HomeScreenStyles.cardItem, HomeScreenStyles.cardItemLastChild] :
                     HomeScreenStyles.cardItem;
 
+                const statusColor = miner.status === 0 ? Colors.danger : Colors.secondary;
+
                 return (
                     <CardItem key={ miner.wallet_addr } style={style} button={true} onPress={goToMiner.bind(this, miner)}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center'}}>
@@ -29,7 +32,7 @@ const Miners = (props) => {
                         </View>
 
                         <Right>
-                            <Text>{miner.statusName}</Text>
+                            <Text style={{color: statusColor}}>{miner.statusName}</Text>
                         </Right>
                     </CardItem>
                 );

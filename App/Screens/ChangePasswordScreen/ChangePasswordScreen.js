@@ -12,6 +12,12 @@ import config from "../../Config/AppConfig";
 
 @translate(['common', 'dashboard'], { wait: true })
 class ChangePasswordScreen extends Component {
+    static navigationOptions = ({navigation, screenProps}) => {
+        const {t} = screenProps;
+        return {
+            title: t('dashboard:changePasswordScreen.title')
+        }
+    };
     renderInput({ input, placeholder, secureTextEntry, label, type, style, meta: { touched, error, warning } }){
         let hasError= false;
         if(error !== undefined && touched){

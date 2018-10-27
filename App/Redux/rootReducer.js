@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
     overview: require('./Common/Overview/OverviewRedux').reducer,
     loadingIndicator: require('../Components/LoadingIndicator/LoadingIndicatorRedux').reducer,
     qrCode: require('../Screens/QrCodeSuccessScreen/QrCodeRedux').reducer,
+    bonus: require('../Screens/MinerScreen/BonusChart/BonusChartRedux').reducer,
 
 });
 
