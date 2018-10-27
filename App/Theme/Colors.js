@@ -15,7 +15,8 @@ const colors = {
     cardBorderColor: '#4a5157',
     listBorderColor: '#4a5157',
     danger: '#e66262',
-    autoCompleteBackground: '#141218'
+    autoCompleteBackground: '#141218',
+    profitChartColor: '#252525'
 }
 
 export default colors

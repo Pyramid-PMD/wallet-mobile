@@ -52,9 +52,8 @@ class MinerDetailScreen extends Component {
         if (miner) {
             const statusColor = miner.status === 0 ? Colors.danger : Colors.secondary;
             return(
-                <Content padder>
-                    <BonusChart walletAddress={walletAddress}/>
-                    <View style={[ApplicationStyles.borders.borderBottom, ApplicationStyles.layout.justifyContentBetween]}>
+                <Content>
+                    <View style={[ApplicationStyles.borders.borderBottom, ApplicationStyles.layout.justifyContentBetween, {padding: 16}]}>
                         <View style={ApplicationStyles.layout.justifyContentStart}>
                             <Icon
                                 name="screen-desktop"
@@ -64,7 +63,10 @@ class MinerDetailScreen extends Component {
                         <Text style={{color: statusColor}}>{miner.statusName}</Text>
                     </View>
 
-                    <View style={{marginTop: 20}}>
+                    <BonusChart walletAddress={walletAddress}/>
+
+
+                    <View style={{marginTop: 20, paddingHorizontal: 16}}>
                         <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText, {marginBottom: 10}]}>{t('dashboard:minerDetailScreen.elapsed')}: <Text style={[ApplicationStyles.typography.numberBig]}>{ miner.elapsed }</Text>h</Text>
 
                         <Text style={[ApplicationStyles.typography.smallText, ApplicationStyles.typography.secondaryText]}>{t('dashboard:minerDetailScreen.margin')}: <Text style={[ApplicationStyles.typography.numberBig]}>{ miner.margin }</Text>PMD</Text>
@@ -72,7 +74,7 @@ class MinerDetailScreen extends Component {
 
                     <Button
                         block
-                        style={[FormStyles.submitButton, {marginTop: 40}]}
+                        style={[FormStyles.submitButton, {marginTop: 40, marginHorizontal: 16}]}
                         onPress={this.unbindMachine.bind(this)}>
                         <Text style={{ marginRight: 5}}>{t('dashboard:minerDetailScreen:unbindMachine')}</Text>
                         {this.props.unbinding ? <Spinner color="#fff"/> : null}
