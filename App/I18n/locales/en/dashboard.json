@@ -34,7 +34,7 @@
     }
   },
   "profileScreen": {
-    "signOut": "Sign out",
+    "signOut": "Sign out from {{email}}",
     "confirmSignOut": "Are you sure you want to sign out?",
     "settings": {
       "help": "Help",

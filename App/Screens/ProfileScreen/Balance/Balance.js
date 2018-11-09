@@ -18,11 +18,11 @@ const Balance = (props) => {
             <Row style={ProfileScreenStyles.cardSection}>
                 <Col>
                     <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.minerIncoming')}</Text>
-                    <Text style={ApplicationStyles.typography.number}>{balance.minerIncoming}</Text>
+                    <Text style={ApplicationStyles.typography.number}>{balance.minerIncoming}%</Text>
                 </Col>
                 <Col style={ProfileScreenStyles.otherIncoming}>
                     <Text style={ApplicationStyles.typography.smallText}>{t('dashboard:profileScreen.balance.otherIncoming')}</Text>
-                    <Text style={ApplicationStyles.typography.number}>{balance.otherIncoming}</Text>
+                    <Text style={ApplicationStyles.typography.number}>{balance.otherIncoming}%</Text>
                 </Col>
             </Row>
             <Row>

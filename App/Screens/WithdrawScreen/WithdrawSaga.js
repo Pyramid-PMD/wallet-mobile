@@ -2,6 +2,7 @@ import { call, put} from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import * as _ from 'lodash';
 import WithdrawActions from './WithdrawRedux';
+import OverviewActions from '../../Redux/Common/Overview/OverviewRedux';
 
 export function* getAddressList() {
     const addressList = yield AsyncStorage.getItem('addressList');
@@ -39,6 +40,7 @@ export function* handleWithdrawResponse(res) {
 
 export function* handleWithdrawSuccess() {
     yield put(WithdrawActions.sendWithdrawSuccess(null));
+    yield put(OverviewActions.overviewRequest());
 }
 
 export function* handleWithdrawError(res) {

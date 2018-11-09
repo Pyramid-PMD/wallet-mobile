@@ -39,6 +39,10 @@ class LoginScreen extends Component {
         NavigationService.navigate('Register');
     }
 
+    goToForgotPassword() {
+        NavigationService.navigate('ForgotPassword');
+    }
+
     renderLoginForm() {
         const { t, handleSubmit } = this.props;
 
@@ -59,7 +63,7 @@ class LoginScreen extends Component {
                             style={FormStyles.regularInputLast}
                             component={this.renderInput}/>
 
-                        <Button transparent light>
+                        <Button transparent light onPress={this.goToForgotPassword.bind(this)}>
                             <Text style={FormStyles.linkButtonText}>{t('auth:login.forgotPassword')}</Text>
                         </Button>
                     </Form>

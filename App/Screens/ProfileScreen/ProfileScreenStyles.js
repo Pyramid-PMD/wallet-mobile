@@ -59,7 +59,8 @@ export default StyleSheet.create({
         backgroundColor: Colors.secondaryBackground,
         borderWidth: 0,
         margin: 2,
-        marginTop: 10
+        marginTop: 10,
+        flexDirection: 'column'
     },
     signOutButtonText: {
         color: Colors.danger

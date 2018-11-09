@@ -32,6 +32,7 @@ import QrCodeScannerScreen from "../Screens/QrCodeScannerScreen/QrCodeScannerScr
 import Colors from "../Theme/Colors";
 import AppLogo from "../Components/AppLogo/AppLogo";
 import QrCodeButton from "../Components/QrCodeButton/QrCodeButton";
+import ForgotPasswordScreen from "../Screens/ForgotPasswordScreen/ForgotPasswordScreen";
 
 
 
@@ -124,6 +125,7 @@ const AuthNavigation = createStackNavigator({
             header: null
         }
     },
+    ForgotPassword: ForgotPasswordScreen,
     Pin: {
         screen: PinCodeScreen,
         navigationOptions: {

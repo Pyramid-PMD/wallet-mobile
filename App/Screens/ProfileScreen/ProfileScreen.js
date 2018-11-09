@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert} from 'react-native';
+import {Alert, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {
     Text,
@@ -17,11 +17,20 @@ import ProfileScreenStyles from './ProfileScreenStyles';
 import FormStyles from '../../Theme/FormStyles';
 import LoginActions from '../LoginScreen/LoginRedux';
 import OverviewActions, {OverviewSelectors} from '../../Redux/Common/Overview/OverviewRedux';
+import {getEmail} from '../../Services/Storage';
 
 @translate(['common', 'dashboard'], { wait: true })
 class ProfileScreen extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: ''
+        };
+    }
+
     componentDidMount() {
         this.props.getOverview();
+        this._getEmail();
     }
     render() {
         return(
@@ -53,6 +62,7 @@ class ProfileScreen extends Component {
             t,
             balance,
             selectedCurrency,
+            email
         } = this.props;
 
         if (balance) {
@@ -65,7 +75,10 @@ class ProfileScreen extends Component {
                         onPress={this.logout.bind(this)}
                         block
                         style={[FormStyles.submitButton, ProfileScreenStyles.signOutButton]}>
-                        <Text style={ProfileScreenStyles.signOutButtonText}>{t('dashboard:profileScreen.signOut')}</Text>
+                        <Text style={ProfileScreenStyles.signOutButtonText}>
+                            {t('dashboard:profileScreen.signOut')}
+                        </Text>
+                        <Text style={ProfileScreenStyles.signOutButtonText}>{this.state.email}</Text>
                     </Button>
                 </View>
             )
@@ -91,6 +104,13 @@ class ProfileScreen extends Component {
 
     onRefresh = () => {
         this.props.getOverview();
+    };
+
+    _getEmail = async () => {
+        const email = await getEmail();
+        if (email) {
+            this.setState({email})
+        }
     };
 }
 

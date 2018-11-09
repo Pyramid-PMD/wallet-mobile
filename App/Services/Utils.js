@@ -12,7 +12,7 @@ export function formatDateTimeAgo(date) {
 }
 
 export function formatDecimal(number, precision = config.balance.precision) {
-    return +parseInt(number).toFixed(precision);
+    return +parseFloat(number).toFixed(precision);
 }
 
 export function setMomentLocale(lang) {

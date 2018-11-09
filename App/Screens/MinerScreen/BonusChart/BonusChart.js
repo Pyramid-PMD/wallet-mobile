@@ -3,7 +3,6 @@ import {Dimensions, ScrollView} from 'react-native';
 import {View, Text, Button} from "native-base";
 import BonusChartActions, {BonusChartSelectors} from "./BonusChartRedux";
 import {connect} from "react-redux";
-import PropTypes from 'prop-types';
 import BonusChartStyles from "./BonusChartStyles";
 import {
     LineChart
@@ -20,7 +19,7 @@ class BonusChart extends Component {
     }
 
     render() {
-        const {chart} = this.props
+        const {chart} = this.props;
         return(
             <View style={{backgroundColor: Colors.profitChartColor}}>
                 {chart ? this.renderChart(chart) : this.renderChartLoading()}
@@ -71,19 +70,19 @@ class BonusChart extends Component {
             return [BonusChartStyles.chartButtonText];
         }
         return [BonusChartStyles.chartButtonText, BonusChartStyles.chartButtonActiveText];
-
-
     }
+
     renderChartLoading() {
         return (
             <View style={{flex:1, height: 220, alignItems: 'center', justifyContent: 'center'}}>
-                loading chart data
+                <Text>loading chart data</Text>
             </View>
         )
     }
 
     renderChart(chart) {
-        const width = (chart.date.length / 2.8) * Dimensions.get('window').width
+        const screenWith = Dimensions.get('window').width;
+        const width = chart.date.length < 4 ? screenWith : (chart.date.length / 4) * screenWith;
         return (
             <ScrollView horizontal contentContainerStyle={{width, height: 220}} ref="_chartScrollView">
                 <LineChart

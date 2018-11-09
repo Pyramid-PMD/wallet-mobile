@@ -34,7 +34,7 @@
     }
   },
   "profileScreen": {
-    "signOut": "注销",
+    "signOut": "注销 from {{email}}",
     "confirmSignOut": "您确定要退出吗",
     "settings": {
       "help": "帮助",

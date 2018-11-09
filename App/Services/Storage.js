@@ -13,6 +13,7 @@ export async function getToken() {
     }
 }
 
+
 export async function getUserId() {
     try {
         const uid = await AsyncStorage.getItem('uid');
@@ -63,3 +64,33 @@ export async function getSelectedCurrency() {
         console.log(error);
     }
 }
+
+export async function saveEmail(email) {
+    try {
+        await AsyncStorage.setItem('email', email);
+    } catch (error) {
+        console.log('failed saving email');
+    }
+}
+
+
+export async function getEmail() {
+    try {
+        const email = await AsyncStorage.getItem('email');
+        if (email !== null) {
+            console.log(email);
+            return email;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function removeEmail() {
+    try {
+        const email = await AsyncStorage.removeItem('email');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
